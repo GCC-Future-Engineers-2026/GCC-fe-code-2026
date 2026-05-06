@@ -26,12 +26,15 @@ p.add_command("msg", to_hub_fmt="repr", from_hub_fmt="repr")
 p.add_channel('color', to_hub_fmt='f')  # char (0: none, 1: green, 2: red)
 p.add_channel('bl_x', to_hub_fmt='f')  # center x of rectangle
 p.add_channel('bl_y', to_hub_fmt='f')  # center y of rectangle
+p.add_channel('cor', to_hub_fmt='f')  # presence of corner
+# p.add_channel('lba', to_hub_fmt='b')  # integer presence of red block at left bottom area
+# p.add_channel('rba', to_hub_fmt='b')  # integer presence of green block at right bottom area
 
 hub.imu.reset_heading(0)
-wait(1000)
+wait(500)
 
 car = Car(steer, rear, 100)
-wait(1000)
+wait(500)
 
 # error => eyes.distance() - target
 
@@ -44,18 +47,20 @@ prev_Gerror = 0
 sum_Rerror = 0 
 prev_Rerror = 0
 
-kp = 0.035
-ki = 0.00001
-kd = 1000000.0
+sumS_error = 0
+prevS_error = 0
 
 distList = [0, 0, 0]
 distListR = [0, 0, 0]
 distListL = [0, 0, 0]
 distListF = [0, 0, 0]
 
-max_steer = 60
-num_turn = 1
+max_steer = 20 
+# num_turn = 1
 direction = 0
+
+drive_power = 0.0
+compensation = 0.0
 
 def getMedian():
     i = 0
@@ -117,171 +122,78 @@ def getMedianF(samples):
     else:
         return (distListF[mid-1] + distListF[mid]) / 2
 
-
-def UltrasonicPID_RSensor():
-
-    while True:
-
-        # error = getMedianR(3) - getMedianL(3)
-        error = getMedian(3) - targetDist
-        
-        #print("error: ", error)
-
-        if error > 500:  # corner
-            car.drive_speed(0)
-            hub.speaker.beep()
-            car.steer(0)
-            # car.drive_speed(200)
-            # wait(100)
-            # car.drive_speed(0)
-            car.steer(max_steer)
-            while getMedian(3) > targetDist:
-                car.drive_speed(300)
-            
-            car.steer(0)
-            car.drive_speed(0)
-            wait(250)
-
-
-        prop = kp * error # proportional
-        
-        sum_error += error
-        integral = ki * sum_error # integral
-
-        if integral > 10.0:
-            integral = 10.0
-
-        derivative = kd * (error - prev_error) # derivative
-
-        compensation = prop + integral + derivative
-
-        prev_error = error
-
-        # negative steer = steer to the right 
-        # positive steer = steer to the left
-        
-        if compensation > max_steer:
-            compensation = max_steer
-        elif compensation < -max_steer:
-            compensation = -max_steer
-            
-        car.steer(compensation)
-
-        # drive power range => 300 - 800
-        # compensation range => 0 - max_compensation
-        maxP = 700
-        minP = 200
-        max_error = 2000 - targetDist
-        
-        drive_power = -(maxP - minP) * (error - max_error) / max_error + minP   
-        # print("drive_power: ", drive_power)
-        car.drive_speed(drive_power)
-        wait(10)
-
-
-def UltrasonicPID_2Sensor():
-
-    global kp, ki, kd, sum_error, prev_error, max_steer, num_turn, direction
-
-    drive_power = 0.0
-    compensation = 0.0
+def UltrasonicPID_2Sensor_C(num_turn, kp=0.05, ki=0.000001, kd=10000, max_steer=20, gyro_angle_correct=25):
     
-    while num_turn <= 12:
+    global sum_error, prev_error, direction, drive_power, compensation #, corner
 
-        error = getMedianR(3) - getMedianL(3)
-        #print("error: ", error)
+    # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
 
-        while hub.imu.heading() > 20 + (90 * (num_turn-1)):
+    error = getMedianR(3) - getMedianL(3)
+
+    # print("IMU Heading: ", hub.imu.heading())
+    
+    if hub.imu.heading() > gyro_angle_correct + (90 * (num_turn-1)):
+        while hub.imu.heading() > gyro_angle_correct//2 + (90 * (num_turn-1)): # and corner == 0:
+            # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
             car.steer(-30)
-            car.drive_speed(600)
+            car.drive_speed(800)
         
-        while hub.imu.heading() < -20 - (90 * (num_turn-1)):
+    if hub.imu.heading() < -gyro_angle_correct - (90 * (num_turn-1)):
+        while hub.imu.heading() < -gyro_angle_correct//2 -(90 * (num_turn-1)): # and corner == 0:
+            # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
             car.steer(30)
-            car.drive_speed(600)
-
-        if getMedianF(3) < 275:  # corner wall
-            car.drive_speed(0)
-            hub.speaker.beep()
-            wait(250)
-
-            if direction == 0:
-                if getMedianL(3) > getMedianR(3): # left corner turn
-                    direction = -1
-                    
-                elif getMedianL(3) < getMedianR(3): # right corner turn
-                    direction = 1
-                
-            if direction == -1:
-                car.steer(-75)  # left turn
-            elif direction == 1:
-                car.steer(75)   # right turn
-            
-            while abs(hub.imu.heading()) < (90 * num_turn):
-                car.drive_speed(400)
-
-            num_turn += 1
-            # print("num_turn: ", num_turn)
-            car.drive_speed(0)
-            car.steer(0)
-            wait(500)
-
-
-        prop = kp * error # proportional
+            car.drive_speed(800)
         
-        sum_error += error
-        integral = ki * sum_error # integral
+    prop = kp * error # proportional
+    
+    sum_error += error
+    integral = ki * sum_error # integral
 
-        if integral > 10.0:
-            integral = 10.0
+    if integral > 10.0:
+        integral = 10.0
 
-        derivative = kd * (error - prev_error) # derivative
+    derivative = kd * (error - prev_error) # derivative
 
-        compensation = prop + integral + derivative
+    compensation = prop + integral + derivative
 
-        prev_error = error
+    prev_error = error
 
-        # negative steer = steer to the right 
-        # positive steer = steer to the left
+    if compensation > max_steer:
+        compensation = max_steer
+    elif compensation < -max_steer:
+        compensation = -max_steer
         
-        if compensation > max_steer:
-            compensation = max_steer
-        elif compensation < -max_steer:
-            compensation = -max_steer
-            
-        car.steer(compensation)
+    car.steer(compensation)
+    # print("compensation: ", compensation)
 
-        # drive power range => 300 - 800
-        # compensation range => 0 - max_compensation
-        maxP = 1100
-        minP = 800
-        max_error = 2000
-        
-        if error > max_error:
-            error = max_error
-        elif error < 0:
-            error = 0
+    maxP = 1100
+    minP = 900
+    max_error = 2000
+    
+    if error > max_error:
+        error = max_error
+    elif error < 0:
+        error = 0
 
-        drive_power = -(maxP - minP) * (error - max_error) / max_error + minP   
-        # print("drive_power: ", drive_power)
-        car.drive_speed(drive_power)
-        wait(10)
-
-    car.drive_speed(0)
+    drive_power = -(maxP - minP) * (error - max_error) / max_error + minP   
+    # print("drive_power: ", drive_power)
+    car.drive_speed(drive_power)
+    wait(10)
 
 
-def avoidBlocks(color=0, kp=0.5, ki=0.0, kd=0.1, bl_x=0.0, bl_y=0.0):
+def avoidBlocks(color=0, kp=0.5, ki=0.000001, kd=0.1, bl_x=0.0, bl_y=0.0, max_steer_obs=50):
 
-    global sum_Rerror, prev_Rerror, sum_Gerror, prev_Gerror, max_steer
+    global sum_Rerror, prev_Rerror, sum_Gerror, prev_Gerror
 
     if bl_x == 0.0:
         return
 
     # print("bl_x: ", bl_x)
 
-    Rerror = 40 - bl_x
-    Gerror = 280 - bl_x
+    Rerror = 80 - bl_x
+    Gerror = 260 - bl_x
     
-    # print("Gerror: ", Gerror)
+    # print("Rerror: ", Rerror)
 
     if color == 2:  # red
         prop = kp * Rerror # proportional
@@ -301,15 +213,18 @@ def avoidBlocks(color=0, kp=0.5, ki=0.0, kd=0.1, bl_x=0.0, bl_y=0.0):
         # negative steer = steer to the right 
         # positive steer = steer to the left
         
-        if compensation > max_steer:
-            compensation = max_steer
-        elif compensation < -max_steer:
-            compensation = -max_steer
+        if compensation > max_steer_obs:
+            compensation = max_steer_obs
+        elif compensation < -max_steer_obs:
+            compensation = -max_steer_obs
         
         car.steer(-compensation)
-        car.drive_speed(150)
 
+        # assumed max power = 600
+        # assumed min power = 150
 
+        Rdrive_power = -(45 / 28) * (abs(Rerror) - 1120 / 3)
+        car.drive_speed(Rdrive_power)
 
     elif color == 1:  # green
         prop = kp * Gerror # proportional
@@ -329,43 +244,144 @@ def avoidBlocks(color=0, kp=0.5, ki=0.0, kd=0.1, bl_x=0.0, bl_y=0.0):
         # negative steer = steer to the right 
         # positive steer = steer to the left
         
-        if compensation > max_steer:
-            compensation = max_steer
-        elif compensation < -max_steer:
-            compensation = -max_steer
+        if compensation > max_steer_obs:
+            compensation = max_steer_obs
+        elif compensation < -max_steer_obs:
+            compensation = -max_steer_obs
             
-        print("compensation: ", -compensation)
+        # print("compensation: ", -compensation)
         car.steer(-compensation)
-        car.drive_speed(150)
 
+        # assumed max power = 600
+        # assumed min power = 150
+        Gdrive_power = -(45 / 28) * (abs(Gerror) - 1120 / 3)
+        car.drive_speed(Gdrive_power)
 
+def turn90_pid(num_turn, kp=35, ki=0.000001, kd=1.0):
+    global sumS_error, prevS_error
+    maxS = 1100
+    minS = 400
+    maxS_error = 90
+    steer_error = (90 * (num_turn)) - hub.imu.heading()
+    steer_power = (steer_error * (maxS - minS) / maxS_error + minS)
+    prop = kp * steer_error # proportional
+    
+    sumS_error += steer_error
+    integral = ki * sumS_error # integral
 
+    if integral > 10.0:
+        integral = 10.0
 
-# UltrasonicPID_RSensor()
-# UltrasonicPID_2Sensor()
+    derivative = kd * (steer_error - prevS_error) # derivative
+
+    compensation = prop + integral + derivative
+
+    prevS_error = steer_error
+    if compensation < minS:
+        compensation = minS
+    elif compensation > maxS:
+        compensation = maxS
+    
+    car.drive_speed(-compensation)
+
+num_turn = 1
+prev_block_x = 0.0
+gyro_angle_correct = 25
 
 while True:
+
     color = p.call('color')
     block_x = p.call('bl_x')
     block_y = p.call('bl_y')
+    cor = p.call('cor')  # 0 -> no corner or 1 -> corner 
     
-    print("Color: ", color, "  Block X: ", block_x, "  Block Y: ", block_y)    
-    # wait(1000)
+    # print("No. Turn: ", num_turn, "Color: ", color, "  Block X: ", block_x, "  Block Y: ", block_y, " corner:", cor)    
+    
+    if prev_block_x == 0.0 and block_x == 0.0: # no blocks
+        UltrasonicPID_2Sensor_C(num_turn, kp=0.00015, ki=0.0, kd=0.5, max_steer=20, gyro_angle_correct=25)         
+    
+    elif prev_block_x != 0.0 and block_x == 0.0:  # just cleared a block
 
-    avoidBlocks(color, bl_x=block_x, bl_y=block_y)
-    # break
+        hub.speaker.beep()
+        print("IMU Heading: ", hub.imu.heading())
+        
+        if direction == 0:
+            if hub.imu.heading() > 0: 
+                # red, cw
+                while hub.imu.heading() > gyro_angle_correct//4: # and corner == 0:
+                    car.steer(-30)
+                    car.drive_speed(800)
+            elif hub.imu.heading() < 0: 
+                # green, cw
+                while hub.imu.heading() < gyro_angle_correct//4: # and corner == 0:
+                    car.steer(30)
+                    car.drive_speed(800)
+        else:
+            if hub.imu.heading() > (90 * (num_turn-1)) and direction == 1: 
+                # red, cw
+                while hub.imu.heading() > gyro_angle_correct//4 + (90 * (num_turn-1)): # and corner == 0:
+                # while hub.imu.heading() > (90 * (num_turn-1)): # and corner == 0:
+                    # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
+                    car.steer(-30)
+                    car.drive_speed(800)
+            elif hub.imu.heading() < (90 * (num_turn-1)) and direction == 1: 
+                # green, cw
+                while hub.imu.heading() < gyro_angle_correct//4 + (90 * (num_turn-1)): # and corner == 0:
+                # while hub.imu.heading() > (90 * (num_turn-1)): # and corner == 0:
+                    # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
+                    car.steer(30)
+                    car.drive_speed(800)
+                
+            elif hub.imu.heading() < -(90 * (num_turn-1)) and direction == -1:
+                # green, ccw
+                while hub.imu.heading() < -gyro_angle_correct//4 - (90 * (num_turn-1)): # and corner == 0:
+                # while hub.imu.heading() < -(90 * (num_turn-1)): # and corner == 0:
+                    # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
+                    car.steer(30)
+                    car.drive_speed(800)
+            elif hub.imu.heading() > -(90 * (num_turn-1)) and direction == -1:
+                # red, ccw
+                while hub.imu.heading() > -gyro_angle_correct//4 - (90 * (num_turn-1)): # and corner == 0:
+                # while hub.imu.heading() < -(90 * (num_turn-1)): # and corner == 0:
+                    # corner = p.call('cor')  # 0 -> no corner or 1 -> corner
+                    car.steer(-30)
+                    car.drive_speed(800)
 
+    else:
+        avoidBlocks(color, bl_x=block_x, bl_y=block_y, max_steer_obs=50)
+        
+    if getMedianF(3) < 175 and cor == 1:  # corner wall
+        hub.speaker.beep(100)
+        car.drive_speed(0)
+        car.steer(0)
+        wait(250) 
 
-# while True:
-    # print("LeftUS: ", getMedianL(3))
-    # print("RightUS: ", getMedianR(3))
-    # print("Error: ", getMedianR(3) - getMedianL(3))
-    # print("LeftUS: ", eyesL.distance())
-    # print("RightUS: ", eyesR.distance())
-    # print("Error: ", eyesR.distance() - eyesL.distance())
-    # wait(1000)
+        rear.reset_angle(0)
+        while rear.angle() > -225:
+            car.drive_speed(-800)
 
-
-
-
-
+        if direction == 0:
+            if getMedianL(3) > getMedianR(3): # left corner turn
+                direction = -1
+                    
+            elif getMedianL(3) < getMedianR(3): # right corner turn
+                direction = 1 
+                
+        if direction == -1:  # counterclockwise
+            while hub.imu.heading() > -(90 * (num_turn)):
+                car.steer(75)  # left turn
+                turn90_pid(num_turn, kp=10, ki=0.000001, kd=1.0)
+        
+        elif direction == 1:
+            while hub.imu.heading() < (90 * (num_turn)):
+                car.steer(-75)   # right turn
+                turn90_pid(num_turn, kp=10, ki=0.000001, kd=1.0)
+        
+        num_turn += 1
+        car.steer(0)
+        car.drive_speed(0)
+        wait(250)
+    
+    # print("prev_block_x: ", prev_block_x, "block_x: ", block_x)
+    
+    prev_block_x = block_x
