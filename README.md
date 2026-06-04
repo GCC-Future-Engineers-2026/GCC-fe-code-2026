@@ -76,8 +76,7 @@ Our robot consists of two Lego Technic motors, one being medium angular motor (v
 The differential gear is integrated into a drive axle that lets the wheels rotate at different speeds. This stops the wheels from locking up and helps the vehicle turn smoothly and stay stable. This is especially helpful when turning in both challenges.
 
 
-<img width="600" <img width="2340" height="1988" alt="IMG20260603094123" src="https://github.com/user-attachments/assets/e2d7b4ab-645c-4b0e-8637-dffae848b71f" />
-alt="rn_image_picker_lib_temp_f4224a3c-ca7e-411c-a0ef-28fc0d756e2f" src="https://github.com/user-attachments/assets/dffd6470-33db-416c-9bd1-e7ddb2f6bbb8" />
+<img width="600"  alt="rn_image_picker_lib_temp_f4224a3c-ca7e-411c-a0ef-28fc0d756e2f" src="https://github.com/user-attachments/assets/dffd6470-33db-416c-9bd1-e7ddb2f6bbb8" />
 
 **4. Engineering principle for steering**
 
