@@ -1,7 +1,7 @@
 <img width="100%"  alt="1" src="https://github.com/user-attachments/assets/3be68703-aaab-4d5a-b530-a2c1ac6d6a7d" />
 
 
-This is the schematic wiring diagram for the self-driving robot. It uses the Spike Prime Hub as the main controller. A **large motor** (Port B) is placed at the back to move the robot forward or backward, while a **medium motor** (Port C) is placed in the front to control the steering. There is an **OpenMV H7 Plus Camera** (Port 4) on the top to spot the blocks around it. A **color sensor** (Port A) is used to detects the lines to help find the corner. A gyro sensor is also built in the Spike Prime Hub to make accurate turns and positioning.
+This is the schematic wiring diagram for the self-driving robot. It uses the Spike Prime Hub as the main controller. A **large motor** (Port B) is placed at the back to move the robot forward or backward, while a **medium motor** (Port C) is placed in the front to control the steering. There is an **OpenMV H7 Plus Camera** (Port 4) on the top to spot the blocks around it. A **color sensor** (Port A) is used to detects the lines to help find the corner. A gyro sensor is also built in the Spike Prime Hub to make accurate turns and positioning. Together, these parts let the robot move, sense, and make smart decisions while driving.
 
 | COMPONENT | FUNCTION | PORT |
 | :--- | :--- | :--- |
