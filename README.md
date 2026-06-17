@@ -183,7 +183,7 @@ This section shows the BOM and the instructions to build the vehicle.
 
 
 |Component |QTY |PHOTO|
-|:---|:---|
+|:---|:---|:---|
 |OpenMV H7 Plus Camera|1|<img width="30%" alt="490818226-ca1d665c-cde8-455f-a26d-12d1ab6409a1" src="https://github.com/user-attachments/assets/7c5ee0b8-33c3-4ba0-bd69-2e91ee1c7bdc" />|
 
 
