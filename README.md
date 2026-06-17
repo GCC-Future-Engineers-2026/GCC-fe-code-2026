@@ -194,8 +194,9 @@ The robot uses two ultrasonic sensors on its left and right, an openmv camera to
 
 <img width="100%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
 
-For the code, our robot 
+Here is the link to our code for reference:
 
+https://drive.google.com/file/d/1-Py2g-Ij56b8HtOUDJv549g4Wuvfz_lZ/view?usp=sharing
 
 ## 5.2 Obstacle Challenge
 For the obstacle challenge, the robot uses a code similar to the open challenge. The camera has another roi that takes up half of the camera to detect an approaching obstacle and its color. The robot uses the ultrasonic sensors to determine which direction it needs to face after leaving the parking lot. The robot uses pid to face straight forward. When a block enters the roi, the camera also detects its color. By using the x coordinate and the color of the obstacle, the robot is able to maneuver away from the obstacle. To avoid detecting corner blocks that cause the robot to face the wrong direction, we utilized the orange and blue lines of the track. When the robot passes the orange or blue line, the robot will ignore the obstacle until it makes a turn. The robot will repeat this until num_turn is equal to 12. When num_trun reaches 12, the robot will align itself using the walls and execute a parallel parking.
