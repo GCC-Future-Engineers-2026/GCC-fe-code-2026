@@ -1,8 +1,13 @@
 <h1 align="center">🛑 OPEN CHALLENGE 🛑</h1>
 <div align="center">
- 
-<a href="https://youtu.be/(https://youtu.be/3q7YnnUxA6w)" target="_blank">    
-  <img src="https://img.youtube.com/vi/(https://youtu.be/3q7YnnUxA6w)/maxresdefault.jpg" alt="Watch the video" width="480" height="360" border="10" />
-</a>
 
-[https://youtu.be/3q7YnnUxA6w](https://youtu.be/3q7YnnUxA6w)
+[![Watch the video](https://img.youtube.com/vi/3q7YnnUxA6w/0.jpg)](https://youtu.be/3q7YnnUxA6w)
+
+**Open Challenge:**[https://youtu.be/3q7YnnUxA6w](https://youtu.be/3q7YnnUxA6w)
+
+<h1 align="center">🛑 OBSTACLE CHALLENGE 🛑</h1>
+<div align="center">
+
+[![Watch the video](https://img.youtube.com/vi/O0ZcxkksFpc/0.jpg)](https://youtu.be/O0ZcxkksFpc)
+
+**Obstacle Challenge:**[https://youtu.be/O0ZcxkksFpc](https://youtu.be/O0ZcxkksFpc)
