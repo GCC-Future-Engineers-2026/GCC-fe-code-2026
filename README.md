@@ -45,11 +45,7 @@ From the Philippines, Team Grace Christian College is a three-member team made t
 
 Its members are Thomas Lao, Yuri Valero, and Kyron Chen.
 ## 1.0 Design of self-driving car
-<img align="right" width="20%" alt="NewProject (1)" src="https://github.com/user-attachments/assets/30526914-fc04-4f29-b330-35a93779b463" />This autonomous self driving car is made with Lego Education Spike Prime Set. This segment also explains the tradeoffs and the reason components were used in the design.
-
-
-
-
+<img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />This autonomous self driving car is made with Lego Education Spike Prime Set. This segment also explains the tradeoffs and the reason components were used in the design.
 
 
 ## 1.1 Tradeoffs
@@ -110,8 +106,7 @@ This segment is dedicated to the vehicle's power supply and usage and its sensor
 ## 3.2 Sensors
 **Camera**-The Openmv camera’s function is to detect the blocks and the parking lot. It detects red and green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
 
-<img width="30%" alt="Messenger_creation_AD349745-06A4-4AB2-90DD-00" src="https://github.com/user-attachments/assets/f628ebe3-e2fc-4a4b-8981-00676a236fde" />
-
+<img width="30%" alt="a" src="https://github.com/user-attachments/assets/98a59458-286c-4f7c-a0f9-371ffc370521" />
 
 
 **Gyro**-The gyro sensor in our robot is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns. It is also built into the Spike Prime Hub.
@@ -119,7 +114,6 @@ This segment is dedicated to the vehicle's power supply and usage and its sensor
 **Color**-The color sensor is used to detect the orange and blue lines depending on the direction(clockwise or counterclockwise) and tells the robot to not avoid the blocks and find the corner on the wall and turn properly.
 
 <img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-o" src="https://github.com/user-attachments/assets/9056b1a8-1a10-4d55-8d19-9b44090fe660" />
-
 
 
 **Ultrasonic**-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenge.
@@ -139,15 +133,12 @@ This section shows the BOM and the instructions to build the vehicle.
 
 |  |  |
 |:----------:|:--------:|
-|<img width="450" alt="1_1x" src="https://github.com/user-attachments/assets/012e493a-47a0-4b4b-9e71-5d446988dcfb" />|<img width="450" alt="2_1x" src="https://github.com/user-attachments/assets/3a46e1a0-72a6-4392-975d-e46c169e90af" />|
-|<img width="450" alt="3_1x" src="https://github.com/user-attachments/assets/af129b96-11ad-4494-bd68-36f0c6c9bca8" />|<img width="450" alt="4_1x" src="https://github.com/user-attachments/assets/76bf120f-a79b-4e04-bc3b-0912f05189f0" />|
-|<img width="450" alt="5_1x" src="https://github.com/user-attachments/assets/1f7a261e-23f2-4c93-8c18-6e7933e22516" />|<img width="450" alt="6_1x" src="https://github.com/user-attachments/assets/78e69178-5a95-4f12-92d5-7b0fdb9b774c" />|
-|<img width="450" alt="7_1x" src="https://github.com/user-attachments/assets/2855d29b-dfa2-4fad-b5ef-b807ef798764" />|<img width="450" alt="8_1x" src="https://github.com/user-attachments/assets/995b8d30-48a8-49ff-ad69-789564530cb2" />|
+|<img width="450" alt="8_1x" src="https://github.com/user-attachments/assets/995b8d30-48a8-49ff-ad69-789564530cb2" />| |
 |<img width="450" alt="9_1x" src="https://github.com/user-attachments/assets/3f4d7998-b673-44e7-9ae5-87aff9d329a2" />|<img width="450" alt="10_1x" src="https://github.com/user-attachments/assets/7f0d7522-93d9-4384-a706-20ade446da86" />|
 |<img width="450" alt="11_1x" src="https://github.com/user-attachments/assets/acfdb71d-4d6c-4196-b598-ec89c42d81cf" />|<img width="450" alt="12_1x" src="https://github.com/user-attachments/assets/8282e2f9-77a6-46e8-9915-29daf5fefd8d" />|
 |<img width="450" alt="13_1x" src="https://github.com/user-attachments/assets/8badba14-8d87-490b-a61a-00b47f16a207" />|<img width="450" alt="14_1x" src="https://github.com/user-attachments/assets/609d227e-743b-4ea7-b16b-e3389cd930e8" />|
 |<img width="450" alt="15_1x" src="https://github.com/user-attachments/assets/4e61a2d1-0432-43ac-9220-47491a47a4a7" />|<img width="450" alt="16_1x" src="https://github.com/user-attachments/assets/4b8826f4-866c-4c5d-8da8-0ee74a5fa729" />|
-|<img width="450" alt="17_1x" src="https://github.com/user-attachments/assets/f6e4129d-4542-4c42-8e55-0cccf8477cbb" />| |
+|<img width="450" alt="17_1x" src="https://github.com/user-attachments/assets/f6e4129d-4542-4c42-8e55-0cccf8477cbb" />|<img width="450" alt="18_1x" src="https://github.com/user-attachments/assets/9835c342-d6dc-45cc-a283-dfdafc937130" />|
 |<img width="450" alt="19_1x" src="https://github.com/user-attachments/assets/1ee05c23-3a90-4111-861b-ac4451eb467f" />|<img width="450" alt="20_1x" src="https://github.com/user-attachments/assets/52d1695a-c94d-45f0-b3f3-e7e9972787d3" />|
 |<img width="450" alt="21_1x" src="https://github.com/user-attachments/assets/10e8ceae-83f8-4c89-8238-06b180670bd0" />|<img width="450" alt="22_1x" src="https://github.com/user-attachments/assets/1c9c2f24-47fd-4af2-9fc3-7de6fc390062" />|
 |<img width="450" alt="23_1x" src="https://github.com/user-attachments/assets/0036b099-3d6a-4ff3-8a00-64fad978eeea" />|<img width="450" alt="24_1x" src="https://github.com/user-attachments/assets/34daa1dc-5eb5-4ce4-9f52-a5b5d97f1ecc" />|
@@ -183,14 +174,13 @@ This section shows the BOM and the instructions to build the vehicle.
 
 
 **Build of Materials (BOM)**
+| | |
+|:---|:---|
+|<img width="450" alt="1_1x" src="https://github.com/user-attachments/assets/012e493a-47a0-4b4b-9e71-5d446988dcfb" />|<img width="450" alt="2_1x" src="https://github.com/user-attachments/assets/3a46e1a0-72a6-4392-975d-e46c169e90af" />|
+|<img width="450" alt="3_1x" src="https://github.com/user-attachments/assets/af129b96-11ad-4494-bd68-36f0c6c9bca8" />|<img width="450" alt="4_1x" src="https://github.com/user-attachments/assets/76bf120f-a79b-4e04-bc3b-0912f05189f0" />|
+|<img width="450" alt="5_1x" src="https://github.com/user-attachments/assets/1f7a261e-23f2-4c93-8c18-6e7933e22516" />|<img width="450" alt="6_1x" src="https://github.com/user-attachments/assets/78e69178-5a95-4f12-92d5-7b0fdb9b774c" />|
+|<img width="450" alt="7_1x" src="https://github.com/user-attachments/assets/2855d29b-dfa2-4fad-b5ef-b807ef798764" />|
 
-<img width="681"  alt="1" src="https://github.com/user-attachments/assets/b8ed1118-b3d9-4f30-ab26-05c053ef5fe6" />
-
-<img width="681"  alt="2" src="https://github.com/user-attachments/assets/7b2eadc5-2375-424f-855f-ea0d53e0bde7" />
-
-<img width="681"  alt="3" src="https://github.com/user-attachments/assets/05a990f5-272b-48f6-9ee5-37110ae32c16" />
-
-<img width="681"  alt="4" src="https://github.com/user-attachments/assets/ee085c06-05a4-4825-b020-9d09e5129dff" />
 
 |Component |QTY |PHOTO|
 |:---|:---|
@@ -217,7 +207,7 @@ For the obstacle challenge, the robot uses a code similar to the open challenge.
 ## 6.0 Engineering Factor
 The third-party factor that we used is the Openmv camera, which enables us to see the blocks and their color. It gives the robot the ability to see the blocks, and in turn, make the right decisions that are needed.
 
-<img width="60%"  alt="Screenshot 2026-06-03 093710" src="https://github.com/user-attachments/assets/67ad3cf5-2a82-496e-ae5a-0b0daca77669" />
+<img width="40%"  alt="Screenshot 2026-06-03 093710" src="https://github.com/user-attachments/assets/67ad3cf5-2a82-496e-ae5a-0b0daca77669" />
 
 ## 6.1 Usage of Camera
 
