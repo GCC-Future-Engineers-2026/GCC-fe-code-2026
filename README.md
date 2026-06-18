@@ -204,6 +204,9 @@ For the obstacle challenge, the robot uses a code similar to the open challenge.
 
 <img width="100%"  alt="Untitled Diagram oc drawio_page-0001" src="https://github.com/user-attachments/assets/216c2a1c-e014-44f7-8426-ec3c51461759" />
 
+Here is the link to our code for reference:
+
+https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing
 
 ## 6.0 Engineering Factor
 The third-party factor that we used is the Openmv camera, which enables us to see the blocks and their color. It gives the robot the ability to see the blocks, and in turn, make the right decisions that are needed.
