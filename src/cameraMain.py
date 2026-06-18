@@ -3,6 +3,7 @@ Run this code on an OpenMV H7 plus camera. It probably works on the RT1060 too..
 
 **OBSTACLE CHALLENGE**
 
+```   
 import sensor
 import time
 from pupremote import PUPRemoteSensor
@@ -226,3 +227,6 @@ while True:
 
     # Take a tiny 1ms break so the camera can send the video feed to the hub
     time.sleep_ms(1)
+```
+
+**OPEN CHALLENGE**
