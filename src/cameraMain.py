@@ -230,3 +230,149 @@ while True:
 ```
 
 **OPEN CHALLENGE**
+
+```
+import sensor
+from pupremote import PUPRemoteSensor
+from pyb import Pin, Timer
+
+def msg(txt):
+    print(txt)
+    return txt+txt
+
+light = Timer(2, freq=50000).channel(1, Timer.PWM, pin=Pin("P6"))
+light.pulse_width_percent(100)
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.set_hmirror(False)
+sensor.set_auto_gain(False)
+sensor.set_auto_whitebal(False)
+sensor.set_auto_exposure(False)
+sensor.skip_frames(time=2000)
+
+p = PUPRemoteSensor(power=False)
+p.add_command('msg', "repr", "repr")
+p.add_channel('cam', to_hub_fmt='bhhb')
+
+img_center = (160, 120)
+img_roi = (5, 110, 310, 125)
+roi_rect = (img_roi[0], img_roi[1], img_roi[2], img_roi[3])
+roi_left_bottom = (5, 201, 70, 35)
+roi_right_bottom = (245, 201, 70, 35)
+img_roi_corner = (155, 80, 10,40)
+
+def find_block(img, img_debug, distance_cap):
+    img_contrast = img.copy()
+    img_contrast.gamma_corr(gamma=1.9, contrast=1.1, brightness=-0.1)
+    color = 0
+    nearestRed = None
+    nearestGreen = None
+    nearestPink = None
+    red_val = 0
+    green_val = 0
+    pink_val = 0
+    blocks = 0
+
+    # Bright Magenta / Pink
+    threshold_pink = (30, 95, 40, 127, -127, -10)
+
+    # Just Red
+    threshold_red = (20, 90, 30, 127, 15, 127)
+
+    # Standard Green
+    threshold_green = (20, 90, -127, -20, -10, 80)
+
+    img_debug.draw_rectangle(img_roi, color=(0, 0, 255))
+    red = img_contrast.find_blobs([threshold_red], area_threshold=150, roi=img_roi, merge=True)
+    green = img_contrast.find_blobs([threshold_green], area_threshold=150, roi=img_roi, merge=True)
+    pink = img_contrast.find_blobs([threshold_pink], area_threshold=150, roi=img_roi, merge=True)
+
+    center_x = 0
+    center_y = 0
+    p_center_x = 0
+    p_center_y = 0
+
+    if red:
+        for b in red:
+            img_debug.draw_rectangle(b.rect(), color=(255, 0, 0))
+            center_x = b.x() + (b.w() // 2)
+            center_y = b.y() + (b.h() // 2)
+            img_debug.draw_cross(center_x, center_y, color=(255, 0, 0))
+            val = b.y() + b.h()
+            if val > distance_cap:
+                blocks += 1
+            if val > red_val:
+                nearestRed = b
+                red_val = val
+
+    if green:
+        for b in green:
+            img_debug.draw_rectangle(b.rect(), color=(0, 255, 0))
+            center_x = b.x() + (b.w() // 2)
+            center_y = b.y() + (b.h() // 2)
+            img_debug.draw_cross(center_x, center_y, color=(0, 255, 0))
+            val = b.y() + b.h()
+            if val > distance_cap:
+                blocks += 1
+            if val > green_val:
+                nearestGreen = b
+                green_val = val
+
+    if pink:
+        for b in pink:
+            img_debug.draw_rectangle(b.rect(), color=(255, 0, 255))
+            p_center_x = b.x() + (b.w() // 2)
+            p_center_y = b.y() + (b.h() // 2)
+            img_debug.draw_cross(p_center_x, p_center_y, color=(255, 0, 255))
+            val = b.y() + b.h()
+            if val > distance_cap:
+                blocks += 1
+            if val > pink_val:
+                nearestPink = b
+                pink_val = val
+
+    if red_val == 0 and green_val == 0:
+        block = {"center_x": center_x, "center_y": center_y, "color": 0, "p_center_x": p_center_x, "p_center_y": p_center_y}
+        return block
+
+    if nearestRed and nearestGreen:
+        if red_val >= green_val:
+            color = 2
+        else:
+            color = 1
+    elif nearestRed:
+        color = 2
+    elif nearestGreen:
+        color = 1
+    else:
+        color = 0
+
+    block = {"center_x": center_x, "center_y": center_y, "color": color, "p_center_x": p_center_x, "p_center_y": p_center_y}
+    return block
+
+def check_corner_roi(img, img_debug):
+    img_contrast = img.copy()
+    img_contrast.gamma_corr(gamma=1.9, contrast=1.1, brightness=-0.1)
+    threshold_black = (0, 37, -128, 15, -54, 37)
+    img_debug.draw_rectangle(img_roi, color=(0, 0, 255))
+    img_debug.draw_rectangle(img_roi_corner, color=(255, 255, 0))
+    black = img_contrast.find_blobs([threshold_black], area_threshold=150, roi=img_roi_corner, merge=True)
+    if black:
+        black_val = 1
+    else:
+        black_val = 0
+    corner = {"black": black_val}
+    return corner
+
+while True:
+    img_debug = sensor.snapshot()
+    img = img_debug.copy()
+    img_debug.draw_cross(160, 120, color=(0, 0, 0))
+    block = find_block(img, img_debug, 30)
+    corner = check_corner_roi(img, img_debug)
+    data = (block["color"], block["center_x"], block["center_y"], corner["black"])
+    p.update_channel('cam', *data)
+    p.process()
+```
