@@ -11,3 +11,4 @@ Helps the robot move through areas with obstacles and to detect corners. It read
 
 # <kbd>**robot-open-challenge**</kbd>
 
+Helps the robot move through the track with precision. It reads data from the camera to detect the wall, ultrasonic sensors to determine the direction (clockwise or counterclockwise), and color sensors to determine whether it will do Avoidblocks or detect corner.
