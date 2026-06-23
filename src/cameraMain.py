@@ -1,7 +1,7 @@
 Based on OpenMV line follower example
 Run this code on an OpenMV H7 plus camera. It probably works on the RT1060 too..
 
-**OBSTACLE CHALLENGE**
+# OBSTACLE CHALLENGE
 
 ```   
 import sensor
@@ -15,7 +15,7 @@ from pyb import Pin, Timer
 DEBUG = True             # prints FPS to the OpenMV IDE; does NOT touch PUP data.
 FPS_PRINT_EVERY = 30     # print fps once every N frames when DEBUG is on.
 
-LED_DUTY = 35            # LED brightness %.
+LED_DUTY = 30            # LED brightness %.
 
 # Lock exposure / gain to fixed values to fight MOTION BLUR.
 EXPOSURE_US = None
@@ -37,14 +37,17 @@ BRIGHTNESS = -0.1
 # ===========================================================================
 threshold_pink  = (30, 95, 40, 127, -127, -10)   # bright magenta / pink
 threshold_red   = (20, 90, 30, 127, 15, 127)     # red
+threshold_red2 = (0, 37, 11, 55, 6, 127)
 threshold_green = (20, 90, -128, -29, -1, 44)    # green
-threshold_black = (13, 40, -13, 2, -21, 28)       # black (corner marker)
+# threshold_green2 = (19, 39, -92, -19, 6, 38)
+threshold_black = (0, 37, -25, 0, -19, 8)   # black (corner marker)
+black2 = (0, 20, -7, -2, -14, 4)
 
 # ===========================================================================
 # ROIs FOR CORNER AND BLOCK DETECTION
 # ===========================================================================
 img_center = (160, 120)
-img_roi = (5, 110, 310, 125)
+img_roi = (0, 110, 320, 130)
 roi_rect = (img_roi[0], img_roi[1], img_roi[2], img_roi[3])
 roi_left_bottom = (5, 201, 70, 35)
 roi_right_bottom = (245, 201, 70, 35)
@@ -112,7 +115,7 @@ def find_block(img_proc, img_debug):
 
     img_debug.draw_rectangle(img_roi, color=(0, 0, 255))
 
-    red = img_proc.find_blobs([threshold_red], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
+    red = img_proc.find_blobs([threshold_red, threshold_red2], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
     green = img_proc.find_blobs([threshold_green], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
     pink = img_proc.find_blobs([threshold_pink], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
 
@@ -187,7 +190,7 @@ def find_block(img_proc, img_debug):
 
 def check_corner_roi(img_proc, img_debug):
     img_debug.draw_rectangle(img_roi_corner, color=(255, 255, 0))
-    black = img_proc.find_blobs([threshold_black], area_threshold=AREA_THRESHOLD, roi=img_roi_corner, merge=True)
+    black = img_proc.find_blobs([threshold_black], area_threshold=100, roi=img_roi_corner, merge=True)
     return {"black": 1 if black else 0}
 
 
@@ -225,11 +228,11 @@ while True:
             print("fps:", clock.fps())
             _frame = 0
 
-    # Take a tiny 1ms break so the camera can send the video feed to the hub
+    # Give the hardware background handler a tiny window to service the USB link
     time.sleep_ms(1)
 ```
 
-**OPEN CHALLENGE**
+# OPEN CHALLENGE
 
 ```
 import sensor
