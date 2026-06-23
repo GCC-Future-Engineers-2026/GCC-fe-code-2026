@@ -8,6 +8,6 @@
 <h1 align="center">🛑 OBSTACLE CHALLENGE 🛑</h1>
 <div align="center">
 
-[![Watch the video](https://img.youtube.com/vi/j58idbpNPUM.jpg)](https://youtu.be/j58idbpNPUM)
+[![Watch the video](https://img.youtube.com/vi/j58idbpNPUM/0.jpg)](https://youtu.be/j58idbpNPUM)
 
 **Obstacle Challenge:**[https://youtu.be/j58idbpNPUM](https://youtu.be/j58idbpNPUM)
