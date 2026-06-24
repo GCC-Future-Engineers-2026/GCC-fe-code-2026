@@ -47,17 +47,6 @@ Its members are Thomas Lao, Yuri Valero, and Kyron Chen.
 <img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />This autonomous self driving car is made with Lego Education Spike Prime Set. This segment also explains the tradeoffs and the reason components were used in the design.
 
 
-## 1.1 Tradeoffs
-We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. We also moved the motor to a different position, so we could have better weight distribution. We moved the ultrasonic sensor to on top of the wheel, so that our robot doesn't turn too early. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer.
-
-| | |
-|:---|:----|
-|<img width="400" alt="a910624c-00f3-4ee8-b32c-c6e39e3e3a63" src="https://github.com/user-attachments/assets/b93fe076-9378-4c38-8162-7b4818c5dacb" />|<img width="400" alt="6" src="https://github.com/user-attachments/assets/d1ae3761-6af4-4ca4-9069-cd16263bd0e6" />|
-| **OLD DESIGN** | **NEW DESIGN** |
-
-
-
-
 ## 2.0 Mobility Management
 This segment shows the propulsion system and mechanical structure of the robot. It covers the main structure, tires, motors, and the entire layout of the vehicle. It also includes information about the engineering principle of the motor and steering that controls speed and torque.
 ## 2.1 Chassis of car
