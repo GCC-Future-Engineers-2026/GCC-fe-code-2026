@@ -13,12 +13,11 @@
 * [Introduction](#introduction)
 
 * [Team Grace Christian College](#team-grace-christian-college)
-* [1.0 Design of self-driving car](#10-design-of-self-driving-car)
-  * [1.1 Tradeoffs](#11-tradeoffs)
-
-  * [1.2 Why components were chosen](#12-why-components-were-chosen)
+* [1.0 Design of self-driving car](#10-design-of-self-driving-car) 
 * [2.0 Mobility Management](#20-mobility-management)
   * [2.1 Chassis of car](#21-chassis-of-car)
+
+  * [2.2 Why components were chosen](#22-why-components-were-chosen)
 * [3.0 Power and sense management](#30-power-and-sense-management)
   * [3.1 Power source](#31-power-source)
 
@@ -58,8 +57,7 @@ We have had multiple tradeoffs due to the changes we made with the design. We in
 
 
 
-## 1.2 Why components were chosen
-We chose spike as our component, because it has similar multithreading capabilities to EV3, smaller, faster. It is also easier to build around, has better connectivity to openmv, and has more flexible ports due to all ports and either be all sensors or all motors. The Large and Medium Spike angular motor were chosen due to it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
+
 ## 2.0 Mobility Management
 This segment shows the propulsion system and mechanical structure of the robot. It covers the main structure, tires, motors, and the entire layout of the vehicle. It also includes information about the engineering principle of the motor and steering that controls speed and torque.
 ## 2.1 Chassis of car
@@ -94,6 +92,9 @@ This robot is designed using Ackermann steering geometry.
 <img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://github.com/user-attachments/assets/9bf7b1c8-57c6-436e-9b63-53230b88d505" />
 
 This setup turns the inside front wheel at a sharper angle than the outside one, so both wheels follow perfect turning circles. By stopping the tires from scrubbing sideways, it cuts down on friction and wear. This gives the vehicle better traction, more stability, and the ability to make sharp turns with great precision.
+
+## 2.2 Why components were chosen
+We chose spike as our component, because it has similar multithreading capabilities to EV3, smaller, faster. It is also easier to build around, has better connectivity to openmv, and has more flexible ports due to all ports and either be all sensors or all motors. The Large and Medium Spike angular motor were chosen due to it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
 
 ## 3.0 Power and sense management
 This segment is dedicated to the vehicle's power supply and usage and its sensor systems. It covers each sensor's implementation and use along with information about the robot's power supply. There is also a wiring diagram given to illustrate the connection of sensors.
@@ -184,7 +185,9 @@ This section shows the BOM and the instructions to build the vehicle.
 
 |Component |QTY |PHOTO|
 |:---|:---|:---|
-|OpenMV H7 Plus Camera|1|<img width="30%" alt="490818226-ca1d665c-cde8-455f-a26d-12d1ab6409a1" src="https://github.com/user-attachments/assets/7c5ee0b8-33c3-4ba0-bd69-2e91ee1c7bdc" />|
+|OpenMV H7 Plus Camera|1|<img width="150" alt="490818226-ca1d665c-cde8-455f-a26d-12d1ab6409a1" src="https://github.com/user-attachments/assets/7c5ee0b8-33c3-4ba0-bd69-2e91ee1c7bdc" />|
+|Wide Angle Lens|1|<img width="150" alt="Wide Angle Lens" src="https://github.com/user-attachments/assets/da917b02-3e57-40bc-b735-6138b657e443" />|
+|Voltage Regulator|1|<img width="150" alt="eisei-trading2019_denkai-50v100uf-smd" src="https://github.com/user-attachments/assets/9852e4dc-e5e8-493e-86fc-a4f1d49bf6ec" />|
 
 
 ## 5.0 Obstacle Management
@@ -1014,130 +1017,27 @@ The third-party factor that we used is the Openmv camera, which enables us to se
 
 ## 6.1 Usage of Camera
 
-**OPEN CHALLENGE**
+**OPEN CHALLENGE CAMERA**
 
-Our Camera Code for the open challenge searches for objects and sends the data to a Lego Hub using the PUPRemote library. When it starts, it turns on a light. It locks the camera's brightness and color settings so the pictures always look the same. It also sets up a Region of Interest (ROI) to limit where the camera looks. In the main loop, the camera takes a picture and makes a copy of it. This lets the script read the data on one copy while drawing helpful lines on the screen with the other. A special function tweaks the picture's contrast to make objects stand out clearly from the background. The script checks a small ROI at the top-center of the picture for dark objects. If it finds a dark object there, it changes a status number from 0 to 1. Finally, the script puts the object data and the status number into a small group of 4 pieces of information. It sends this packet to the Lego Hub right away before starting over.
+Our Camera Code for the open challenge searches for objects and sends the data to a Lego Hub using the PUPRemote library. When it starts, it turns on a light. It locks the camera's brightness and color settings so the pictures always look the same. It also sets up a Region of Interest (ROI) to limit where the camera looks.
+
+In the main loop, the camera takes a picture and makes a copy of it. This lets the script read the data on one copy while drawing helpful lines on the screen with the other. 
 ```
-import sensor
-from pupremote import PUPRemoteSensor
-from pyb import Pin, Timer
-
-def msg(txt):
-    print(txt)
-    return txt+txt
-
-light = Timer(2, freq=50000).channel(1, Timer.PWM, pin=Pin("P6"))
-light.pulse_width_percent(100)
-
-sensor.reset()
-sensor.set_pixformat(sensor.RGB565)
-sensor.set_framesize(sensor.QVGA)
-sensor.set_hmirror(False)
-sensor.set_auto_gain(False)
-sensor.set_auto_whitebal(False)
-sensor.set_auto_exposure(False)
-sensor.skip_frames(time=2000)
-
-p = PUPRemoteSensor(power=False)
-p.add_command('msg', "repr", "repr")
-p.add_channel('cam', to_hub_fmt='bhhb')
-
+img_debug = sensor.snapshot()
+    img = img_debug.copy()
+    img_debug.draw_cross(160, 120, color=(0, 0, 0))
+```
+A special function tweaks the picture's contrast to make objects stand out clearly from the background. The script checks a small ROI at the top-center of the picture for dark objects.
+```
 img_center = (160, 120)
 img_roi = (5, 110, 310, 125)
 roi_rect = (img_roi[0], img_roi[1], img_roi[2], img_roi[3])
 roi_left_bottom = (5, 201, 70, 35)
 roi_right_bottom = (245, 201, 70, 35)
 img_roi_corner = (155, 80, 10,40)
-
-def find_block(img, img_debug, distance_cap):
-    img_contrast = img.copy()
-    img_contrast.gamma_corr(gamma=1.9, contrast=1.1, brightness=-0.1)
-    color = 0
-    nearestRed = None
-    nearestGreen = None
-    nearestPink = None
-    red_val = 0
-    green_val = 0
-    pink_val = 0
-    blocks = 0
-
-    # Bright Magenta / Pink
-    threshold_pink = (30, 95, 40, 127, -127, -10)
-
-    # Just Red
-    threshold_red = (20, 90, 30, 127, 15, 127)
-
-    # Standard Green
-    threshold_green = (20, 90, -127, -20, -10, 80)
-
-    img_debug.draw_rectangle(img_roi, color=(0, 0, 255))
-    red = img_contrast.find_blobs([threshold_red], area_threshold=150, roi=img_roi, merge=True)
-    green = img_contrast.find_blobs([threshold_green], area_threshold=150, roi=img_roi, merge=True)
-    pink = img_contrast.find_blobs([threshold_pink], area_threshold=150, roi=img_roi, merge=True)
-
-    center_x = 0
-    center_y = 0
-    p_center_x = 0
-    p_center_y = 0
-
-    if red:
-        for b in red:
-            img_debug.draw_rectangle(b.rect(), color=(255, 0, 0))
-            center_x = b.x() + (b.w() // 2)
-            center_y = b.y() + (b.h() // 2)
-            img_debug.draw_cross(center_x, center_y, color=(255, 0, 0))
-            val = b.y() + b.h()
-            if val > distance_cap:
-                blocks += 1
-            if val > red_val:
-                nearestRed = b
-                red_val = val
-
-    if green:
-        for b in green:
-            img_debug.draw_rectangle(b.rect(), color=(0, 255, 0))
-            center_x = b.x() + (b.w() // 2)
-            center_y = b.y() + (b.h() // 2)
-            img_debug.draw_cross(center_x, center_y, color=(0, 255, 0))
-            val = b.y() + b.h()
-            if val > distance_cap:
-                blocks += 1
-            if val > green_val:
-                nearestGreen = b
-                green_val = val
-
-    if pink:
-        for b in pink:
-            img_debug.draw_rectangle(b.rect(), color=(255, 0, 255))
-            p_center_x = b.x() + (b.w() // 2)
-            p_center_y = b.y() + (b.h() // 2)
-            img_debug.draw_cross(p_center_x, p_center_y, color=(255, 0, 255))
-            val = b.y() + b.h()
-            if val > distance_cap:
-                blocks += 1
-            if val > pink_val:
-                nearestPink = b
-                pink_val = val
-
-    if red_val == 0 and green_val == 0:
-        block = {"center_x": center_x, "center_y": center_y, "color": 0, "p_center_x": p_center_x, "p_center_y": p_center_y}
-        return block
-
-    if nearestRed and nearestGreen:
-        if red_val >= green_val:
-            color = 2
-        else:
-            color = 1
-    elif nearestRed:
-        color = 2
-    elif nearestGreen:
-        color = 1
-    else:
-        color = 0
-
-    block = {"center_x": center_x, "center_y": center_y, "color": color, "p_center_x": p_center_x, "p_center_y": p_center_y}
-    return block
-
+```
+If it finds a dark object there, it changes a status number from 0 to 1. Finally, the script puts the object data and the status number into a small group of 4 pieces of information. It sends this packet to the Lego Hub right away before starting over.
+```
 def check_corner_roi(img, img_debug):
     img_contrast = img.copy()
     img_contrast.gamma_corr(gamma=1.9, contrast=1.1, brightness=-0.1)
@@ -1163,167 +1063,33 @@ while True:
     p.process()
 ```
 
-**OBSTACLE CHALLENGE**
+**OBSTACLE CHALLENGE CAMERA**
 
 How our camera code works for obstacle challenge is like this:
-This MicroPython script allows an OpenMV smart camera to track colored objects and send that tracking data to a LEGO control hub. At startup, it turns on an external LED light at full brightness to ensure consistent, stable lighting for the camera. The camera is configured to a 320 x 240 QVGA resolution and locks its exposure and white balance so changing room lights won't mess up its vision. It defines two "Regions of Interest" (ROIs): a wide middle strip to look for blocks and a tiny central box to look for a black corner marker. In the main loop, the camera takes a snapshot and enhances its contrast and gamma to make specific colors stand out sharply. The find_block function searches the wide strip for color clusters matching pre-defined ranges for Red, Green, and Pink.If multiple blocks are visible, the script calculates which one is lowest on the screen, recognizing it as the closest block to the robot.The check_corner_roi function looks strictly inside the tiny central box to see if the robot has driven over a black marker line. All of this gathered information is packed into a compact 4-part data packet containing the closest color ID, its coordinates, and the black line status. Finally, the script continuously transmits this data stream over a PUPRemote channel so the connected LEGO robot can steer toward the blocks or react to the corner.
+This MicroPython script allows an OpenMV smart camera to track colored objects and send that tracking data to a LEGO control hub. At startup, it turns on an external LED light at full brightness to ensure consistent, stable lighting for the camera. The camera is configured to a 320 x 240 QVGA resolution and locks its exposure and white balance so changing room lights won't mess up its vision.
 
-```   
-import sensor
-import time
-from pupremote import PUPRemoteSensor
-from pyb import Pin, Timer
-
-# ===========================================================================
-# Tunables
-# ===========================================================================
-DEBUG = True             # prints FPS to the OpenMV IDE; does NOT touch PUP data.
-FPS_PRINT_EVERY = 30     # print fps once every N frames when DEBUG is on.
-
-LED_DUTY = 30            # LED brightness %.
-
-# Lock exposure / gain to fixed values to fight MOTION BLUR.
-EXPOSURE_US = None
-GAIN_DB = None
-
-# --- IMAGE PROCESSING LAYER ---
-USE_CLAHE = True         # Normalizes local lighting spots caused by your LEDs.
-CLAHE_CLIP_LIMIT = 3     # High numbers = more contrast, lower numbers = less noise.
-
-AREA_THRESHOLD = 150     #minimum number of pixels needed to detect block.
-
-# Gamma / contrast applied to the analysis frame before find_blobs.
+It defines two "Regions of Interest" (ROIs): a wide middle strip to look for blocks and a tiny central box to look for a black corner marker.
+```
+img_roi = (0, 110, 320, 130)
+img_roi_corner = (155, 110, 10, 80)
+```
+In the main loop, the camera takes a snapshot and enhances its contrast and gamma to make specific colors stand out sharply. The find_block function searches the wide strip for color clusters matching pre-defined ranges for Red, Green, and Pink.
+```
 GAMMA = 1.9
 CONTRAST = 1.1
 BRIGHTNESS = -0.1
-
-# ===========================================================================
-# Colour thresholds (LAB) -- BLOCK AND CORNER DETECTION
-# ===========================================================================
+```
+```
 threshold_pink  = (30, 95, 40, 127, -127, -10)   # bright magenta / pink
 threshold_red   = (20, 90, 30, 127, 15, 127)     # red
 threshold_red2 = (0, 37, 11, 55, 6, 127)
 threshold_green = (20, 90, -128, -29, -1, 44)    # green
-# threshold_green2 = (19, 39, -92, -19, 6, 38)
-threshold_black = (0, 37, -25, 0, -19, 8)   # black (corner marker)
-black2 = (0, 20, -7, -2, -14, 4)
+```
 
-# ===========================================================================
-# ROIs FOR CORNER AND BLOCK DETECTION
-# ===========================================================================
-img_center = (160, 120)
-img_roi = (0, 110, 320, 130)
-roi_rect = (img_roi[0], img_roi[1], img_roi[2], img_roi[3])
-roi_left_bottom = (5, 201, 70, 35)
-roi_right_bottom = (245, 201, 70, 35)
-img_roi_corner = (155, 110, 10, 80)
+If multiple blocks are visible, the script calculates which one is lowest on the screen, recognizing it as the closest block to the robot.
 
-
-# ===========================================================================
-# PUPRemote Command Callback
-# ===========================================================================
-def msg(txt):
-    # Callback handler for PUPRemote 'msg' command received from the Hub.
-    # PUPRemote requires a return value matching the 'repr' format.
-    print(txt)
-    return txt + txt
-
-
-# ===========================================================================
-# LED Control
-# ===========================================================================
-light = Timer(2, freq=50000).channel(1, Timer.PWM, pin=Pin("P6"))
-light.pulse_width_percent(LED_DUTY)
-
-# ===========================================================================
-# Camera Sensor Initialization
-# ===========================================================================
-sensor.reset()
-sensor.set_pixformat(sensor.RGB565)
-sensor.set_framesize(sensor.QVGA)
-sensor.set_hmirror(False)
-sensor.set_auto_gain(False)
-sensor.set_auto_whitebal(False)
-sensor.set_auto_exposure(False)
-sensor.skip_frames(time=2000)
-
-# Optional explicit locks, applied AFTER skip_frames so they actually stick.
-if GAIN_DB is not None:
-    sensor.set_auto_gain(False, gain_db=GAIN_DB)
-if EXPOSURE_US is not None:
-    sensor.set_auto_exposure(False, exposure_us=EXPOSURE_US)
-
-# ===========================================================================
-# PUPRemote Communication
-# ===========================================================================
-p = PUPRemoteSensor(power=True)
-p.add_command('msg', "repr", "repr")
-p.add_channel('cam', to_hub_fmt='bhhb')
-
-
-def _bbox_center(b):
-    return (b.x() + (b.w() // 2), b.y() + (b.h() // 2))
-
-
-def find_block(img_proc, img_debug):
-    # Detect the nearest red / green / pink block.
-
-    # img_proc  : Shared gamma-corrected and CLAHE analysis frame.
-    # img_debug : Raw overlay frame displayed in OpenMV IDE.
-
-    nearestRed = None
-    nearestGreen = None
-    nearestPink = None
-    red_val = 0
-    green_val = 0
-    pink_val = 0
-
-    img_debug.draw_rectangle(img_roi, color=(0, 0, 255))
-
-    red = img_proc.find_blobs([threshold_red, threshold_red2], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
-    green = img_proc.find_blobs([threshold_green], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
-    pink = img_proc.find_blobs([threshold_pink], area_threshold=AREA_THRESHOLD, roi=img_roi, merge=True)
-
-    if red:
-        for b in red:
-            cx, cy = _bbox_center(b)
-            img_debug.draw_rectangle(b.rect(), color=(255, 0, 0))
-            img_debug.draw_cross(cx, cy, color=(255, 0, 0))
-
-            # Proximity calculation: Y + H equals the bottom edge of the blob.
-            # Higher pixel value = lower down in the frame = closer to the robot camera.
-            val = b.y() + b.h()
-            if val > red_val:
-                red_val = val
-                nearestRed = b
-
-    if green:
-        for b in green:
-            cx, cy = _bbox_center(b)
-            img_debug.draw_rectangle(b.rect(), color=(0, 255, 0))
-            img_debug.draw_cross(cx, cy, color=(0, 255, 0))
-
-            # Proximity calculation: Higher pixel value = closer to the robot camera.
-            val = b.y() + b.h()
-            if val > green_val:
-                green_val = val
-                nearestGreen = b
-
-    if pink:
-        for b in pink:
-            cx, cy = _bbox_center(b)
-            img_debug.draw_rectangle(b.rect(), color=(255, 0, 255))
-            img_debug.draw_cross(cx, cy, color=(255, 0, 255))
-
-            # Pink is actively tracked to isolate it from red, preventing false red positives.
-            val = b.y() + b.h()
-            if val > pink_val:
-                pink_val = val
-                nearestPink = b
-
-    # Pick dominant colour based on closest block (lowest in frame)
-    # COLOR MAPPING KEY FOR HUB: 0 = None, 1 = Green, 2 = Red
-    if nearestRed and nearestGreen:
+```
+ if nearestRed and nearestGreen:
         color = 2 if red_val >= green_val else 1
     elif nearestRed:
         color = 2
@@ -1343,58 +1109,16 @@ def find_block(img_proc, img_debug):
         p_center_x, p_center_y = _bbox_center(nearestPink)
     else:
         p_center_x, p_center_y = 0, 0
-
-    return {
-        "center_x": center_x,
-        "center_y": center_y,
-        "color": color,
-        "p_center_x": p_center_x,
-        "p_center_y": p_center_y,
-    }
+```
+The check_corner_roi function looks strictly inside the tiny central box to see if the robot has driven over a black marker line. 
 
 
-def check_corner_roi(img_proc, img_debug):
-    img_debug.draw_rectangle(img_roi_corner, color=(255, 255, 0))
-    black = img_proc.find_blobs([threshold_black], area_threshold=100, roi=img_roi_corner, merge=True)
-    return {"black": 1 if black else 0}
-
-
-# ===========================================================================
-# Main Execution Loop
-# ===========================================================================
-clock = time.clock()
-_frame = 0
-
-while True:
-    clock.tick()
-    img_debug = sensor.snapshot()
-
-    # Image preparation layer
-    img_proc = img_debug.copy()
-    img_proc.gamma_corr(gamma=GAMMA, contrast=CONTRAST, brightness=BRIGHTNESS)
-
-    if USE_CLAHE:
-        img_proc.histeq(adaptive=True, clip_limit=CLAHE_CLIP_LIMIT)
-
-    img_debug.draw_cross(160, 120, color=(0, 0, 0)) # place cross on the center of the camera
-
-    block = find_block(img_proc, img_debug)
-    corner = check_corner_roi(img_proc, img_debug)
-
-    # NOTE: Pink block data is purposely omitted from 'data' tuple because the
+All of this gathered information is packed into a compact 4-part data packet containing the closest color ID, its coordinates, and the black line status. Finally, the script continuously transmits this data stream over a PUPRemote channel so the connected LEGO robot can steer toward the blocks or react to the corner.
+```
     # 'cam' PUPRemote channel format ('bhhb') is only configured to send 4 values.
     data = (block["color"], block["center_x"], block["center_y"], corner["black"])
     p.update_channel('cam', *data)
     p.process()
-
-    if DEBUG:
-        _frame += 1
-        if _frame >= FPS_PRINT_EVERY:
-            print("fps:", clock.fps())
-            _frame = 0
-
-    # Give the hardware background handler a tiny window to service the USB link
-    time.sleep_ms(1)
 ```
 
 ## 7.0 Engineering decisions and Improvements
@@ -1407,6 +1131,9 @@ The first problem we had was when our robot's ultrasonic sensors were infront of
 |:---|:---|
 |<img width="50%" alt="a910624c-00f3-4ee8-b32c-c6e39e3e3a63" src="https://github.com/user-attachments/assets/db19628c-23a0-4470-924d-ea5b12803162" />|<img width="30%" alt="6" src="https://github.com/user-attachments/assets/d8fe5bac-05d1-4e37-9ee0-4aa5278ebcee" />|
 |**OLD ROBOT**|**CURRENT ROBOT**|
+
+**Tradeoffs**
+We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer.
 
 ## 7.2 Robot Programming
 We had many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
