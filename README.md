@@ -1012,7 +1012,7 @@ The third-party factor that we used is the Openmv camera, which enables us to se
 
 **OPEN CHALLENGE CAMERA**
 
-Our Camera Code for the open challenge searches for objects and sends the data to a Lego Hub using the PUPRemote library. When it starts, it turns on a light. It locks the camera's brightness and color settings so the pictures always look the same. It also sets up a Region of Interest (ROI) to limit where the camera looks.
+Our Camera Code for the open challenge searches for objects and sends the data to a Lego Hub using the PUPRemote library. It sets the camera resolution to QVGA (320x240 pixels). When it starts, it sets up a Region of Interest (ROI) to limit where the camera looks. set_auto_gain(), set_auto_whitebal(), and set_auto_exposure() are set to False to keep the image and thresholds consistent when in different lighting conditions.
 
 In the main loop, the camera takes a picture and makes a copy of it. This lets the script read the data on one copy while drawing helpful lines on the screen with the other. 
 ```
@@ -1020,7 +1020,7 @@ img_debug = sensor.snapshot()
     img = img_debug.copy()
     img_debug.draw_cross(160, 120, color=(0, 0, 0))
 ```
-A special function tweaks the picture's contrast to make objects stand out clearly from the background. The script checks a small ROI at the top-center of the picture for dark objects.
+A special function tweaks the picture's contrast to make objects stand out clearly from the background. The script checks a small ROI at the top-center of the picture for dark objects. This ROI is used to detect the black corner and tells the robot to turn once it reaches near the corner
 ```
 img_center = (160, 120)
 img_roi = (5, 110, 310, 125)
@@ -1058,58 +1058,30 @@ while True:
 
 **OBSTACLE CHALLENGE CAMERA**
 
-How our camera code works for obstacle challenge is like this:
-This MicroPython script allows an OpenMV smart camera to track colored objects and send that tracking data to a LEGO control hub. At startup, it turns on an external LED light at full brightness to ensure consistent, stable lighting for the camera. The camera is configured to a 320 x 240 QVGA resolution and locks its exposure and white balance so changing room lights won't mess up its vision.
+The camera first turns on its front LED lights to full brightness. This keeps the lighting on the track perfectly steady and stops outside shadows from messing up the camera’s view. The camera then locks its settings for exposure and color balance. By turning off the camera's automatic adjustments, the code ensures colors look exactly the same whether the room is bright or dim. The camera also fixes lens distortion so shapes look accurate.
 
-It defines two "Regions of Interest" (ROIs): a wide middle strip to look for blocks and a tiny central box to look for a black corner marker.
-```
-img_roi = (0, 110, 320, 130)
-img_roi_corner = (155, 110, 10, 80)
-```
-In the main loop, the camera takes a snapshot and enhances its contrast and gamma to make specific colors stand out sharply. The find_block function searches the wide strip for color clusters matching pre-defined ranges for Red, Green, and Pink.
-```
-GAMMA = 1.9
-CONTRAST = 1.1
-BRIGHTNESS = -0.1
-```
-```
-threshold_pink  = (30, 95, 40, 127, -127, -10)   # bright magenta / pink
-threshold_red   = (20, 90, 30, 127, 15, 127)     # red
-threshold_red2 = (0, 37, 11, 55, 6, 127)
-threshold_green = (20, 90, -128, -29, -1, 44)    # green
-```
+To save computing power, the camera doesn’t search the whole screen. Instead, it looks only inside two specific boxes called Regions of Interest:
 
-If multiple blocks are visible, the script calculates which one is lowest on the screen, recognizing it as the closest block to the robot.
+* The Wide Middle Strip: A wide box across the lower half of the screen. This is where the camera watches out for red, green, or pink obstacle blocks on the floor.
 
-```
- if nearestRed and nearestGreen:
-        color = 2 if red_val >= green_val else 1
-    elif nearestRed:
-        color = 2
-    elif nearestGreen:
-        color = 1
-    else:
-        color = 0
+* The Central Thin Strip: A narrow vertical box right in the center. This is whre the camera searches for oncoming walls or black lines.
 
-    if color == 2:
-        center_x, center_y = _bbox_center(nearestRed)
-    elif color == 1:
-        center_x, center_y = _bbox_center(nearestGreen)
-    else:
-        center_x, center_y = 0, 0
+Every time the camera takes a picture, it makes an exact copy of it. It uses the clean original to draw colorful boxes and crosshairs on your computer screen for testing. It takes the copy and alters its brightness and contrast to make the background go black while making the block colors stand out sharply. It uses a special color system that measures the actual tint of an object rather than how bright it is. Since red can look bright or dark depending on shadows, the camera uses two separate red filters and combines them so reduces the chance to miss a red obstacle.
 
-    if nearestPink is not None:
-        p_center_x, p_center_y = _bbox_center(nearestPink)
-    else:
-        p_center_x, p_center_y = 0, 0
-```
-The check_corner_roi function looks strictly inside the tiny central box to see if the robot has driven over a black marker line. 
+<img width="463" height="348" alt="Screenshot_3" src="https://github.com/user-attachments/assets/93d56997-3c43-4584-b25c-3fd17b836d37" />
 
+
+If the camera sees more than one block at the same time, it uses perspective to figure out which one is the closest. Because the camera points downward at the floor, objects that are lower down on the screen are physically closer to the robot.
+
+The camera checks the bottom edge of the blocks and picks the one closest to the bottom of the screen. If a red and green block are both visible, the lower one wins priority. The camera then calculates the exact center of that winning block and labels it with a simple color ID number.
+
+<img width="457" height="349" alt="Screenshot_1" src="https://github.com/user-attachments/assets/3390f3bb-e073-4d89-85b6-71e0c7dd9589" />
+
+At the same time, the camera looks inside the narrow central box to see if the path ahead is clear. If it spots a dark object or a black line inside the strip, it instantly changes an internal status number from zero to one. This acts as an early warning, letting the robot know it is about to hit a wall or cross a boundary line.
 
 All of this gathered information is packed into a compact 4-part data packet containing the closest color ID, its coordinates, and the black line status. Finally, the script continuously transmits this data stream over a PUPRemote channel so the connected LEGO robot can steer toward the blocks or react to the corner.
-```
-    # 'cam' PUPRemote channel format ('bhhb') is only configured to send 4 values.
-    data = (block["color"], block["center_x"], block["center_y"], corner["black"])
+ ```
+ data = (block["color"], block["center_x"], block["center_y"], corner["black"])
     p.update_channel('cam', *data)
     p.process()
 ```
@@ -1127,7 +1099,7 @@ The first problem we had was when our robot's ultrasonic sensors were infront of
 
 **Tradeoffs**
 
-We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer.
+We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer. Due to its bigger width, when it does a sharp turn it might hit the robot with its backside.
 
 ## 7.2 Robot Programming
 We had many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
