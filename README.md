@@ -1075,9 +1075,11 @@ If the camera sees more than one block at the same time, it uses perspective to 
 
 The camera checks the bottom edge of the blocks and picks the one closest to the bottom of the screen. If a red and green block are both visible, the lower one wins priority. The camera then calculates the exact center of that winning block and labels it with a simple color ID number.
 
-<img width="457" height="349" alt="Screenshot_1" src="https://github.com/user-attachments/assets/3390f3bb-e073-4d89-85b6-71e0c7dd9589" />
+<img width="467" height="348" alt="Screenshot_2" src="https://github.com/user-attachments/assets/dcc030b7-af08-4d0c-a4ef-4b39abbef44e" />
 
 At the same time, the camera looks inside the narrow central box to see if the path ahead is clear. If it spots a dark object or a black line inside the strip, it instantly changes an internal status number from zero to one. This acts as an early warning, letting the robot know it is about to hit a wall or cross a boundary line.
+
+<img width="457" height="349" alt="Screenshot_1" src="https://github.com/user-attachments/assets/3390f3bb-e073-4d89-85b6-71e0c7dd9589" />
 
 All of this gathered information is packed into a compact 4-part data packet containing the closest color ID, its coordinates, and the black line status. Finally, the script continuously transmits this data stream over a PUPRemote channel so the connected LEGO robot can steer toward the blocks or react to the corner.
  ```
