@@ -192,11 +192,284 @@ For this project, we used Python as the coding language to operate the robot. Ou
 ## 5.1 Open Challenge
 The robot uses two ultrasonic sensors on its left and right, an openmv camera to trigger the turning, and the in-built gyro sensor to assist its turns and face the correct direction. At the start of the challenge, the robot will use pid to navigate towards a corner. The robot has a roi (region of interest) at the middle of its camera to detect if it is getting close to a corner. When that roi detects black, the robot will execute a 90 degree turn by reversing. The robot determines the direction of the turn based on the difference of the left and right ultrasonic sensor. After completing a turn, a variable called “num_turn” will increase by one. The robot uses the absolute heading value to determine where to face after turning and during pid. While the variable is less than 12, the robot will continue to repeat the pid and turning code. When the variable reaches 12, the robot will continue to go forward for a few second with pid towards its starting section.
 
-<img width="60%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
+<img width="70%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
 
-Here is the link to our code for reference:
+```
+p = PUPRemoteHub(Port.D)
+p.add_command("msg", to_hub_fmt="repr", from_hub_fmt="repr")
+p.add_channel('cam', to_hub_fmt='bhhb')
+```
+PUPRemoteHub connects the hub to an external OpenMV camera via Port D. It sets up a command channel called 'cam' to receive 4 variables packaged as binary data.
+```
+async def getMedianR(samples):
+    i = 0
+    while i < samples:
+        distListR[i] = await eyesR.distance()
+        i += 1
+    
+    distListR.sort()
+    n = len(distListR)
+    mid = n // 2 # median of the 3 samples
 
-https://drive.google.com/file/d/1-Py2g-Ij56b8HtOUDJv549g4Wuvfz_lZ/view?usp=sharing
+    if n % 2 == 1: # if odd number of samples, return information 
+        return distListR[mid]
+    else: # if even number, find average then return information 
+        return (distListR[mid-1] + distListR[mid]) / 2
+
+async def getMedianL(samples):
+    i = 0
+    while i < samples:
+        distListL[i] = await eyesL.distance()
+        i += 1
+    
+    distListL.sort()
+    n = len(distListL)
+    mid = n // 2
+
+    if n % 2 == 1:
+        return distListL[mid]
+    else:
+        return (distListL[mid-1] + distListL[mid]) / 2
+```
+To avoid reading random spikes from the ultrasonic sensors, this function takes 3 quick distance samples, sorts them in ascending order, and extracts the middle value (median). This completely discards outlier anomalies.
+```
+async def remote_engine():
+    while True:
+        # connects hub to the camera and relay information
+        await p.process_async()
+        # A tiny wait is necessary to let other tasks in
+        await wait(1)
+
+# updates information from camera and sensors
+async def update_robot_data():
+    global rob_data
+    
+    while True:
+        # This is specifically designed for Pybricks multitasking.
+        result = await p.call_multitask("cam")
+        
+        if result:
+            # Unpack the tuple directly from the result
+            color, block_x, block_y, corner = result 
+            
+            heading = hub.imu.heading()
+            lineColor = await getLineColor()
+            us_R = await getMedianR(3)
+            us_L = await getMedianL(3)
+
+            rob_data['color'] = color
+            rob_data['block_x'] = block_x
+            rob_data['block_y'] = block_y
+            rob_data['corner'] = corner
+            rob_data['heading'] = heading
+            rob_data['ultra_R'] = us_R
+            rob_data['ultra_L'] = us_L
+            rob_data['line_color'] = lineColor
+            
+        await wait(20) # Increased to 20ms to give the connection 'breathing room'
+```
+* remote_engine: Keeps communication alive with the OpenMV camera.
+
+* update_robot_data: Constantly populates a global dictionary (rob_data) every 20 milliseconds with refreshed telemetry: camera tracking data (color, block_x, corner), IMU gyro heading, color sensor color, and filtered ultrasonic distances.
+```
+async def ultrasonic_PID(kp=0.075, ki=0.000001, kd=10000.0, minPower=900, maxPower=1100):
+    global sum_error, prev_error, max_steer, direction, num_turn
+    global rob_data, steer_center, speed_center
+
+    drive_power = 0.0
+    compensation = 0.0
+    
+    while num_turn <= 12:  
+        # after 3 laps, pid stops   
+        error = rob_data['ultra_R'] - rob_data['ultra_L']    
+            
+        prop = kp * error # proportional
+        
+        sum_error += error
+        integral = ki * sum_error # integral
+
+        if integral > 10.0:
+            integral = 10.0
+
+        derivative = kd * (error - prev_error) # derivative
+
+        compensation = prop + integral + derivative
+
+        prev_error = error
+
+        # negative steer = steer to the left
+        # positive steer = steer to the right
+        
+        if compensation > max_steer:
+            compensation = max_steer
+        elif compensation < -max_steer:
+            compensation = -max_steer
+        
+        maxP = maxPower
+        minP = minPower
+        max_error = 2000
+        
+        # cap the steering of the robot 
+        if error > max_error:
+            error = max_error
+        elif error < 0:
+            error = 0
+
+        # adjust speed depending on the error - bigger the error, slower the movement and vice versa
+        drive_power = -(maxP - minP) * (error - max_error) / max_error + minP   
+        
+        steer_center = compensation
+        speed_center = drive_power     
+                    
+        await wait(100)
+    
+    # set speed to 0 to stop robot from moving
+    speed_center = 0
+```
+The Error for the PID is calculated by subtracting the left wall distance from the right wall distance. If the robot is perfectly centered, the error is 0.
+
+This function also gives the robot **dynamic speed**. The function slows the robot down dynamically if the error is large (approaching a wall) and speeds up to maximum power when the error is low (driving perfectly straight).
+```
+def turn90_pid(num_turn, kp=35, ki=0.000001, kd=1.0, forward=False, maxP=1100, minP=400):
+    global sumS_error, prevS_error
+    global speed_sequence
+
+    maxS = maxP
+    minS = minP
+    steer_error = abs((90 * (num_turn)) - abs(rob_data['heading']))
+    prop = kp * steer_error # proportional
+    
+    sumS_error += steer_error
+    integral = ki * sumS_error # integral
+
+    if integral > 10.0:
+        integral = 10.0
+
+    derivative = kd * (steer_error - prevS_error) # derivative
+
+    compensation = prop + integral + derivative
+
+    prevS_error = steer_error
+    
+    if compensation > maxS:
+        compensation = maxS
+    elif compensation < minS:
+        compensation = minS
+    
+    if forward:
+        speed_sequence = compensation
+    else:
+        speed_sequence = -compensation
+
+# signal to turn after detecting corner wall
+async def detect_corner():
+    global num_turn, direction
+    global rob_data, steer_sequence, speed_sequence, is_sequencing
+    global can_sense_corner
+
+    while True:
+        if rob_data["corner"] == 1 and not is_sequencing and can_sense_corner:  # corner wall
+            is_sequencing = True
+            speed_sequence = 0
+            await hub.speaker.beep()
+            
+            if direction == 0:
+                if rob_data['ultra_L'] > rob_data['ultra_R']: # left corner turn
+                    direction = -1
+                elif rob_data['ultra_L'] < rob_data['ultra_R']: # right corner turn
+                    direction = 1
+                
+            if direction == -1:
+                steer_sequence = -75 # left turn
+            elif direction == 1:
+                steer_sequence = 75 # right turn
+
+            # reduce the turn amount to stop momentum from increasing the turn
+            while abs(rob_data['heading']) < (90 * num_turn - 14):
+                turn90_pid(num_turn, forward=True, maxP=1000, minP=300)                
+                await wait(1)
+
+            num_turn += 1
+            # crucial for knowing how many laps the robot did
+            
+            steer_sequence = 0
+            speed_sequence = 0
+            is_sequencing = False
+            can_sense_corner = False
+            
+        await wait(50)
+```
+* detect_corner: Waits until the OpenMV camera sets corner == 1 and a color lane line has been crossed (can_sense_corner).
+
+Once triggered, it locks out normal wall-following (is_sequencing = True) and forces a hard turn (75 or -75 steering angle) while dynamically calculating speed using turn90_pid based on the internal Gyro heading.
+
+Momentum Compensation: It cuts the turn sequence short by 14 degrees (90 * num_turn - 14) because the physical weight and speed of the robot will cause it to drift smoothly through the remaining 14 degrees.
+```
+async def sense_line_color():
+    global can_sense_corner
+
+    while True:
+        # can_sense_corner allows the robot to turn at the corner
+        if rob_data['line_color'] == 1 and (direction == 0 or direction == 1): # orange clockwise
+            can_sense_corner = True
+            await hub.speaker.beep(100)
+        elif rob_data['line_color'] == 2 and (direction == 0 or direction == -1): # blue counter-clockwise
+            can_sense_corner = True
+            await hub.speaker.beep(100)
+        
+        await wait(20)
+```
+To ensure the camera doesn't accidentally trigger a corner turn sequence in the middle of a straightaway due to a visual glitch, This function forces the robot to physically cross a colored line (Orange for clockwise tracks, Blue for counter-clockwise tracks) before it is permitted to execute a corner turn.
+```
+async def motor_controller():
+    global rob_data, steer, speed, is_sequencing
+    global steer_center, speed_center
+    global steer_sequence, speed_sequence
+
+    while True:
+        if is_sequencing:
+            steer = steer_sequence
+            speed = speed_sequence          
+        elif rob_data['block_x'] == 0:
+            steer = steer_center
+            speed = speed_center 
+            
+        car.steer(steer)
+        car.drive_speed(speed)
+        
+        await wait(50)
+```
+This function acts as the multiplexer. It checks if the robot is currently executing a corner turn (is_sequencing). If it is, it feeds the corner variables to the motors. If not, it feeds the wall-following PID values (steer_center, speed_center) to the motors.
+```
+async def main():
+    # Run tasks concurrently
+    await multitask(
+        remote_engine(), 
+        update_robot_data(), 
+        detect_corner(),
+        sense_line_color(),
+        ultrasonic_PID(kp=0.0005, ki=0.0000001, kd=1.0),
+        motor_controller(),
+        race=True
+        # if even one function stops, all function stops
+    )
+
+    car.drive_speed(0)
+    car.steer(0)
+    gc.collect() # <--- Force a full memory clear here!
+    await wait(10) # Give the hub a moment to breathe
+
+    rear.reset_angle(0)
+    while rear.angle() < 1850:
+        await UltrasonicPID_2Sensor_C(num_turn=13, kp=0.075, ki=0.000001, kd=1.0, max_steer=20, gyro_angle_correct=25, with_gyro=True)
+        gc.collect()
+        
+    car.drive_speed(0)
+```
+* race=True: This Pybricks feature means that if any single task ends, all tasks are stopped. The ultrasonic_PID loop ends when num_turn > 12 (meaning the robot has finished 3 full laps of a 4-corner track).
+
+Once the multitasking race finishes, the car drops out of the concurrent loop, stops, fires gc.collect() to free memory, and runs a standalone function (UltrasonicPID_2Sensor_C) utilizing gyro correction angles to smoothly drive forward exactly 1850 motor degrees back across the starting finish line to complete the run.
+
 
 ## 5.2 Obstacle Challenge
 For the obstacle challenge, the robot uses a code similar to the open challenge. The camera has another roi that takes up half of the camera to detect an approaching obstacle and its color. The robot uses the ultrasonic sensors to determine which direction it needs to face after leaving the parking lot. The robot uses pid to face straight forward. When a block enters the roi, the camera also detects its color. By using the x coordinate and the color of the obstacle, the robot is able to maneuver away from the obstacle. To avoid detecting corner blocks that cause the robot to face the wrong direction, we utilized the orange and blue lines of the track. When the robot passes the orange or blue line, the robot will ignore the obstacle until it makes a turn. The robot will repeat this until num_turn is equal to 12. When num_turn reaches 12, the robot will align itself using the walls and execute a parallel parking.
@@ -204,10 +477,535 @@ For the obstacle challenge, the robot uses a code similar to the open challenge.
 
 <img width="100%"  alt="Untitled Diagram oc drawio_page-0001" src="https://github.com/user-attachments/assets/216c2a1c-e014-44f7-8426-ec3c51461759" />
 
-Here is the link to our code for reference:
+**Logic and Behavoir**
+```
+p = PUPRemoteHub(Port.D) # Connection to an external openMV/SPIKE camera hub
+p.add_command("msg", to_hub_fmt="repr", from_hub_fmt="repr")
+p.add_channel('cam', to_hub_fmt='bhhb')
+```
+PUPRemoteHub handles data streaming from an external smart camera over a serial port. This camera passes information regarding obstacle colors, coordinates, and corner signs.
+```
+async def getMedianR(samples):
+    i = 0
+    while i < samples:
+        distListR[i] = await eyesR.distance()
+        i += 1
+    distListR.sort()
+    n = len(distListR)
+    mid = n // 2
+    if n % 2 == 1: return distListR[mid]
+    else: return (distListR[mid-1] + distListR[mid]) / 2
 
-[https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing
-](https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing)
+async def getMedianL(samples):
+    i = 0
+    while i < samples:
+        distListL[i] = await eyesL.distance()
+        i += 1
+    distListL.sort()
+    n = len(distListL)
+    mid = n // 2
+    if n % 2 == 1: return distListL[mid]
+    else: return (distListL[mid-1] + distListL[mid]) / 2
+```
+Ultrasonic sensors are prone to occasional noise or random spikes. Both getMedianR and getMedianL take 3 rapid readings, sort them, and pick the middle value (median filter). This ensures smooth, reliable data for the steering logic.
+
+```
+# --- Background Engines ---
+# Relays information from the camera
+async def remote_engine():
+    while True:
+        await p.process_async()
+        await wait(1)
+
+# update information from sensors and camera
+async def update_robot_data():
+    global rob_data
+    while True:
+        rob_data['heading'] = hub.imu.heading()
+        rob_data['line_color'] = await getLineColor()
+        rob_data['ultra_R'] = await getMedianR(3)
+        rob_data['ultra_L'] = await getMedianL(3)
+
+        result = await p.call_multitask("cam")
+        if result:
+            color, block_x, block_y, corner= result 
+            rob_data['color'] = color
+            rob_data['block_x'] = block_x
+            rob_data['block_y'] = block_y
+            rob_data['corner'] = corner
+        await wait(20)
+
+# changes motor control according to priority
+async def motor_controller():
+    global rob_data, is_sequencing
+    global steer_center, speed_center
+    global steer_sequence, speed_sequence
+    
+    while True:
+        if is_sequencing:
+             # PRIORITY 1
+            current_steer = steer_sequence
+            current_speed = speed_sequence
+        else:
+            # PRIORITY 2
+            current_steer = steer_center
+            current_speed = speed_center
+                
+        car.steer(current_steer)
+        car.drive_speed(current_speed)
+        
+        await wait(10)
+```
+These asynchronous loops run constantly in the backround using Python uasyncio:
+
+* remote_engine(): Keeps the communication channel with the camera active.
+
+* update_robot_data(): Constantly refreshes the robot’s telemetry—its IMU (gyro) heading, line colors, ultrasonic distances, and camera tracking metrics—saving them into a global dictionary called rob_data.
+
+* motor_controller(): Acts as a safety/priority switchboard. If the robot is executing a strict maneuver (like avoiding a block or taking a corner), is_sequencing is true, and it takes commands from steer_sequence. Otherwise, it defaults to steer_center (basic wall-centering).
+
+```
+async def get_out_parking():
+    global direction
+    # Auto detect layout orientation
+    if await getMedianR(3) > await getMedianL(3): 
+        direction = 1
+    else: 
+        direction = -1
+
+    # Scale initial steering angle directly based on track direction
+    car.steer(75 * direction)
+    await wait(100)
+    while abs(hub.imu.heading()) < 65:
+        car.drive_speed(500)
+        await wait(10)
+    car.drive_speed(0)
+    car.steer(0)
+    await wait(100)
+    rear.reset_angle()
+    while rear.angle() < 1000:
+        car.drive_speed(800)
+        await wait(10)
+    car.drive_speed(0)
+    car.steer(75 * direction)
+    await wait(100)
+    
+    # Watch gyro orientation bound dynamically 
+    while (direction == 1 and hub.imu.heading() > 10) or (direction == -1 and hub.imu.heading() < -10):
+        car.drive_speed(-500)
+        await wait(10)
+    car.drive_speed(0)
+    car.steer(0)
+```
+This function runs immediately at launch. It reads the left and right sensors to see which wall is further away, automatically determining if the track runs clockwise (direction = 1) or counter-clockwise (direction = -1). It then performs a hard-coded swing maneuver to clear the starting stall and align with the track.
+```
+# pid in corner turns for smooth execution
+async def turn90_PID_L(num_turn, kp=20.0, ki=0.0, kd=55.0, maxP=900, minP=400, forward=False):
+    global sumS_error, prevS_error, direction
+    global is_sequencing, speed_sequence
+    base_target = 90 * num_turn
+    target_angle = base_target * direction 
+    sumS_error = 0
+    prevS_error = 0
+    while True:
+        current_heading = hub.imu.heading()
+        steer_error = target_angle - current_heading
+        abs_error = abs(steer_error)
+        # cut turn short to avoid turning over 90
+        if direction == 1:
+            if abs_error <= 5: 
+                break
+        if direction == -1:
+            if abs_error <= 2:
+                break
+        prop = kp * abs_error
+        sumS_error += abs_error
+        derivative = kd * (abs_error - prevS_error)
+        compensation = prop + (ki * sumS_error) + derivative
+        prevS_error = abs_error
+        if compensation > maxP:
+            compensation = maxP
+        elif compensation < minP:
+            compensation = minP
+        if forward:
+            speed_sequence = compensation
+        else:
+            speed_sequence = -compensation
+        await wait(10)
+    speed_sequence = 0
+    is_sequencing = True
+```
+This function uses a PID controller tied to the internal gyro (hub.imu.heading()) to seamlessly execute a precise 90-degree corner turn. It slows down dynamically as it reaches its target heading to avoid overshooting.
+```
+async def parallel_parking():
+    await hub.speaker.beep(100,500)
+    await wait(500)
+    await hub.speaker.beep(100,500)
+
+    global num_turn, speed_sequence, steer_sequence
+    global distance_wall, direction
+
+    hub.imu.reset_heading(0)
+    rear.reset_angle(0)
+    if direction == 1:
+        while rear.angle() > -100:
+            await straight_backward()
+            await wait(10)
+    if direction == -1:
+        while rear.angle() > -100:
+            await straight_backward()
+            await wait(10)
+    car.drive_power(0)
+    car.steer(0)
+    await wait(500)
+    hub.speaker.beep(600,100)
+    await last_turn()
+    car.steer(0)
+    car.drive_power(0)
+    await wait(100)
+
+    rear.reset_angle(0)
+    car.steer(0)
+    hub.imu.reset_heading(0)
+    if direction == 1:
+        while rear.angle() > int(-(distance_wall * 2.5)):
+            await straight_backward() 
+            await wait(10) 
+    if direction == -1:
+        while rear.angle() > int(-(distance_wall * 3.5)):
+            await straight_backward() 
+            await wait(10)
+    car.drive_power(0)
+    await wait(100)
+    
+    hub.imu.reset_heading(0)
+    car.steer(0)
+    await wait(100)
+    rear.reset_angle(0)
+    if direction == 1:
+        while rear.angle() < 3330:
+            await straight_forward()
+            await wait(10)
+    if direction == -1:
+        while rear.angle() < 3325:
+            await straight_forward()
+            await wait(10)
+    car.drive_power(0)
+    rear.reset_angle(0)
+    await wait(100)
+    
+    # difference in value from the location of the differential
+    if direction == 1:
+        car.steer(-75 * direction)
+        while rear.angle() > -460:
+            car.drive_power(-200)
+            await wait(10)
+        car.drive_power(0)
+        await wait(200)
+        car.steer(75 * direction)
+        
+        await wait(200)
+        while rear.angle() > -1070:
+            car.drive_power(-200)
+            await wait(10)
+            if (direction == 1 and hub.imu.heading() <= 7):
+                break
+    if direction == -1:
+        car.steer(-75 * direction)
+        while rear.angle() > -460:
+            car.drive_power(-200)
+            await wait(10)
+        car.drive_power(0)
+        await wait(200)
+        car.steer(75 * direction)
+        
+        await wait(200)
+        while rear.angle() > -1200:
+            car.drive_power(-200)
+            await wait(10)
+            if (direction == -1 and hub.imu.heading() >= -2):
+                break
+            
+    car.drive_power(0)
+    await wait(500)
+    car.steer(0)
+    await wait(500)
+```
+parallel_parking is a long, sequential function triggered at the very end of the race (after 12 turns/3 laps). It uses a sequence of timed straight reverses, a 90-degree pivot (last_turn()), and calculated back-and-forth S-turns to cleanly park the vehicle inside the designated finish zone.
+```
+def avoid_blocks(color=0, kp=0.5, ki=0.000001, kd=0.1, bl_x=0.0, bl_y=0.0, max_steer_obs=55):
+    global sum_Rerror, prev_Rerror, sum_Gerror, prev_Gerror
+    global steer_sequence, speed_sequence, turn_right, turn_left
+    
+    Rerror = 65 - bl_x
+    Gerror = 290 - bl_x     
+    current_error = 0 
+    
+    if color == 2:  # Red block
+        current_error = Rerror
+        prop = kp * Rerror 
+        sum_Rerror += Rerror
+        integral = ki * sum_Rerror 
+        if integral > 10.0: integral = 10.0
+        derivative = kd * (Rerror - prev_Rerror) 
+        compensation = prop + integral + derivative
+        prev_Rerror = Rerror
+        if compensation > max_steer_obs: compensation = max_steer_obs
+        elif compensation < -max_steer_obs: compensation = -max_steer_obs
+        
+        steer_sequence = -compensation
+        speed_sequence = -(45 / 28) * (abs(Rerror) - 1120 / 3) 
+        turn_left = True
+        turn_right = False
+        
+    elif color == 1:  # Green block
+        current_error = Gerror
+        prop = kp * Gerror 
+        sum_Gerror += Gerror
+        integral = ki * sum_Gerror 
+        if integral > 10.0: integral = 10.0
+        derivative = kd * (Gerror - prev_Gerror)
+        compensation = prop + integral + derivative
+        prev_Gerror = Gerror
+        if compensation > max_steer_obs: compensation = max_steer_obs
+        elif compensation < -max_steer_obs: compensation = -max_steer_obs
+        
+        steer_sequence = -compensation
+        speed_sequence = -(45 / 28) * (abs(Gerror) - 1120 / 3)  
+        turn_right = True
+        turn_left = False
+```
+This function is used when it detects a block near it (color == 2 for Red, color == 1 for Green). This function calculates a PID error based on where the block is horizontally (bl_x) relative to safe zones (65 for Red, 290 for Green). It swerves the car away from the block.
+```
+def position_to_center(position_target, p_error, kp=6, ki=0.000001, kd=1.0, max_steer=40):
+    global sump_error, prevp_error, num_turn
+    global steer_sequence, speed_sequence
+    p_error = position_target - hub.imu.heading()
+    prop = kp * p_error 
+    sump_error += p_error
+    integral = ki * sump_error 
+    if integral > 10.0: integral = 10.0
+    elif integral < -10.0: integral = -10.0
+    derivative = kd * (p_error - prevp_error) 
+    compensation = prop + integral + derivative
+    prevp_error = p_error
+    if compensation > max_steer: compensation = max_steer
+    elif compensation < -max_steer: compensation = -max_steer
+    steer_sequence = compensation
+
+# return to the middle on the track
+async def return_to_center_position( num_turn, direction, gyro_angle_correct=20, max_steer = 45, color = 0):
+    global prevp_error, sump_error, p_error
+    global steer_sequence, speed_sequence, turn_right, turn_left
+    
+    if direction == 1:
+        if turn_left == True: position_target = 90 * (num_turn-1) - 30
+        elif turn_right == True: position_target = 90 * (num_turn-1) + 30
+    elif direction == -1:
+        if turn_right == True: position_target = 90 * (num_turn-1) * direction + 35
+        elif turn_left == True: position_target = 90 * (num_turn-1) * direction - 35
+    
+    while True:
+        p_error = position_target - hub.imu.heading()
+        await wait(10)
+        if abs(p_error) <= 5:
+            steer_sequence = 0
+            await wait(10)
+            current_rot = rear.angle()
+            while rear.angle() < current_rot + 140:
+                steer_sequence = 0
+                speed_sequence = 900
+                await wait(10)
+                if rob_data['line_color'] in [1, 2]:
+                    break
+            break 
+        position_to_center(position_target, p_error, max_steer=max_steer)
+        speed_sequence = 1100
+        await wait(10)
+
+# pid for return to center from block
+def steer_to_center(target, kp=12, ki=0.000001, kd=1.0, max_steer=45):
+    global sumH_error, prevH_error, steer_sequence
+    h_error = target - hub.imu.heading()
+    prop = kp * h_error 
+    sumH_error += h_error
+    integral = ki * sumH_error 
+    if integral > 10.0: integral = 10.0
+    elif integral < -10.0: integral = -10.0
+    derivative = kd * (h_error - prevH_error) 
+    compensation = prop + integral + derivative
+    prevH_error = h_error
+    if compensation > max_steer: compensation = max_steer
+    elif compensation < -max_steer: compensation = -max_steer
+    steer_sequence = compensation
+
+# straighten out the robot after returning to center position
+async def return_center_fr_block(num_turn, direction, max_steer=40):
+    global steer_sequence, speed_sequence, turn_left, turn_right
+    global sumH_error, prevH_error
+    sumH_error = 0
+    prevH_error = 0
+    if direction == 0: target = 0
+    else:
+        if turn_left == True:
+            target = (90 * (num_turn - 1)) * direction -5
+        if turn_right == True:
+            target = (90 * (num_turn - 1)) * direction +5
+    while True:
+        h_error = target - hub.imu.heading()
+        if turn_left or turn_right:
+            if abs(h_error) <= 10: 
+                steer_sequence = 0
+                break
+                
+        steer_to_center(target, max_steer=max_steer)
+        speed_sequence = 1100
+        await wait(10)
+```
+return_to_center_position() and return_center_fr_block() calculate a counter-heading using the Gyro sensor to steer the car diagonally back toward the middle of the track lane, straightening out once it gets there and preparing for the next block.
+```
+async def detect_corner():
+    global num_turn, direction
+    global rob_data, steer_sequence, speed_sequence, is_sequencing
+    global can_sense_corner, can_sense_corner_CW, can_sense_corner_CCW
+    global detect_color, distance_wall
+    while True:
+        if num_turn < 12:
+            if direction == 1: can_sense_corner = can_sense_corner_CW
+            elif direction == -1: can_sense_corner = can_sense_corner_CCW
+            
+            if rob_data["corner"] == 1 and not is_sequencing and can_sense_corner: 
+                is_sequencing = True
+                await hub.speaker.beep()
+                if direction == 0:
+                    if rob_data['ultra_L'] > rob_data['ultra_R']: direction = -1
+                    elif rob_data['ultra_L'] < rob_data['ultra_R']: direction = 1
+                if num_turn in [4, 8]:
+                    rear.reset_angle(0)
+                    steer_sequence = 0
+                    while rear.angle() < 700: 
+                        current_angle = hub.imu.heading()
+                        error = (90 * (num_turn-1) * direction) - current_angle
+                        if direction == 1:
+                            steer_sequence = error * 1.35
+                        if direction == -1:
+                            steer_sequence = error * 1.65
+                        speed_sequence = 750
+                        await wait(10)
+                    hub.imu.reset_heading(90 * (num_turn-1) * direction)
+                    rear.reset_angle(0)
+                    steer_sequence = 0
+                    await wait(10)
+                    while rear.angle() > -370:
+                        speed_sequence = -800
+                        await wait(10)
+                else:
+                    rear.reset_angle(0)
+                    while rear.angle() > -150:
+                        speed_sequence = -800
+                        await wait(10)
+                
+                steer_sequence = -75 * direction
+                await turn90_PID_L(num_turn, forward=False, maxP=1100, minP=400)
+                num_turn += 1
+                await wait(10)
+                steer_sequence = 0
+                await wait(200)
+                rear.reset_angle(0)
+                is_sequencing = False
+                if direction == 1: can_sense_corner_CW = False
+                elif direction == -1: can_sense_corner_CCW = False
+        elif num_turn == 12:
+            # initiating parking sequence
+            if direction == 1: can_sense_corner = can_sense_corner_CW
+            elif direction == -1: can_sense_corner = can_sense_corner_CCW
+            if rob_data["corner"] == 1 and not is_sequencing and can_sense_corner:
+                rear.reset_angle(0)
+                while rear.angle() < 500: 
+                    current_angle = hub.imu.heading()
+                    error = (90 * (num_turn-1) * direction) - current_angle
+                    steer_sequence = error * 5
+                    speed_sequence = 800
+                    await wait(10) 
+                if direction == 1:
+                    distance_wall = await getMedianL(3)
+                if direction == -1:
+                    distance_wall = await getMedianR(3)
+                speed_sequence = 0
+                steer_sequence = 0
+                return 
+        await wait(20)
+```
+This function monitors rob_data["corner"]. When the color sensor spots a corner line tape, it freezes normal driving (is_sequencing = True), tracks what lap/turn it is on (num_turn), adjusts its alignment, and kicks off the 90-degree PID turn. Once complete, it bumps num_turn by 1. When num_turn hits 12, it breaks out of the loop to trigger parking.
+```
+async def ultrasonic_PID(kp=0.001, ki=0.000001, kd=1000.0, minPower=900, maxPower=1100):
+    global sum_error, prev_error, max_steer, direction, num_turn
+    global rob_data, steer_center, speed_center, is_sequencing
+    while num_turn <= 12:        
+        if is_sequencing:
+            sum_error = 0
+            prev_error = 0
+            await wait(20)
+            continue
+            
+        error = rob_data['ultra_R'] - rob_data['ultra_L']    
+        prop = kp * error 
+        sum_error += error
+        integral = ki * sum_error 
+        if integral > 10.0: integral = 10.0
+        derivative = kd * (error - prev_error) 
+        compensation = prop + integral + derivative
+        prev_error = error
+        if compensation > max_steer: compensation = max_steer
+        elif compensation < -max_steer: compensation = -max_steer
+        maxP, minP = maxPower, minPower
+        max_error = 1000
+        if error > max_error: error = max_error
+        elif error < 0: error = 0
+        drive_power = -(maxP - minP) * (error - max_error) / max_error + minP   
+        steer_center = compensation
+        speed_center = drive_power                    
+        await wait(20) 
+    speed_center = 0
+```
+The error for the PID is calculated by using the two ultrasonic sensors and finding the difference between them. If the difference is zero the robot is in the center of the track. If it drifts, the PID loop outputs a correction to steer_center to bring the robot back to the middle of the lane.
+```
+async def sense_line_color():
+    global can_sense_corner_CW, can_sense_corner_CCW, detect_color
+    while True:
+        if rob_data['line_color'] == 1 and (direction == 0 or direction == 1) and detect_color == True: 
+            can_sense_corner_CW = True
+            await hub.speaker.beep(100)
+            await wait(100)
+            detect_color = False
+        elif rob_data['line_color'] == 2 and (direction == 0 or direction == -1): 
+            can_sense_corner_CCW = True
+            await hub.speaker.beep(100)
+        await wait(20)
+```
+This function converts raw sensor values to colors. Spotting orange(1) tells the system it needs to prepare for a Clockwise corner turn; spotting blue(2) prepares it for a Counter-Clockwise turn.
+```
+async def main():
+    await get_out_parking()
+    # asynchronously controls functions
+    await multitask(
+        remote_engine(),  
+        update_robot_data(),
+        avoid_blocks_and_return_center(),
+        sense_line_color(),
+        detect_corner(),
+        ultrasonic_PID(kp=0.003, ki=0.000001, kd=10000.0), 
+        motor_controller(),
+        race=True        
+    )
+    await parallel_parking()
+    car.drive_speed(0)
+    car.steer(0)
+    gc.collect() 
+    await wait(500) 
+```
+This function orchestrates everything. The multitask() function allows the robot to do PID, obstacle avoidance, and line checking at the same time. The moment detect_corner() finishes lap 3 (turn 12), the multitasking race ends, and the script moves directly to the final parallel_parking() function.
+
 
 ## 6.0 Engineering Factor
 The third-party factor that we used is the Openmv camera, which enables us to see the blocks and their color. It gives the robot the ability to see the blocks, and in turn, make the right decisions that are needed.
@@ -615,7 +1413,8 @@ We had many problems in our old code and we made many improvements since then. W
 
 https://drive.google.com/file/d/1IwvF9whDRN1dr9YeoEUpp2IKtazWew4s/view (old code)
 
-https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing (current code)
+[https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing
+](https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing) (current code)
 
 ### Disclaimer
 Gemini and Claude were used to enchance the formulated code and as an inspiration for the github by providing examples. Claude was used to improve the threshold of the colors and Gemini was used to help build the code in specific parts by providing an example and was modified by us to complete the challenge.
