@@ -1133,6 +1133,7 @@ The first problem we had was when our robot's ultrasonic sensors were infront of
 |**OLD ROBOT**|**CURRENT ROBOT**|
 
 **Tradeoffs**
+
 We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer.
 
 ## 7.2 Robot Programming
@@ -1144,4 +1145,4 @@ https://drive.google.com/file/d/1IwvF9whDRN1dr9YeoEUpp2IKtazWew4s/view (old code
 ](https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing) (current code)
 
 ### Disclaimer
-Gemini and Claude were used to enchance the formulated code and as an inspiration for the github by providing examples. Claude was used to improve the threshold of the colors and Gemini was used to help build the code in specific parts by providing an example and was modified by us to complete the challenge.
+Gemini and Claude were used to enchance the formulated code and as an inspiration for the github by providing examples. Claude was used to improve the threshold of the colors and Gemini was used to help build the code in specific parts by providing an example and was modified by us to complete the challenge, and it also helped in making the github in some parts.
