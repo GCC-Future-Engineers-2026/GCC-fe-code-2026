@@ -999,6 +999,10 @@ async def main():
 This function orchestrates everything. The multitask() function allows the robot to do PID, obstacle avoidance, and line checking at the same time. The moment detect_corner() finishes lap 3 (turn 12), the multitasking race ends, and the script moves directly to the final parallel_parking() function.
 
 
+## 💡 <mark> How to Improve Obstacle Management</mark>
+**Adding a backup function** can help the robot with problems if it sees it too late. Making the function be a backward command when the robot gets too close to an obstacle, like when the robot doesn't see the block until it's already near. This function will make the robot go backward, thus giving it the chance to redo the obstacle avoidance. This will make runs more consistent and will give a chance to save your run.
+
+
 ## 6.0 Engineering Factor
 The third-party factor that we used is the Openmv camera, which enables us to see the blocks and their color. It gives the robot the ability to see the blocks, and in turn, make the right decisions that are needed.
 
