@@ -1,4 +1,9 @@
-# Content (GitHub)
+
+## WRO2026_Team Grace Christian College
+
+## Introduction
+This documentation contains comprehensive information about the robot's design, mobility management, power and sensor management, wiring diagram, materials needed, third-party factors and components, obstacle detection and avoidance, and the decisions and improvements made in preparation made for Philippine Robot Olympiad (PRO) located in Mall of Asia (MOA), Pasay in Philippines 2026 under the Future Engineers category.
+
 **scheme** - This folder contains schematic diagrams of the electromechanical components(sensors and motors) used in the vehicle and how they are connected to each other. This folder also includes the schematic diagram of the robot during open and obstacle challenge.
 
 **src** - This folder contains all the code and programming used for the WRO 2026
@@ -34,8 +39,7 @@
   * [7.1 Robot Construction](#71-robot-construction)
 
   * [7.2 Robot Programming](#72-robot-programming)
-## Introduction
-This documentation contains comprehensive information about the robot's design, mobility management, power and sensor management, wiring diagram, materials needed, third-party factors and components, obstacle detection and avoidance, and the decisions and improvements made in preparation made for Philippine Robot Olympiad (PRO) located in Mall of Asia (MOA), Pasay in Philippines 2026 under the Future Engineers category.
+
 ## Team Grace Christian College
 From the Philippines, Team Grace Christian College is a three-member team made to compete in the PRO 2026 in Mall of Asia. 
 
@@ -66,7 +70,7 @@ We used this wheel compared to others, because of the advantage that it's a sing
 
 **2. Implementation of motor**
 
-Our robot consists of two Lego Technic motors, one being medium angular motor (vertical) and the other being large angular motor (horizontal). The medium (vertical) motor faces inwards to further makes the robot compact to reduce overall length. This keeps our robot compact and saves space, reduces turning radius for sharper turns.
+Our robot consists of two Lego Technic motors, one being medium angular motor (vertical) and the other being large angular motor (horizontal). The medium  motor faces inwards because when facing in the back the nearest connections dont move with the axle unlike the front makes the robot compact to reduce overall length, saves space, reduces turning radius for sharper turns.
 
 **3. Use of differential gear**
 
@@ -83,7 +87,14 @@ This robot is designed using Ackermann steering geometry.
 This setup turns the inside front wheel at a sharper angle than the outside one, so both wheels follow perfect turning circles. By stopping the tires from scrubbing sideways, it cuts down on friction and wear. This gives the vehicle better traction, more stability, and the ability to make sharp turns with great precision.
 
 ## 2.2 Why components were chosen
-We chose spike as our component, because it has similar multithreading capabilities to EV3, smaller, faster. It is also easier to build around, has better connectivity to openmv, and has more flexible ports due to all ports and either be all sensors or all motors. The Large and Medium Spike angular motor were chosen due to it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
+We chose spike as our component, because
+<br>-same multithreading capabilities to EV3
+<br>-its smaller and  faster
+<br>-It is also easier to build around
+<br>-it has better connectivity to openmv
+<br>-it has more flexible ports due to all ports and either be all sensors or all motors
+
+The Large and Medium Spike angular motor were chosen because of it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
 
 ## 3.0 Power and sense management
 This segment is dedicated to the vehicle's power supply and usage and its sensor systems. It covers each sensor's implementation and use along with information about the robot's power supply. There is also a wiring diagram given to illustrate the connection of sensors.
@@ -94,21 +105,22 @@ This segment is dedicated to the vehicle's power supply and usage and its sensor
 
 
 ## 3.2 Sensors
-**Camera**-The Openmv camera’s function is to detect the blocks and the parking lot. It detects red and green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
+**Camera**<br>-The Openmv camera’s function is to detect the blocks and the parking lot. It detects red and green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
 
 <img width="30%" alt="a" src="https://github.com/user-attachments/assets/98a59458-286c-4f7c-a0f9-371ffc370521" />
 
 
-**Gyro**-The gyro sensor in our robot is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns. It is also built into the Spike Prime Hub.
-
-**Color**-The color sensor is used to detect the orange and blue lines depending on the direction(clockwise or counterclockwise) and tells the robot to not avoid the blocks and find the corner on the wall and turn properly.
+**Gyro**<br>-The gyro sensor in our robot is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns. It is also built into the Spike Prime Hub.
 
 <img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-o" src="https://github.com/user-attachments/assets/9056b1a8-1a10-4d55-8d19-9b44090fe660" />
 
 
-**Ultrasonic**-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenge.
+**Color**<br>-The color sensor is used to detect the orange and blue lines depending on the direction(clockwise or counterclockwise) and tells the robot to not avoid the blocks and find the corner on the wall and turn properly.
+
 
 <img width="40%" alt="Messenger_creation_CAF01661-0C92-4251-9CD1-j" src="https://github.com/user-attachments/assets/953f666c-4e99-4b5f-973f-a4d4987c5e5f" />
+
+**Ultrasonic**<br>-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenge.
 
 
 ## 3.3 Wiring Diagram
