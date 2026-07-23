@@ -14,31 +14,31 @@ This documentation contains comprehensive information about the robot's design, 
 
 **video** - This folder contains video footage of how the robot completes the challenges presented to it.
 
-# Table of Contents
-* [Introduction](#introduction)
+# 📚Table of Contents
 
-* [Team Grace Christian College](#team-grace-christian-college)
-* [1.0 Design of self-driving car](#10-design-of-self-driving-car) 
-* [2.0 Mobility Management](#20-mobility-management)
-  * [2.1 Chassis of car](#21-chassis-of-car)
+* 👥[Team Grace Christian College](#team-grace-christian-college)
+* 🤖[1.0 Design of self-driving car](#10-design-of-self-driving-car) 
+* 🛞[2.0 Mobility Management](#20-mobility-management)
+  * 🚗[2.1 Chassis of car](#21-chassis-of-car)
 
-  * [2.2 Why components were chosen](#22-why-components-were-chosen)
-* [3.0 Power and sense management](#30-power-and-sense-management)
-  * [3.1 Power source](#31-power-source)
+  * ⚙️[2.2 Why components were chosen](#22-why-components-were-chosen)
+* ⚡[3.0 Power and sense management](#30-power-and-sense-management)
+  * ⚡[3.1 Power source](#31-power-source)
 
-  * [3.2 Sensors](#32-sensors)
-  * [3.3 Wirning Diagram](33-wiring-diagram)
-* [4.0 Bill of Materials (BOM) and instructions to build](#40-bill-of-materials-bom-and-instructions-to-build)
-* [5.0 Obstacle Management](#50-obstacle-management)
-  * [5.1 Open Challenge](#51-open-challenge)
+  * 👁️[3.2 Sensors](#32-sensors)
+  * 🛜[3.3 Wirning Diagram](33-wiring-diagram)
+* 📋[4.0 Bill of Materials (BOM) and instructions to build](#40-bill-of-materials-bom-and-instructions-to-build)
+* 🚗[5.0 Obstacle Management](#50-obstacle-management)
+  * 🚗[5.1 Open Challenge](#51-open-challenge)
 
-  * [5.2 Obstacle Challenge](#52-obstacle-challenge)
-* [6.0 Engineering Factor](#60-engineering-factor)
-  * [6.1 Usage of Camera](#61-usage-of-camera)
-* [7.0 Engineering decisions and Improvements](#70-engineering-decisions-and-improvements)
-  * [7.1 Robot Construction](#71-robot-construction)
+  * 🚗[5.2 Obstacle Challenge](#52-obstacle-challenge)
+* 💡[6.0 Engineering Factor](#60-engineering-factor)
+  * 📷[6.1 Usage of Camera](#61-usage-of-camera)
+* 💡[7.0 Engineering decisions and Improvements](#70-engineering-decisions-and-improvements)
+  * 🔧[7.1 Robot Construction](#71-robot-construction)
 
-  * [7.2 Robot Programming](#72-robot-programming)
+  * 🖥️[7.2 Robot Programming](#72-robot-programming)
+
 
 ## Team Grace Christian College
 From the Philippines, Team Grace Christian College is a three-member team made to compete in the PRO 2026 in Mall of Asia. 
@@ -60,7 +60,7 @@ This segment shows the propulsion system and mechanical structure of the robot. 
 
 <img width="20%"  alt="OIP" src="https://github.com/user-attachments/assets/bc7f8fc5-ba6a-487f-8f1a-bacec84432b2" />
 
-We used these tires because they're big enough that they can still move fast and small enough to make accurate turns, unlike other tires which sacrifice speed or turning for their size. Unlike other larger Lego tires, the 62.4 x 20 has thicker sidewalls, so it won't flatten out under the robot's weight.
+We used these tires because they can still move fast and small enough to make accurate turns, unlike other tires which sacrifice speed or turning for their size. Unlike other larger Lego tires, the 62.4 x 20 has thicker sidewalls, so it won't flatten out under the robot's weight.
 
 **Integrated Wheel 43 x 14(Part 65834)**
 
@@ -72,7 +72,7 @@ We used this wheel compared to others, because of the advantage that it's a sing
 
 Our robot consists of two Lego Technic motors, one being medium angular motor (vertical) and the other being large angular motor (horizontal). The medium  motor faces inwards because when facing in the back the nearest connections dont move with the axle unlike the front makes the robot compact to reduce overall length, saves space, reduces turning radius for sharper turns.
 
-**3. Use of differential gear**
+**3. The use of differential gear**
 
 The differential gear is integrated into a drive axle that lets the wheels rotate at different speeds. This stops the wheels from locking up and helps the vehicle turn smoothly and stay stable. This is especially helpful when turning in both challenges.
 
@@ -80,7 +80,7 @@ The differential gear is integrated into a drive axle that lets the wheels rotat
 
 **4. Engineering principle for steering**
 
-This robot is designed using Ackermann steering geometry.
+This robot uses Ackermann steering geometry.
 
 <img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://github.com/user-attachments/assets/9bf7b1c8-57c6-436e-9b63-53230b88d505" />
 
@@ -96,7 +96,7 @@ We chose spike as our component, because
 
 The Large and Medium Spike angular motor were chosen because of it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
 
-## 3.0 Power and sense management
+## 3.0 Power and Sensor management
 This segment is dedicated to the vehicle's power supply and usage and its sensor systems. It covers each sensor's implementation and use along with information about the robot's power supply. There is also a wiring diagram given to illustrate the connection of sensors.
 ## 3.1 Power source
 <img align="right" width="25%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" />The robot is powered by the SPIKE Prime Hub, which features a 2,000 mAh rechargeable lithium-ion battery. It was selected due to the fact that it's easily replaced. It is also at peak voltage and performance for most of its run time, until it dies.
@@ -194,7 +194,7 @@ This section shows the BOM and the instructions to build the vehicle.
 ## 5.0 Obstacle Management
 For this project, we used Python as the coding language to operate the robot. Our robot uses two different codes that both utilize a camera to complete the open and obstacle challenge. This section includes the code overview and a flowchart for the open challenge and obstacle challenge.
 ## 5.1 Open Challenge
-The robot uses two ultrasonic sensors on its left and right, an openmv camera to trigger the turning, and the in-built gyro sensor to assist its turns and face the correct direction. At the start of the challenge, the robot will use pid to navigate towards a corner. The robot has a roi (region of interest) at the middle of its camera to detect if it is getting close to a corner. When that roi detects black, the robot will execute a 90 degree turn by reversing. The robot determines the direction of the turn based on the difference of the left and right ultrasonic sensor. After completing a turn, a variable called “num_turn” will increase by one. The robot uses the absolute heading value to determine where to face after turning and during pid. While the variable is less than 12, the robot will continue to repeat the pid and turning code. When the variable reaches 12, the robot will continue to go forward for a few second with pid towards its starting section.
+The robot uses two ultrasonic sensors on its left and right, an openmv camera to trigger the turning, and the in-built gyro sensor to assist its turns and face the correct direction. At the start of the challenge, the robot will use PID to navigate towards a corner. The robot has a ROI (region of interest) at the middle of its camera to detect if it is getting close to a corner. When that ROI detects black, the robot will execute a 90 degree turn by reversing. The robot determines the direction of the turn based on the difference of the left and right ultrasonic sensors. After completing a turn, a variable called “num_turn” will increase by one. The robot uses the absolute heading value to determine where to face after turning and during PID. While the variable is less than 12, the robot will continue to repeat the PID and turning code. When the variable reaches 12, the robot will continue to go forward for a few second with PID towards its starting section.
 
 <img width="70%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
 
@@ -1101,7 +1101,7 @@ All of this gathered information is packed into a compact 4-part data packet con
 ```
 
 ## 7.0 Engineering decisions and Improvements
-This segment explains the challenges, both in the build and programming, when making the robot and the improvements made to clear the challenges.
+This segment explains the challenges, both in the build, programming, and tradeoffs when making the robot and the improvements made to clear the challenges.
 
 ## 7.1 Robot Construction
 The first problem we had was when our robot's ultrasonic sensors were infront of the wheels, which made the timing of the turn too early. To solve that, we made an entirely new design with the sensors on top of the wheels to help the robot turn better. We also switch from cantilever to braced for better stability on the wheels.
@@ -1116,7 +1116,7 @@ The first problem we had was when our robot's ultrasonic sensors were infront of
 We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer. Due to its bigger width, when it does a sharp turn it might hit the robot with its backside.
 
 ## 7.2 Robot Programming
-We had many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
+We encountered many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
 
 https://drive.google.com/file/d/1IwvF9whDRN1dr9YeoEUpp2IKtazWew4s/view (old code)
 
