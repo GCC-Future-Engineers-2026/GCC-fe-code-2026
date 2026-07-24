@@ -21,11 +21,11 @@ This documentation contains comprehensive information about the robot's design, 
 * 🛞[2.0 Mobility Management](#20-mobility-management)
   * 🚗[2.1 Chassis of car](#21-chassis-of-car)
 
-  * ⚙️[2.2 Why components were chosen](#22-why-components-were-chosen)
-* ⚡[3.0 Power and sense management](#30-power-and-sense-management)
+  * ⚙️[2.2 Why components were chosen](22-why-components-were-chosen)
+* ⚡[3.0 Power and sense management](30-power-and-sense-management)
   * ⚡[3.1 Power source](#31-power-source)
 
-  * 👁️[3.2 Sensors](#32-sensors)
+  * 👁️[3.2 Sensors](32-sensors)
   * 🛜[3.3 Wirning Diagram](33-wiring-diagram)
 * 📋[4.0 Bill of Materials (BOM) and instructions to build](#40-bill-of-materials-bom-and-instructions-to-build)
 * 🚗[5.0 Obstacle Management](#50-obstacle-management)
@@ -37,23 +37,23 @@ This documentation contains comprehensive information about the robot's design, 
 * 💡[7.0 Engineering decisions and Improvements](#70-engineering-decisions-and-improvements)
   * 🔧[7.1 Robot Construction](#71-robot-construction)
 
-  * 🖥️[7.2 Robot Programming](#72-robot-programming)
+  * 🖥️[7.2 Robot Programming](72-robot-programming)
 
 
-## Team Grace Christian College
+## 👥Team Grace Christian College
 From the Philippines, Team Grace Christian College is a three-member team made to compete in the PRO 2026 in Mall of Asia. 
 
 <img width="30%" alt="Messenger_creation_9F03665D-973D-4025-9D37-10E926EF3D5B" src="https://github.com/user-attachments/assets/1ff4be49-f7dc-450e-8937-915cecd19cf5" />
 
 
 Its members are Thomas Lao, Yuri Valero, and Kyron Chen.
-## 1.0 Design of self-driving car
-<img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />This autonomous self driving car is made with Lego Education Spike Prime Set. This segment also explains the tradeoffs and the reason components were used in the design.
+## 🤖1.0 Design of self-driving car
+<img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />This autonomous self driving car is made with Lego Education Spike Prime Set. This segment also explains the reason components were used in the design.
 
 
-## 2.0 Mobility Management
+## 🛞2.0 Mobility Management
 This segment shows the propulsion system and mechanical structure of the robot. It covers the main structure, tires, motors, and the entire layout of the vehicle. It also includes information about the engineering principle of the motor and steering that controls speed and torque.
-## 2.1 Chassis of car
+## 🚗2.1 Chassis of car
 **1. Tire**
 
 **Lego Technic Tire 62.4 x 20**
@@ -82,11 +82,13 @@ The differential gear is integrated into a drive axle that lets the wheels rotat
 
 This robot uses Ackermann steering geometry.
 
-<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://github.com/user-attachments/assets/9bf7b1c8-57c6-436e-9b63-53230b88d505" />
+<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://github.com/user-attachments/assets/9bf7b1c8-57c6-436e-9b63-53230b88d505" /><br>
 
-This setup turns the inside front wheel at a sharper angle than the outside one, so both wheels follow perfect turning circles. By stopping the tires from scrubbing sideways, it cuts down on friction and wear. This gives the vehicle better traction, more stability, and the ability to make sharp turns with great precision.
+This setup turns the inner front wheel at a sharper angle than the outer one, so both wheels follow near perfect turning circles so this stops the tires from scrubbing sideways, it cuts down on friction and wear. This gives the vehicle better traction, more stability, and the ability to make turns with great precision.<br>
 
-## 2.2 Why components were chosen
+<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://th.bing.com/th/id/R.4972e645d170158c2f9dc37ff1e09c00?rik=sURb92AoO9szTA&riu=http%3a%2f%2fwww.datagenetics.com%2fblog%2fdecember12016%2ftitle.jpg&ehk=w5iAOJ7uEVvs3vc6SoebZdEQm1gcUfzZh5uA5vIyu68%3d&risl=&pid=ImgRaw&r=0" />
+
+## ⚙️2.2 Why components were chosen
 We chose spike as our component, because
 <br>-same multithreading capabilities to EV3
 <br>-its smaller and  faster
@@ -96,46 +98,45 @@ We chose spike as our component, because
 
 The Large and Medium Spike angular motor were chosen because of it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
 
-## 3.0 Power and Sensor management
-This segment is dedicated to the vehicle's power supply and usage and its sensor systems. It covers each sensor's implementation and use along with information about the robot's power supply. There is also a wiring diagram given to illustrate the connection of sensors.
-## 3.1 Power source
+## ⚡3.0 Power and Sensor management
+This segment is dedicated to the vehicle's power supply and its sensor systems. It covers each sensor's implementation and use along with information about the robot's power supply. There is also a wiring diagram given to illustrate the connection of sensors.
+## ⚡3.1 Power source
 <img align="right" width="25%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" />The robot is powered by the SPIKE Prime Hub, which features a 2,000 mAh rechargeable lithium-ion battery. It was selected due to the fact that it's easily replaced. It is also at peak voltage and performance for most of its run time, until it dies.
 
 
 
 
-## 3.2 Sensors
+## 👁️3.2 Sensors
 **Camera**<br>-The Openmv camera’s function is to detect the blocks and the parking lot. It detects red and green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
 
 <img width="30%" alt="a" src="https://github.com/user-attachments/assets/98a59458-286c-4f7c-a0f9-371ffc370521" />
 
 
-**Gyro**<br>-The gyro sensor in our robot is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns. It is also built into the Spike Prime Hub.
-
+**Gyro**<br>-The gyro sensor is built in to our robot via the Spike Prime hub and, is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns.
 <img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-o" src="https://github.com/user-attachments/assets/9056b1a8-1a10-4d55-8d19-9b44090fe660" />
 
 
-**Color**<br>-The color sensor is used to detect the orange and blue lines depending on the direction(clockwise or counterclockwise) and tells the robot to not avoid the blocks and find the corner on the wall and turn properly.
+**Color**<br>-The color sensor is used to detect the orange and blue lines on the track. Depending on the direction either (clockwise or counterclockwise) it tells the robot to not avoid the blocks and find the corner on the wall and turn the correct direction.
 
 
 <img width="40%" alt="Messenger_creation_CAF01661-0C92-4251-9CD1-j" src="https://github.com/user-attachments/assets/953f666c-4e99-4b5f-973f-a4d4987c5e5f" />
 
-**Ultrasonic**<br>-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenge.
+**Ultrasonic**<br>-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenges.
 
 
-## 3.3 Wiring Diagram
+## 🛜3.3 Wiring Diagram
 This diagram shows the sensor's power usage and how the motors are connected with them to run the vehicle.
 
 <img width="70%"  alt="1" src="https://github.com/user-attachments/assets/6b8fc953-147c-4fd8-a46e-876f7e10923e" />
 
 We took advantage of Spike's versatility and used four ports for sensors and only two for motors. This setup helps the robot to sense the obstacles and make smart decisons on the track.
 
-## 4.0 Bill of Materials (BOM) and instructions to build
+## 📋4.0 Bill of Materials (BOM) and instructions to build
 This section shows the BOM and the instructions to build the vehicle. 
 
 |  |  |
 |:----------:|:--------:|
-|<img width="450" alt="8_1x" src="https://github.com/user-attachments/assets/995b8d30-48a8-49ff-ad69-789564530cb2" />| |
+|<img width="450" alt="8_1x" src="https://github.com/user-attachments/assets/995b8d30-48a8-49ff-ad69-789564530cb2" />| 
 |<img width="450" alt="9_1x" src="https://github.com/user-attachments/assets/3f4d7998-b673-44e7-9ae5-87aff9d329a2" />|<img width="450" alt="10_1x" src="https://github.com/user-attachments/assets/7f0d7522-93d9-4384-a706-20ade446da86" />|
 |<img width="450" alt="11_1x" src="https://github.com/user-attachments/assets/acfdb71d-4d6c-4196-b598-ec89c42d81cf" />|<img width="450" alt="12_1x" src="https://github.com/user-attachments/assets/8282e2f9-77a6-46e8-9915-29daf5fefd8d" />|
 |<img width="450" alt="13_1x" src="https://github.com/user-attachments/assets/8badba14-8d87-490b-a61a-00b47f16a207" />|<img width="450" alt="14_1x" src="https://github.com/user-attachments/assets/609d227e-743b-4ea7-b16b-e3389cd930e8" />|
@@ -191,9 +192,9 @@ This section shows the BOM and the instructions to build the vehicle.
 |Voltage Regulator|1|<img width="150" alt="eisei-trading2019_denkai-50v100uf-smd" src="https://github.com/user-attachments/assets/9852e4dc-e5e8-493e-86fc-a4f1d49bf6ec" />|
 
 
-## 5.0 Obstacle Management
+##  🚗5.0 Obstacle Management
 For this project, we used Python as the coding language to operate the robot. Our robot uses two different codes that both utilize a camera to complete the open and obstacle challenge. This section includes the code overview and a flowchart for the open challenge and obstacle challenge.
-## 5.1 Open Challenge
+## 🚗5.1 Open Challenge
 The robot uses two ultrasonic sensors on its left and right, an openmv camera to trigger the turning, and the in-built gyro sensor to assist its turns and face the correct direction. At the start of the challenge, the robot will use PID to navigate towards a corner. The robot has a ROI (region of interest) at the middle of its camera to detect if it is getting close to a corner. When that ROI detects black, the robot will execute a 90 degree turn by reversing. The robot determines the direction of the turn based on the difference of the left and right ultrasonic sensors. After completing a turn, a variable called “num_turn” will increase by one. The robot uses the absolute heading value to determine where to face after turning and during PID. While the variable is less than 12, the robot will continue to repeat the PID and turning code. When the variable reaches 12, the robot will continue to go forward for a few second with PID towards its starting section.
 
 <img width="70%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
@@ -475,7 +476,7 @@ async def main():
 Once the multitasking race finishes, the car drops out of the concurrent loop, stops, fires gc.collect() to free memory, and runs a standalone function (UltrasonicPID_2Sensor_C) utilizing gyro correction angles to smoothly drive forward exactly 1850 motor degrees back across the starting finish line to complete the run.
 
 
-## 5.2 Obstacle Challenge
+## 🚗5.2 Obstacle Challenge
 For the obstacle challenge, the robot uses a code similar to the open challenge. The camera has another roi that takes up half of the camera to detect an approaching obstacle and its color. The robot uses the ultrasonic sensors to determine which direction it needs to face after leaving the parking lot. The robot uses pid to face straight forward. When a block enters the roi, the camera also detects its color. By using the x coordinate and the color of the obstacle, the robot is able to maneuver away from the obstacle. To avoid detecting corner blocks that cause the robot to face the wrong direction, we utilized the orange and blue lines of the track. When the robot passes the orange or blue line, the robot will ignore the obstacle until it makes a turn. The robot will repeat this until num_turn is equal to 12. When num_turn reaches 12, the robot will align itself using the walls and execute a parallel parking.
 
 
@@ -1015,12 +1016,12 @@ This function orchestrates everything. The multitask() function allows the robot
 **Adding a backup function** can help the robot with problems if it sees it too late. Making the function be a backward command when the robot gets too close to an obstacle, like when the robot doesn't see the block until it's already near. This function will make the robot go backward, thus giving it the chance to redo the obstacle avoidance. This will make runs more consistent and will give a chance to save your run.
 
 
-## 6.0 Engineering Factor
+## 💡6.0 Engineering Factor
 The third-party factor that we used is the Openmv camera, which enables us to see the blocks and their color. It gives the robot the ability to see the blocks, and in turn, make the right decisions that are needed.
 
 <img width="40%"  alt="Screenshot 2026-06-03 093710" src="https://github.com/user-attachments/assets/67ad3cf5-2a82-496e-ae5a-0b0daca77669" />
 
-## 6.1 Usage of Camera
+## 📷6.1 Usage of Camera
 
 **OPEN CHALLENGE CAMERA**
 
@@ -1100,10 +1101,10 @@ All of this gathered information is packed into a compact 4-part data packet con
     p.process()
 ```
 
-## 7.0 Engineering decisions and Improvements
+## 💡7.0 Engineering decisions and Improvements
 This segment explains the challenges, both in the build, programming, and tradeoffs when making the robot and the improvements made to clear the challenges.
 
-## 7.1 Robot Construction
+## 🔧7.1 Robot Construction
 The first problem we had was when our robot's ultrasonic sensors were infront of the wheels, which made the timing of the turn too early. To solve that, we made an entirely new design with the sensors on top of the wheels to help the robot turn better. We also switch from cantilever to braced for better stability on the wheels.
 
 | | |
@@ -1115,7 +1116,7 @@ The first problem we had was when our robot's ultrasonic sensors were infront of
 
 We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer. Due to its bigger width, when it does a sharp turn it might hit the robot with its backside.
 
-## 7.2 Robot Programming
+## 🖥️7.2 Robot Programming
 We encountered many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
 
 https://drive.google.com/file/d/1IwvF9whDRN1dr9YeoEUpp2IKtazWew4s/view (old code)
