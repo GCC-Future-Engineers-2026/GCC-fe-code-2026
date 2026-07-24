@@ -2,17 +2,28 @@
 ## WRO2026_Team Grace Christian College
 
 ## Introduction
-This documentation contains comprehensive information about the robot's design, mobility management, power and sensor management, wiring diagram, materials needed, third-party factors and components, obstacle detection and avoidance, and the decisions and improvements made in preparation made for Philippine Robot Olympiad (PRO) located in Mall of Asia (MOA), Pasay in Philippines 2026 under the Future Engineers category.
+Official Documentation | Future Engineers Category <br>
 
-**scheme** - This folder contains schematic diagrams of the electromechanical components(sensors and motors) used in the vehicle and how they are connected to each other. This folder also includes the schematic diagram of the robot during open and obstacle challenge.
+Event: Philippine Robot Olympiad (PRO) 2026<br>
 
-**src** - This folder contains all the code and programming used for the WRO 2026
+Location: Mall of Asia (MOA), Pasay, Philippines
 
-**t-photos** - This folder contains photos of the participants 
+## 🏁 Challenge Overview
+**Open Challenge**
+-the Robot must complete (3) laps across the track<br>
+-Either (clockwise or counterclockwise)<br>
+-The Inner ring may be 1. square 2. small rectangle 3. big rectangle
 
-**v-photos** - This folder contains photos of the vehicle from multiple sides.(Top, Bottom, Front, Back, etc)
+## 📁 Repository Structure<br>
+**scheme** — Schematic diagrams of the electromechanical components (sensors, motors) and their wiring connections for both Open and Obstacle Challenges.
 
-**video** - This folder contains video footage of how the robot completes the challenges presented to it.
+**src** — Complete Python source code used for the WRO 2026 challenges.
+
+**t-photos** — Official team member photos.
+
+**v-photos** — Vehicle photos of (Front, Back, Sides, Top, and Bottom)
+
+**video** — Video demonstrations of the vehicle completing the challenges.
 
 # 📚Table of Contents
 
@@ -101,13 +112,16 @@ The Large and Medium Spike angular motor were chosen because of it having specia
 ## ⚡3.0 Power and Sensor management
 This segment is dedicated to the vehicle's power supply and its sensor systems. It covers each sensor's implementation and use along with information about the robot's power supply. There is also a wiring diagram given to illustrate the connection of sensors.
 ## ⚡3.1 Power source
-<img align="right" width="25%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" />The robot is powered by the SPIKE Prime Hub, which features a 2,000 mAh rechargeable lithium-ion battery. It was selected due to the fact that it's easily replaced. It is also at peak voltage and performance for most of its run time, until it dies.
+<img align="right" width="25%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" /><br>
+Battery: LEGO SPIKE Prime 2,000 mAh Rechargeable Lithium-Ion Battery.<br>
+
+Characteristics: Maintains flat voltage discharge profiles during runs to ensure consistent motor torque and camera processing performance. Easily swappable .<br>
 
 
 
 
 ## 👁️3.2 Sensors
-**Camera**<br>-The Openmv camera’s function is to detect the blocks and the parking lot. It detects red and green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
+**Camera**<br>-The Openmv camera’s function is to detect the blocks and the parking lot. It detects Red and Green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
 
 <img width="30%" alt="a" src="https://github.com/user-attachments/assets/98a59458-286c-4f7c-a0f9-371ffc370521" />
 
@@ -1118,7 +1132,32 @@ We have had multiple tradeoffs due to the changes we made with the design. We in
 
 ## 🖥️7.2 Robot Programming
 We encountered many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
-
+<table class="failure-table">
+    <thead>
+      <tr>
+        <th>Issue Encountered</th>
+        <th>Root Cause Analysis</th>
+        <th>Implemented Solution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 https://drive.google.com/file/d/1IwvF9whDRN1dr9YeoEUpp2IKtazWew4s/view (old code)
 
 [https://drive.google.com/file/d/1YzoAbaAszqIbo_PungKgBqTQ1u02eVbx/view?usp=sharing
