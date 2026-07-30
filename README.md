@@ -12,19 +12,47 @@ Location: Mall of Asia (MOA), Pasay, Philippines
 **Open Challenge**
 -the Robot must complete (3) laps across the track<br>
 -Either (clockwise or counterclockwise)<br>
--The Inner ring may be 1. square 2. small rectangle 3. big rectangle
+-The Inner ring may be 1. square 2. small rectangle 3. big rectangle<br>
+**Obstacle Challenge**<br>
+-the Robot must complete (3) laps across the track<br>
+-Either (clockwise or counterclockwise)<br>
+-Robot must avoid blocks either 🟥Red (right) or 🟩Green (left) Block and turn according to the color<br>
+-complete parking whether parks Parallel or Perpendicular
 
 ## 📁 Repository Structure<br>
-**scheme** — Schematic diagrams of the electromechanical components (sensors, motors) and their wiring connections for both Open and Obstacle Challenges.
-
-**src** — Complete Python source code used for the WRO 2026 challenges.
-
-**t-photos** — Official team member photos.
-
-**v-photos** — Vehicle photos of (Front, Back, Sides, Top, and Bottom)
-
-**video** — Video demonstrations of the vehicle completing the challenges.
-
+```
+v 📁scheme — Schematic diagrams of the electromechanical components (sensors, motors) and their wiring connections for both Open and Obstacle Challenges.
+ |README.md
+ |Schematic Wiring Diagram.md
+v 📁src — Complete Python source code used for the WRO 2026 challenges.
+ |README.md
+ |cameraMain.py
+ |robot-obstacle-challenge.py
+ |robot-open-challenge.py
+v 📁t-photos — Official team member photos.
+ |README.md
+ |offcial team photo.md
+v 📁v-photos — Vehicle photos of (Front, Back, Sides, Top, and Bottom)
+ |v 📁vehicle photos with label
+ || back with label.md 
+ || bottom with label.md
+ || front with label.md
+ || left with label.md
+ || right with label.md
+ || top with label.md
+ |v 📁vehicle photos
+ || back.md
+ || bottom.md
+ || front.md
+ || left.md
+ || right.md
+ || top.md
+ |  README.md
+ v 📁video — Video demonstrations of the vehicle completing the challenges.
+ | README.md
+ | video.md
+README.md
+```
 # 📚Table of Contents
 
 * 👥[Team Grace Christian College](#team-grace-christian-college)
@@ -37,7 +65,7 @@ Location: Mall of Asia (MOA), Pasay, Philippines
   * ⚡[3.1 Power source](#31-power-source)
 
   * 👁️[3.2 Sensors](32-sensors)
-  * 🛜[3.3 Wirning Diagram](33-wiring-diagram)
+  * 🛜[3.3 Wiring Diagram](33-wiring-diagram)
 * 📋[4.0 Bill of Materials (BOM) and instructions to build](#40-bill-of-materials-bom-and-instructions-to-build)
 * 🚗[5.0 Obstacle Management](#50-obstacle-management)
   * 🚗[5.1 Open Challenge](#51-open-challenge)
@@ -52,18 +80,19 @@ Location: Mall of Asia (MOA), Pasay, Philippines
 
 
 ## 👥Team Grace Christian College
-From the Philippines, Team Grace Christian College is a three-member team made to compete in the PRO 2026 in Mall of Asia. 
+From the Philippines, Team Grace Christian College is a three-member team going to compete in the PRO 2026 in Mall of Asia. 
 
 <img width="30%" alt="Messenger_creation_9F03665D-973D-4025-9D37-10E926EF3D5B" src="https://github.com/user-attachments/assets/1ff4be49-f7dc-450e-8937-915cecd19cf5" />
 
 
 Its members are Thomas Lao, Yuri Valero, and Kyron Chen.
 ## 🤖1.0 Design of self-driving car
-<img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />This autonomous self driving car is made with Lego Education Spike Prime Set. This segment also explains the reason components were used in the design.
+<img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />Our Self Driving car uses Spike as the main set of components, and the Camera on top of the car guides it during the Obstacle & Open challenge <br>
+We will continue to explain the design further in 2.0 - 3.3
 
 
 ## 🛞2.0 Mobility Management
-This segment shows the propulsion system and mechanical structure of the robot. It covers the main structure, tires, motors, and the entire layout of the vehicle. It also includes information about the engineering principle of the motor and steering that controls speed and torque.
+This segment explains the hardware of the Robot such as the Chassis, Motors, and Hub and why we chose the components to build the robot
 ## 🚗2.1 Chassis of car
 **1. Tire**
 
