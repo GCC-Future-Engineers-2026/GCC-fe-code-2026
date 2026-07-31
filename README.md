@@ -55,6 +55,7 @@ README.md
 ```
 # 📚Table of Contents
 
+* 🤖 [Robot Specifications ](#-robot-specifications)
 * 👥 [Team Grace Christian College](#team-grace-christian-college)
 * 🤖 [1.0 Design of self-driving car](#10-design-of-self-driving-car) 
 * 🛞 [2.0 Mobility Management](#20-mobility-management)
@@ -73,6 +74,22 @@ README.md
 * 💡 [7.0 Engineering decisions and Improvements](#70-engineering-decisions-and-improvements)
   * 🔧 [7.1 Robot Construction](#71--problems-encountered-in-robot-construction)
   * 🖥️ [7.2 Robot Programming](#72-programming)
+
+## 🤖 Robot Specifications 
+
+|  |  |
+|:----------:|:--------:|
+|Weight:N/A|Lenght:N/A|
+|Camera Voltage:V|Camera Resolution:px|
+Steering Torque:|Drive axle Torque:|
+|Power Consuption:V/hr|Power Capaticty:V|
+|Runtime:|Speed:|
+
+
+
+
+
+
 
 ## 👥Team Grace Christian College
 From the Philippines, Team Grace Christian College is a three-member team going to compete in the PRO 2026 in Mall of Asia. 
@@ -189,7 +206,7 @@ Characteristics: Maintains flat voltage discharge profiles during runs to ensure
 ## 🛜3.3 Wiring Diagram
 This diagram shows the sensor's power usage and how the motors are connected with them to run the vehicle.
 
-<img width="70%"  alt="1" src="https://github.com/user-attachments/assets/6b8fc953-147c-4fd8-a46e-876f7e10923e" />
+<img width="70%"  alt="1" src="scheme/A.png" />
 
 We took advantage of Spike's versatility and used four ports for sensors and only two for motors. This setup helps the robot to sense the obstacles and make smart decisons on the track.
 
@@ -1185,8 +1202,11 @@ The first problem we had was when our robot's ultrasonic sensors were infront of
 |**OLD ROBOT**|**CURRENT ROBOT**|
 
 **Tradeoffs**
+| | | |
+|:---|:---|:---|
+|Changes|Pros|Cons|
+|Wheels Braced |Better Stability|Bigger Width|
 
-We have had multiple tradeoffs due to the changes we made with the design. We increased the value of steering, but we had to make the robot slower as a result. Our robot was also braced for better stability, but the tradeoff is our robot's width is longer. Due to its bigger width, when it does a sharp turn it might hit the robot with its backside.
 <a id="72-programming"></a>
 ## 🖥️7.2 Robot Programming
 We encountered many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
@@ -1200,9 +1220,9 @@ We encountered many problems in our old code and we made many improvements since
     </thead>
     <tbody>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>N/A</td>
+        <td>Null</td>
+        <td>NOT PLANNED</td>
       </tr>
       <tr>
         <td></td>
