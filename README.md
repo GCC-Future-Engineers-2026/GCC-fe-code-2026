@@ -226,13 +226,13 @@ Lap Tracking & Finish: Each completed turn increments the global variable num_tu
 
 <img width="70%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
 
-```
+```python
 p = PUPRemoteHub(Port.D)
 p.add_command("msg", to_hub_fmt="repr", from_hub_fmt="repr")
 p.add_channel('cam', to_hub_fmt='bhhb')
 ```
 PUPRemoteHub connects the hub to an external OpenMV camera via Port D. It sets up a command channel called 'cam' to receive 4 variables packaged as binary data.
-```
+```python
 async def getMedianR(samples):
     i = 0
     while i < samples:
@@ -264,7 +264,7 @@ async def getMedianL(samples):
         return (distListL[mid-1] + distListL[mid]) / 2
 ```
 To avoid reading random spikes from the ultrasonic sensors, this function takes 3 quick distance samples, sorts them in ascending order, and extracts the middle value (median). This completely discards outlier anomalies.
-```
+```python
 async def remote_engine():
     while True:
         # connects hub to the camera and relay information
@@ -303,7 +303,7 @@ async def update_robot_data():
 * remote_engine: Keeps communication alive with the OpenMV camera.
 
 * update_robot_data: Constantly populates a global dictionary (rob_data) every 20 milliseconds with refreshed telemetry: camera tracking data (color, block_x, corner), IMU gyro heading, color sensor color, and filtered ultrasonic distances.
-```
+```python
 async def ultrasonic_PID(kp=0.075, ki=0.000001, kd=10000.0, minPower=900, maxPower=1100):
     global sum_error, prev_error, max_steer, direction, num_turn
     global rob_data, steer_center, speed_center
@@ -361,7 +361,7 @@ async def ultrasonic_PID(kp=0.075, ki=0.000001, kd=10000.0, minPower=900, maxPow
 The Error for the PID is calculated by subtracting the left wall distance from the right wall distance. If the robot is perfectly centered, the error is 0.
 
 This function also gives the robot **dynamic speed**. The function slows the robot down dynamically if the error is large (approaching a wall) and speeds up to maximum power when the error is low (driving perfectly straight).
-```
+```python
 def turn90_pid(num_turn, kp=35, ki=0.000001, kd=1.0, forward=False, maxP=1100, minP=400):
     global sumS_error, prevS_error
     global speed_sequence
@@ -436,7 +436,7 @@ async def detect_corner():
 Once triggered, it locks out normal wall-following (is_sequencing = True) and forces a hard turn (75 or -75 steering angle) while dynamically calculating speed using turn90_pid based on the internal Gyro heading.
 
 Momentum Compensation: It cuts the turn sequence short by 14 degrees (90 * num_turn - 14) because the physical weight and speed of the robot will cause it to drift smoothly through the remaining 14 degrees.
-```
+```python
 async def sense_line_color():
     global can_sense_corner
 
@@ -452,7 +452,7 @@ async def sense_line_color():
         await wait(20)
 ```
 To ensure the camera doesn't accidentally trigger a corner turn sequence in the middle of a straightaway due to a visual glitch, This function forces the robot to physically cross a colored line (Orange for clockwise tracks, Blue for counter-clockwise tracks) before it is permitted to execute a corner turn.
-```
+```python
 async def motor_controller():
     global rob_data, steer, speed, is_sequencing
     global steer_center, speed_center
@@ -472,7 +472,7 @@ async def motor_controller():
         await wait(50)
 ```
 This function acts as the multiplexer. It checks if the robot is currently executing a corner turn (is_sequencing). If it is, it feeds the corner variables to the motors. If not, it feeds the wall-following PID values (steer_center, speed_center) to the motors.
-```
+```python
 async def main():
     # Run tasks concurrently
     await multitask(
@@ -510,13 +510,13 @@ For the obstacle challenge, the robot uses a code similar to the open challenge.
 <img width="100%"  alt="Untitled Diagram oc drawio_page-0001" src="https://github.com/user-attachments/assets/216c2a1c-e014-44f7-8426-ec3c51461759" />
 
 **Logic and Behavoir**
-```
+```python
 p = PUPRemoteHub(Port.D) # Connection to an external openMV/SPIKE camera hub
 p.add_command("msg", to_hub_fmt="repr", from_hub_fmt="repr")
 p.add_channel('cam', to_hub_fmt='bhhb')
 ```
 PUPRemoteHub handles data streaming from an external smart camera over a serial port. This camera passes information regarding obstacle colors, coordinates, and corner signs.
-```
+```python
 async def getMedianR(samples):
     i = 0
     while i < samples:
@@ -541,7 +541,7 @@ async def getMedianL(samples):
 ```
 Ultrasonic sensors are prone to occasional noise or random spikes. Both getMedianR and getMedianL take 3 rapid readings, sort them, and pick the middle value (median filter). This ensures smooth, reliable data for the steering logic.
 
-```
+```python
 # --- Background Engines ---
 # Relays information from the camera
 async def remote_engine():
@@ -596,7 +596,7 @@ These asynchronous loops run constantly in the backround using Python uasyncio:
 
 * motor_controller(): Acts as a safety/priority switchboard. If the robot is executing a strict maneuver (like avoiding a block or taking a corner), is_sequencing is true, and it takes commands from steer_sequence. Otherwise, it defaults to steer_center (basic wall-centering).
 
-```
+```python
 async def get_out_parking():
     global direction
     # Auto detect layout orientation
@@ -630,7 +630,7 @@ async def get_out_parking():
     car.steer(0)
 ```
 This function runs immediately at launch. It reads the left and right sensors to see which wall is further away, automatically determining if the track runs clockwise (direction = 1) or counter-clockwise (direction = -1). It then performs a hard-coded swing maneuver to clear the starting stall and align with the track.
-```
+```python
 # pid in corner turns for smooth execution
 async def turn90_PID_L(num_turn, kp=20.0, ki=0.0, kd=55.0, maxP=900, minP=400, forward=False):
     global sumS_error, prevS_error, direction
@@ -668,7 +668,7 @@ async def turn90_PID_L(num_turn, kp=20.0, ki=0.0, kd=55.0, maxP=900, minP=400, f
     is_sequencing = True
 ```
 This function uses a PID controller tied to the internal gyro (hub.imu.heading()) to seamlessly execute a precise 90-degree corner turn. It slows down dynamically as it reaches its target heading to avoid overshooting.
-```
+```python
 async def parallel_parking():
     await hub.speaker.beep(100,500)
     await wait(500)
@@ -764,7 +764,7 @@ async def parallel_parking():
     await wait(500)
 ```
 parallel_parking is a long, sequential function triggered at the very end of the race (after 12 turns/3 laps). It uses a sequence of timed straight reverses, a 90-degree pivot (last_turn()), and calculated back-and-forth S-turns to cleanly park the vehicle inside the designated finish zone.
-```
+```python
 def avoid_blocks(color=0, kp=0.5, ki=0.000001, kd=0.1, bl_x=0.0, bl_y=0.0, max_steer_obs=55):
     global sum_Rerror, prev_Rerror, sum_Gerror, prev_Gerror
     global steer_sequence, speed_sequence, turn_right, turn_left
@@ -808,7 +808,7 @@ def avoid_blocks(color=0, kp=0.5, ki=0.000001, kd=0.1, bl_x=0.0, bl_y=0.0, max_s
         turn_left = False
 ```
 This function is used when it detects a block near it (color == 2 for Red, color == 1 for Green). This function calculates a PID error based on where the block is horizontally (bl_x) relative to safe zones (65 for Red, 290 for Green). It swerves the car away from the block.
-```
+```python
 def position_to_center(position_target, p_error, kp=6, ki=0.000001, kd=1.0, max_steer=40):
     global sump_error, prevp_error, num_turn
     global steer_sequence, speed_sequence
@@ -895,7 +895,7 @@ async def return_center_fr_block(num_turn, direction, max_steer=40):
         await wait(10)
 ```
 return_to_center_position() and return_center_fr_block() calculate a counter-heading using the Gyro sensor to steer the car diagonally back toward the middle of the track lane, straightening out once it gets there and preparing for the next block.
-```
+```python
 async def detect_corner():
     global num_turn, direction
     global rob_data, steer_sequence, speed_sequence, is_sequencing
@@ -969,7 +969,7 @@ async def detect_corner():
         await wait(20)
 ```
 This function monitors rob_data["corner"]. When the color sensor spots a corner line tape, it freezes normal driving (is_sequencing = True), tracks what lap/turn it is on (num_turn), adjusts its alignment, and kicks off the 90-degree PID turn. Once complete, it bumps num_turn by 1. When num_turn hits 12, it breaks out of the loop to trigger parking.
-```
+```python
 async def ultrasonic_PID(kp=0.001, ki=0.000001, kd=1000.0, minPower=900, maxPower=1100):
     global sum_error, prev_error, max_steer, direction, num_turn
     global rob_data, steer_center, speed_center, is_sequencing
@@ -1001,7 +1001,7 @@ async def ultrasonic_PID(kp=0.001, ki=0.000001, kd=1000.0, minPower=900, maxPowe
     speed_center = 0
 ```
 The error for the PID is calculated by using the two ultrasonic sensors and finding the difference between them. If the difference is zero the robot is in the center of the track. If it drifts, the PID loop outputs a correction to steer_center to bring the robot back to the middle of the lane.
-```
+```python
 async def sense_line_color():
     global can_sense_corner_CW, can_sense_corner_CCW, detect_color
     while True:
@@ -1016,7 +1016,7 @@ async def sense_line_color():
         await wait(20)
 ```
 This function converts raw sensor values to colors. Spotting orange(1) tells the system it needs to prepare for a Clockwise corner turn; spotting blue(2) prepares it for a Counter-Clockwise turn.
-```
+```python
 async def main():
     await get_out_parking()
     # asynchronously controls functions
@@ -1117,13 +1117,13 @@ The third-party factor that we used is the Openmv camera, which enables us to se
 Our Camera Code for the open challenge searches for objects and sends the data to a Lego Hub using the PUPRemote library. It sets the camera resolution to QVGA (320x240 pixels). When it starts, it sets up a Region of Interest (ROI) to limit where the camera looks. set_auto_gain(), set_auto_whitebal(), and set_auto_exposure() are set to False to keep the image and thresholds consistent when in different lighting conditions.
 
 In the main loop, the camera takes a picture and makes a copy of it. This lets the script read the data on one copy while drawing helpful lines on the screen with the other. 
-```
+```python
 img_debug = sensor.snapshot()
     img = img_debug.copy()
     img_debug.draw_cross(160, 120, color=(0, 0, 0))
 ```
 A special function tweaks the picture's contrast to make objects stand out clearly from the background. The script checks a small ROI at the top-center of the picture for dark objects. This ROI is used to detect the black corner and tells the robot to turn once it reaches near the corner
-```
+```python
 img_center = (160, 120)
 img_roi = (5, 110, 310, 125)
 roi_rect = (img_roi[0], img_roi[1], img_roi[2], img_roi[3])
@@ -1132,7 +1132,7 @@ roi_right_bottom = (245, 201, 70, 35)
 img_roi_corner = (155, 80, 10,40)
 ```
 If it finds a dark object there, it changes a status number from 0 to 1. Finally, the script puts the object data and the status number into a small group of 4 pieces of information. It sends this packet to the Lego Hub right away before starting over.
-```
+```python
 def check_corner_roi(img, img_debug):
     img_contrast = img.copy()
     img_contrast.gamma_corr(gamma=1.9, contrast=1.1, brightness=-0.1)
