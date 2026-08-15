@@ -142,7 +142,7 @@ If both front wheels were to turn at the exact same angle (parallel steering), t
 
 The Ackermann setup mechanically angles the inner front wheel more sharply than the outer one. This ensures that the axle lines of all four wheels intersect at a single, common center point during a turn.<br>
 
-Advantages for our WRO Robot:
+Advantages for our Robot:
 
 Eliminates Tire Scrubbing: The wheels experience pure rolling motion rather than sliding, which significantly reduces friction and prevents unnecessary tire wear.
 
@@ -1220,16 +1220,31 @@ We encountered many problems in our old code and we made many improvements since
     </thead>
     <tbody>
       <tr>
-        <td>N/A</td>
-        <td>Null</td>
-        <td>NOT PLANNED</td>
+        <td>Corner Detection</td>
+        <td>Camera hadn't seen the black or Black is too different from the Range</td>
+        <td>Timer after detecting Orange or Blue</td>
+      </tr>
+      <tr>
+        <td>Wrong algorithm for Parking</td>
+        <td>only possible with a specific case</td>
+        <td>make it possible to park with multiple cases</td>
       </tr>
       <tr>
         <td></td>
         <td></td>
         <td></td>
       </tr>
-      <tr>
+       <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+       <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+       <tr>
         <td></td>
         <td></td>
         <td></td>
