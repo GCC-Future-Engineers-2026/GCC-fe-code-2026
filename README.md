@@ -2,11 +2,17 @@
 ## WRO2026_Team Grace Christian College
 
 ## Introduction
-Official Documentation | Future Engineers Category <br>
 
-Event: Philippine Robot Olympiad (PRO) 2026<br>
+OFFICIAL DOCUMENTATION | FUTURE ENGINEERS CATEGORY
+Event: World Robot Olympiad (WRO) 2026
+Location: Ontario Convention Center Ontario CA USA
+School / Institution: Grace Christian College
+Team Name: Team Grace
 
-Location: Mall of Asia (MOA), Pasay, Philippines
+Welcome to the official engineering documentation for our autonomous vehicle, designed and developed for the Future Engineers category at the Philippine Robot Olympiad 2026. This document details the mechanical design, software architecture, and systems engineering principles utilized to navigate the complexities of this year's competition.
+
+-place abstract here
+
 
 ## 🏁 Challenge Overview
 **Open Challenge**
@@ -20,42 +26,22 @@ Location: Mall of Asia (MOA), Pasay, Philippines
 -complete parking whether parks Parallel or Perpendicular
 
 ## 📁 Repository Structure<br>
-```
-v 📁scheme — Schematic diagrams of the electromechanical components (sensors, motors) and their wiring connections for both Open and Obstacle Challenges.
- |README.md
- |Schematic Wiring Diagram.md
-v 📁src — Complete Python source code used for the WRO 2026 challenges.
- |README.md
- |cameraMain.py
- |robot-obstacle-challenge.py
- |robot-open-challenge.py
-v 📁t-photos — Official team member photos.
- |README.md
- |offcial team photo.md
-v 📁v-photos — Vehicle photos of (Front, Back, Sides, Top, and Bottom)
- |v 📁vehicle photos with label
- || back with label.md 
- || bottom with label.md
- || front with label.md
- || left with label.md
- || right with label.md
- || top with label.md
- |v 📁vehicle photos
- || back.md
- || bottom.md
- || front.md
- || left.md
- || right.md
- || top.md
- |  README.md
- v 📁video — Video demonstrations of the vehicle completing the challenges.
- | README.md
- | video.md
-README.md
-```
+
+📁scheme — Schematic diagrams of the electromechanical components (sensors, motors) and their wiring connections for both Open and Obstacle Challenges.
+
+📁src — Complete Python source code used for the WRO 2026 challenges.
+
+📁t-photos — Official team member photos.
+
+📁v-photos — Vehicle photos of (Front, Back, Sides, Top, and Bottom) wiht or without labels
+
+ 📁video — Video demonstrations of the vehicle completing the challenges.
+
+README.md - the Main ReadMe of this Documentation
+
 # 📚Table of Contents
 
-* 🤖 [Robot Specifications ](#-robot-specifications)
+
 * 👥 [Team Grace Christian College](#team-grace-christian-college)
 * 🤖 [1.0 Design of self-driving car](#10-design-of-self-driving-car) 
 * 🛞 [2.0 Mobility Management](#20-mobility-management)
@@ -75,21 +61,6 @@ README.md
   * 🔧 [7.1 Robot Construction](#71--problems-encountered-in-robot-construction)
   * 🖥️ [7.2 Robot Programming](#72-programming)
 
-## 🤖 Robot Specifications 
-
-|  |  |
-|:----------:|:--------:|
-|Weight:N/A|Lenght:N/A|
-|Camera Voltage:V|Camera Resolution:px|
-Steering Torque:|Drive axle Torque:|
-|Power Consuption:V/hr|Power Capaticty:V|
-|Runtime:|Speed:|
-
-
-
-
-
-
 
 ## 👥Team Grace Christian College
 From the Philippines, Team Grace Christian College is a three-member team going to compete in the PRO 2026 in Mall of Asia. 
@@ -99,7 +70,24 @@ From the Philippines, Team Grace Christian College is a three-member team going 
 
 Its members are Thomas Lao, Yuri Valero, and Kyron Chen.
 ## 🤖1.0 Design of self-driving car
-<img align="right" width="20%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" />Our Self Driving car uses Spike as the main set of components, and the Camera on top of the car guides it during the Obstacle & Open challenge <br>
+The autonomous vehicle developed for our World Robot Olympiad submission utilizes a highly integrated hardware architecture designed to meet the rigorous demands of both the Obstacle and Open Challenges. At the core of the vehicle's control system is the LEGO Education SPIKE Prime Hub, which serves as the primary microcontroller. Propulsion and precise directional control—including steering and speed regulation—are managed by a combination of Large and Medium Angular Motors
+
+To accurately perceive its environment, the robot is equipped with a robust sensor suite featuring distance sensors for spatial awareness and collision avoidance, alongside color sensors for track boundary recognition. Furthermore, the system’s primary navigational asset is an OpenMV Camera, strategically mounted at an elevated vantage point on the chassis. This advanced computer vision module processes real-time visual data, allowing the vehicle to dynamically map its surroundings and autonomously navigate the complex environments of the competition. 
+
+<img width="40%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" /><br>
+
+
+**🤖 Robot Specifications **
+
+|  |  |
+|:----------:|:--------:|
+|Weight:N/A|Lenght:N/A|
+|Camera Voltage:V|Camera Resolution:px|
+Steering Torque:|Drive axle Torque:|
+|Power Consuption:V/hr|Power Capaticty:V|
+|Runtime:|Speed:|
+<br>
+
 We will continue to explain the design further in 2.0 - 3.3
 
 
@@ -110,13 +98,13 @@ This segment explains the hardware of the Robot such as the Chassis, Motors, and
 
 **Lego Technic Tire 62.4 x 20**
 
-<img width="20%"  alt="OIP" src="https://github.com/user-attachments/assets/bc7f8fc5-ba6a-487f-8f1a-bacec84432b2" />
+<img width="40%"  alt="OIP" src="https://github.com/user-attachments/assets/bc7f8fc5-ba6a-487f-8f1a-bacec84432b2" />
 
 We used these tires because they can still move fast and small enough to make accurate turns, unlike other tires which sacrifice speed or turning for their size. Unlike other larger Lego tires, the 62.4 x 20 has thicker sidewalls, so it won't flatten out under the robot's weight.
 
 **Integrated Wheel 43 x 14(Part 65834)**
 
-<img width="20%" alt="Kolo-Robota-Mindstorms-43x14-1szt-LEGO-65834" src="https://github.com/user-attachments/assets/93f40a8d-c51b-4f4b-a18a-cd7e0507d101" />
+<img width="40%" alt="Kolo-Robota-Mindstorms-43x14-1szt-LEGO-65834" src="https://github.com/user-attachments/assets/93f40a8d-c51b-4f4b-a18a-cd7e0507d101" />
 
 We used this wheel compared to others, because of the advantage that it's a single piece, which prevents the tire from slipping off unlike others. The tire is also made of hard rubber, which prevents significant friction and allows the wheel to slide smoothly over the track, requiring less motor power to steer.
 
@@ -128,7 +116,7 @@ Our robot consists of two Lego Technic motors, one being medium angular motor (v
 
 A differential gear is integrated into the drive axle to allow the outer and inner wheels to rotate at different speeds. This mechanism prevents wheel binding and scrubbing, ensuring smooth cornering and maintaining overall vehicle stability. This capability was crucial for executing precise turns in both challenges.
 
-<img width="25%" alt="Messenger_creation_2DD2113F-E5B7-4058-AAD0-0F9EC8B3905B" src="https://github.com/user-attachments/assets/cebe4825-b5ef-4ca0-b05a-08d2a869794f" />
+<img width="45%" alt="Messenger_creation_2DD2113F-E5B7-4058-AAD0-0F9EC8B3905B" src="https://github.com/user-attachments/assets/cebe4825-b5ef-4ca0-b05a-08d2a869794f" />
 
 **4. Engineering principle for steering**
 
