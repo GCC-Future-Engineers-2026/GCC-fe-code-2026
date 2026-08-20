@@ -1,44 +1,60 @@
 
 ## WRO2026_Team Grace Christian College
 
-## Introduction
+## Team Introduction
 
-OFFICIAL DOCUMENTATION | FUTURE ENGINEERS CATEGORY
-Event: World Robot Olympiad (WRO) 2026
-Location: Ontario Convention Center Ontario CA USA
-School / Institution: Grace Christian College
-Team Name: Team Grace
+We are Grace Christian College representing The Philippines in the WRO Future Engineers category. This repository serves as our documentation with the use of Github.
 
-Welcome to the official engineering documentation for our autonomous vehicle, designed and developed for the Future Engineers category at the Philippine Robot Olympiad 2026. This document details the mechanical design, software architecture, and systems engineering principles utilized to navigate the complexities of this year's competition.
+# The Team: 
 
--place abstract here
+**Team Members:**<br>
+*Kyron Chen* of Grace Christian College<br>
+contact - email
+
+*Thomas Yuri* of Grace Christian College<br>
+contact - email
+
+*Fritz Lim* of Grace Christian College<br>
+contact - lim.fritz.nathaniel@gmail.com
+
+**Coaches:**<br>
+*Warren Ong Pe* <br>
+contact - email
+
+*Kim Gamboa* <br>
+contact - email
+
+
 
 
 ## 🏁 Challenge Overview
-**Open Challenge**
--the Robot must complete (3) laps across the track<br>
--Either (clockwise or counterclockwise)<br>
--The Inner ring may be 1. square 2. small rectangle 3. big rectangle<br>
+**Open Challenge**<br>
+- Objective: Autonomously complete 3 consecutive laps either clockwise or counterclockwise<br>
+- Environment: Randomized track dimensions and starting direction.<br>
+- Obstacles: None. Pure lane-keeping between inner and outer boundary walls.<br>
+- End State: Halt vehicle immediately after the 3rd lap is registered.<br><br>
+
 **Obstacle Challenge**<br>
--the Robot must complete (3) laps across the track<br>
--Either (clockwise or counterclockwise)<br>
--Robot must avoid blocks either 🟥Red (right) or 🟩Green (left) Block and turn according to the color<br>
--complete parking whether parks Parallel or Perpendicular
+- Objective: Autonomously complete 3 consecutive laps either clockwise or counterclockwise AND execute parallel parking.<br>
+- Environment: Randomized track, starting direction, and randomized parking zone.<br>
+- Obstacles: Traffic signs (pillars) dynamically placed inside the driving lanes.<br>
+   -> RED Pillar: Vehicle must evade and pass to the RIGHT side.<br>
+   -> GREEN Pillar: Vehicle must evade and pass to the LEFT side.<br>
+- End State: Recognize parking zone post-lap 3 and park within physical limits.<br>
+
 
 ## 📁 Repository Structure<br>
 
-📁scheme — Schematic diagrams of the electromechanical components (sensors, motors) and their wiring connections for both Open and Obstacle Challenges.
+📁scheme — This directory contains the complete electrical documentation of the vehicle. It includes pictures of each specific component of our robot and their respective functions. Our extensive documentation ensures full hardware reproducibility. It details how the Spike Prime Hub interfaces with the components and how power is distributed across the system.
 
-📁src — Complete Python source code used for the WRO 2026 challenges.
+📁src — This directory contains the entirety of our robot's program in Python (programming language). It includes the obstacle management of each sensor and the core logic behind our robot's decision making and navigation throughout both the open and obstacle challenge, particularly the logic behind the camera code and how it is integrated into the main code.
 
-📁t-photos — Official team member photos.
+📁t-photos — This directory contains our team's pictures.
 
-📁v-photos — Vehicle photos of (Front, Back, Sides, Top, and Bottom) wiht or without labels
+📁v-photos — This directory is where our robot is displayed visually. It includes both 2D and 3D pictures of our robot from all sides. The components seen in images are labelled to further enhance clarity of the images. 
 
- 📁video — Video demonstrations of the vehicle completing the challenges.
-
-README.md - the Main ReadMe of this Documentation
-
+ 📁video — This directory contains videos of our robot in operation. It includes both open and obstacle challenge videos.
+ 
 # 📚Table of Contents
 
 
