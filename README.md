@@ -8,13 +8,13 @@ We are Grace Christian College representing The Philippines in the WRO Future En
 # The Team: 
 
 **Team Members:**<br>
-   - *Kyron Chen* of Grace Christian College<br>
+   - *Kyron Chen* Grade x of Grace Christian College<br>
    contact - email
 
-   - *Thomas Yuri* of Grace Christian College<br>
+   - *Thomas Yuri* Grade x of Grace Christian College<br>
    contact - email
 
-   - *Fritz Lim* of Grace Christian College<br>
+   - *Fritz Lim* Grade 11 of Grace Christian College<br>
    contact - lim.fritz.nathaniel@gmail.com
 
 **Coaches:**<br>
