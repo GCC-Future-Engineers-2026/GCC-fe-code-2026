@@ -3,26 +3,26 @@
 
 ## Team Introduction
 
-We are Grace Christian College representing The Philippines in the WRO Future Engineers category. This repository serves as our documentation with the use of Github.
+We are Grace Christian College representing The Philippines in the WRO Future Engineers category. This repository serves as our engineering documentation of our self-driving robot with the use of GitHub.
 
 # The Team: 
 
 **Team Members:**<br>
-*Kyron Chen* of Grace Christian College<br>
-contact - email
+   - *Kyron Chen* of Grace Christian College<br>
+   contact - email
 
-*Thomas Yuri* of Grace Christian College<br>
-contact - email
+   - *Thomas Yuri* of Grace Christian College<br>
+   contact - email
 
-*Fritz Lim* of Grace Christian College<br>
-contact - lim.fritz.nathaniel@gmail.com
+   - *Fritz Lim* of Grace Christian College<br>
+   contact - lim.fritz.nathaniel@gmail.com
 
 **Coaches:**<br>
-*Warren Ong Pe* <br>
-contact - email
+   - *Warren Ong Pe* <br>
+   contact - email
 
-*Kim Gamboa* <br>
-contact - email
+   - *Kim Gamboa* <br>
+   contact - email
 
 
 
@@ -53,7 +53,7 @@ contact - email
 
 📁v-photos — This directory is where our robot is displayed visually. It includes both 2D and 3D pictures of our robot from all sides. The components seen in images are labelled to further enhance clarity of the images. 
 
- 📁video — This directory contains videos of our robot in operation. It includes both open and obstacle challenge videos.
+📁video — This directory contains videos of our robot in operation. It includes both open and obstacle challenge videos.
  
 # 📚Table of Contents
 
