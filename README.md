@@ -5,13 +5,13 @@
 
 We are Grace Christian College representing The Philippines in the WRO Future Engineers category. This repository serves as our engineering documentation of our self-driving robot with the use of GitHub.
 
-# The Team: 
+## 👥Team Grace Christian College
 
 **Team Members:**<br>
-   - *Kyron Chen* Grade x of Grace Christian College<br>
-   contact - email
+   - *Kyron Chen* Grade 8 of Grace Christian College<br>
+   contact - email chen.kyronemmanuel@grace.gcc.edu.ph
 
-   - *Thomas Yuri* Grade x of Grace Christian College<br>
+   - *Thomas Yuri* Grade 10 of Grace Christian College<br>
    contact - email
 
    - *Fritz Lim* Grade 11 of Grace Christian College<br>
@@ -78,13 +78,8 @@ We are Grace Christian College representing The Philippines in the WRO Future En
   * 🖥️ [7.2 Robot Programming](#72-programming)
 
 
-## 👥Team Grace Christian College
-From the Philippines, Team Grace Christian College is a three-member team going to compete in the PRO 2026 in Mall of Asia. 
-
-<img width="30%" alt="Messenger_creation_9F03665D-973D-4025-9D37-10E926EF3D5B" src="https://github.com/user-attachments/assets/1ff4be49-f7dc-450e-8937-915cecd19cf5" />
 
 
-Its members are Thomas Lao, Yuri Valero, and Kyron Chen.
 ## 🤖1.0 Design of self-driving car
 The autonomous vehicle developed for our World Robot Olympiad submission utilizes a highly integrated hardware architecture designed to meet the rigorous demands of both the Obstacle and Open Challenges. At the core of the vehicle's control system is the LEGO Education SPIKE Prime Hub, which serves as the primary microcontroller. Propulsion and precise directional control—including steering and speed regulation—are managed by a combination of Large and Medium Angular Motors
 
@@ -211,7 +206,7 @@ Characteristics: Maintains flat voltage discharge profiles during runs to ensure
 This diagram shows the sensor's power usage and how the motors are connected with them to run the vehicle.
 
 <img width="70%"  alt="1" src="scheme/A.png" />
-
+PLACE HOLDER for CAMERA WIRE DIAGRAM
 We took advantage of Spike's versatility and used four ports for sensors and only two for motors. This setup helps the robot to sense the obstacles and make smart decisons on the track.
 
 
