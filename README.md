@@ -203,10 +203,12 @@ Characteristics: Maintains flat voltage discharge profiles during runs to ensure
 
 
 ## 🛜3.3 Wiring Diagram
-This diagram shows the sensor's power usage and how the motors are connected with them to run the vehicle.
+This diagram shows the sensor's power usage and how the motors are connected with them to run the vehicle.<br><br>
+**SPIKE hub Wiring**<br>
+<img width="70%"  alt="1" src="scheme/A.png" /><br><br>
+**OpenMV Camera Wiring**<br>
+<img width="508" height="343" alt="image" src="https://github.com/user-attachments/assets/32093d39-e3d5-4635-a763-4dd1b0d757ee" />
 
-<img width="70%"  alt="1" src="scheme/A.png" />
-PLACE HOLDER for CAMERA WIRE DIAGRAM
 We took advantage of Spike's versatility and used four ports for sensors and only two for motors. This setup helps the robot to sense the obstacles and make smart decisons on the track.
 
 
