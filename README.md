@@ -3,7 +3,12 @@
 
 ## Team Introduction
 
-We are Grace Christian College representing The Philippines in the WRO Future Engineers category. This repository serves as our engineering documentation of our self-driving robot with the use of GitHub.
+WRO Future Engineers 2026: Team Grace Christian College 🏎️
+Welcome to the official engineering repository for Team Grace Christian College from The Philippines.
+
+This repository documents the complete development cycle of our autonomous vehicle, designed from the ground up for the WRO Future Engineers challenge. Our engineering strategy this year focused on lightweight chassis design and high-speed computer vision processing]. By prioritizing [e.g., reliable sensor fusion over complex mechanics], we built a robot capable of navigating dynamic obstacle courses with high precision and consistent lap times.
+
+Below, you will find our complete codebase, electrical schematics, and the engineering documentation that tracks our progress from early prototypes to our final competition-ready vehicle.
 
 ## 👥Team Grace Christian College
 
@@ -88,7 +93,7 @@ To accurately perceive its environment, the robot is equipped with a robust sens
 <img width="40%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" /><br>
 
 
-**🤖 Robot Specifications **
+**Robot Specifications**
 
 |  |  |
 |:----------:|:--------:|
@@ -191,15 +196,17 @@ Characteristics: Maintains flat voltage discharge profiles during runs to ensure
 
 **Gyro**<br>-The gyro sensor is built in to our robot via the Spike Prime hub and, is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns.
 
-<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-o" src="https://github.com/user-attachments/assets/9056b1a8-1a10-4d55-8d19-9b44090fe660" />
+<img width="40%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" />
 
 
 **Color**<br>-The color sensor is used to detect the orange and blue lines on the track. Depending on the direction either (clockwise or counterclockwise) it tells the robot to not avoid the blocks and find the corner on the wall and turn the correct direction.<br>
 
+<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-o" src="https://github.com/user-attachments/assets/9056b1a8-1a10-4d55-8d19-9b44090fe660" />
 
-<img width="40%" alt="Messenger_creation_CAF01661-0C92-4251-9CD1-j" src="https://github.com/user-attachments/assets/953f666c-4e99-4b5f-973f-a4d4987c5e5f" />
 
 **Ultrasonic**<br>-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenges.
+
+<img width="40%" alt="Messenger_creation_CAF01661-0C92-4251-9CD1-j" src="https://github.com/user-attachments/assets/953f666c-4e99-4b5f-973f-a4d4987c5e5f" />
 
 
 ## 🛜3.3 Wiring Diagram
