@@ -12,6 +12,9 @@ Below, you will find our complete codebase, electrical schematics, and the engin
 
 ## 👥Team Grace Christian College
 
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/ec08529b-d942-4aec-9292-35f2b0b49923" />
+
+
 **Team Members:**<br>
    - *Kyron Chen* Grade 8 of Grace Christian College<br>
    contact - email chen.kyronemmanuel@grace.gcc.edu.ph
