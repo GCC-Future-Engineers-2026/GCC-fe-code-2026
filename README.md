@@ -1,6 +1,3 @@
-
-## WRO2026_Team Grace Christian College
-
 ## Team Introduction
 
 WRO Future Engineers 2026: Team Grace Christian College 🏎️
@@ -8,12 +5,9 @@ Welcome to the official engineering repository for Team Grace Christian College 
 
 This repository documents the complete development cycle of our autonomous vehicle, designed from the ground up for the WRO Future Engineers challenge. Our engineering strategy this year focused on lightweight chassis design and high-speed computer vision processing]. By prioritizing [e.g., reliable sensor fusion over complex mechanics], we built a robot capable of navigating dynamic obstacle courses with high precision and consistent lap times.
 
-Below, you will find our complete codebase, electrical schematics, and the engineering documentation that tracks our progress from early prototypes to our final competition-ready vehicle.
-
-## 👥Team Grace Christian College
+Below, you will find our complete codebase, electrical schematics, and the engineering documentation that tracks our progress from early prototypes to our final competition-ready vehicle. <br>
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/ec08529b-d942-4aec-9292-35f2b0b49923" />
-
 
 **Team Members:**<br>
    - *Kyron Chen* Grade 8 of Grace Christian College<br>
@@ -30,12 +24,12 @@ Below, you will find our complete codebase, electrical schematics, and the engin
    contact - email
 
    - *Kim Gamboa* <br>
-   contact - email
+   contact - email <br> <br>
 
 
 
 
-## 🏁 Challenge Overview
+## Challenge Overview
 **Open Challenge**<br>
 - Objective: Autonomously complete 3 consecutive laps either clockwise or counterclockwise<br>
 - Environment: Randomized track dimensions and starting direction.<br>
@@ -48,55 +42,13 @@ Below, you will find our complete codebase, electrical schematics, and the engin
 - Obstacles: Traffic signs (pillars) dynamically placed inside the driving lanes.<br>
    -> RED Pillar: Vehicle must evade and pass to the RIGHT side.<br>
    -> GREEN Pillar: Vehicle must evade and pass to the LEFT side.<br>
-- End State: Recognize parking zone post-lap 3 and park within physical limits.<br>
+- End State: Recognize parking zone post-lap 3 and park within physical limits.<br> <br>
 
+## Vehicle Photos
 
-## 📁 Repository Structure<br>
+## Performance Videos
 
-📁scheme — This directory contains the complete electrical documentation of the vehicle. It includes pictures of each specific component of our robot and their respective functions. Our extensive documentation ensures full hardware reproducibility. It details how the Spike Prime Hub interfaces with the components and how power is distributed across the system.
-
-📁src — This directory contains the entirety of our robot's program in Python (programming language). It includes the obstacle management of each sensor and the core logic behind our robot's decision making and navigation throughout both the open and obstacle challenge, particularly the logic behind the camera code and how it is integrated into the main code.
-
-📁t-photos — This directory contains our team's pictures.
-
-📁v-photos — This directory is where our robot is displayed visually. It includes both 2D and 3D pictures of our robot from all sides. The components seen in images are labelled to further enhance clarity of the images. 
-
-📁video — This directory contains videos of our robot in operation. It includes both open and obstacle challenge videos.
- 
-# 📚Table of Contents
-
-
-* 👥 [Team Grace Christian College](#team-grace-christian-college)
-* 🤖 [1.0 Design of self-driving car](#10-design-of-self-driving-car) 
-* 🛞 [2.0 Mobility Management](#20-mobility-management)
-  * 🚗 [2.1 Chassis of car](#21-chassis-of-car)
-  * ⚙️ [2.2 Why components were chosen](#22-components)
-* ⚡ [3.0 Power and Sensor management](#30-power-and-sensor-management)
-  * ⚡ [3.1 Power source](#31-power-source)
-  * 👁️ [3.2 Sensors](#32-sensors)
-  * 🛜 [3.3 Wiring Diagram](#33-wiring-diagram)
-* 🚗 [4.0 Obstacle Management](#40-obstacle-management)
-  * 🚗 [4.1 Open Challenge](#41-open-challenge)
-  * 🚗 [4.2 Obstacle Challenge](#42-obstacle-challenge)
-  * 📋 [5.0 Bill of Materials (BOM) and instructions to build](#50-bill-of-materials-bom-and-instructions-to-build)
-* 💡 [6.0 Engineering Factor](#60-engineering-factor)
-  * 📷 [6.1 Usage of Camera](#61-usage-of-camera)
-* 💡 [7.0 Engineering decisions and Improvements](#70-engineering-decisions-and-improvements)
-  * 🔧 [7.1 Robot Construction](#71--problems-encountered-in-robot-construction)
-  * 🖥️ [7.2 Robot Programming](#72-programming)
-
-
-
-
-## 🤖1.0 Design of self-driving car
-The autonomous vehicle developed for our World Robot Olympiad submission utilizes a highly integrated hardware architecture designed to meet the rigorous demands of both the Obstacle and Open Challenges. At the core of the vehicle's control system is the LEGO Education SPIKE Prime Hub, which serves as the primary microcontroller. Propulsion and precise directional control—including steering and speed regulation—are managed by a combination of Large and Medium Angular Motors
-
-To accurately perceive its environment, the robot is equipped with a robust sensor suite featuring distance sensors for spatial awareness and collision avoidance, alongside color sensors for track boundary recognition. Furthermore, the system’s primary navigational asset is an OpenMV Camera, strategically mounted at an elevated vantage point on the chassis. This advanced computer vision module processes real-time visual data, allowing the vehicle to dynamically map its surroundings and autonomously navigate the complex environments of the competition. 
-
-<img width="40%" alt="flix" src="https://github.com/user-attachments/assets/09a6862f-22b9-45d2-bd73-e3e6188f6f17" /><br>
-
-
-**Robot Specifications**
+## Robot Specifications
 
 |  |  |
 |:----------:|:--------:|
@@ -107,135 +59,375 @@ Steering Torque:|Drive axle Torque:|
 |Runtime:|Speed:|
 <br>
 
-We will continue to explain the design further in 2.0 - 3.3
+## Repository Structure
+<br>
 
+📁scheme — This directory contains the complete electrical documentation of the vehicle. It includes pictures of each specific component of our robot and their respective functions. Our extensive documentation ensures full hardware reproducibility. It details how the Spike Prime Hub interfaces with the components and how power is distributed across the system. <br>
 
-## 🛞2.0 Mobility Management
-This segment explains the hardware of the Robot such as the Chassis, Motors, and Hub and why we chose the components to build the robot
-## 🚗2.1 Chassis of car
-**1. Tire**
+📁src — This directory contains the entirety of our robot's program in Python (programming language). It includes the obstacle management of each sensor and the core logic behind our robot's decision making and navigation throughout both the open and obstacle challenge, particularly the logic behind the camera code and how it is integrated into the main code. <br>
 
-**Lego Technic Tire 62.4 x 20**
+📁t-photos — This directory contains our team's pictures. <br>
 
-<img width="40%"  alt="OIP" src="https://github.com/user-attachments/assets/bc7f8fc5-ba6a-487f-8f1a-bacec84432b2" />
+📁v-photos — This directory is where our robot is displayed visually. It includes both 2D and 3D pictures of our robot from all sides. The components seen in images are labelled to further enhance clarity of the images.  <br>
 
-We used these tires because they can still move fast and small enough to make accurate turns, unlike other tires which sacrifice speed or turning for their size. Unlike other larger Lego tires, the 62.4 x 20 has thicker sidewalls, so it won't flatten out under the robot's weight.
+📁video — This directory contains videos of our robot in operation. It includes both open and obstacle challenge videos. <br> <br>
+ 
+# 📚Table of Contents
 
-**Integrated Wheel 43 x 14(Part 65834)**
+* 👥 [Team Introduction](#team-introduction)
+  <br><br>
+* [Challenge Overview](#challenge-overview)
+  <br><br>
+* [Vehicle Photos](#vehicle-photos)
+  <br><br>
+* [Performance Videos](#performance-videos)
+  <br><br>
+* [Robot Specifications](#robot-specifications)
+  <br><br>
+* [Repository Structure](#repository-structure)
+  <br><br>
+* [1.0 Mechanical Design and Mobility Management](#10-mechanical-design-and-mobility-management)
+   * [1.1 Chassis Architecture](#11-chassis-architecture)
+      * [1.1.1 Tire Selection](#111-tire-selection)
+      * [1.1.2 Motor Configuration](#112-motor-configuration)
+   * [1.2 Drivetrain and Kinematics](#12-drivetrain-and-kinematics)
+      * [1.2.1 Differential Gear Integration](#121-differential-gear-integration)
+      * [1.2.2 Ackermann Steering Geometry](#122-ackermann-steering-geometry)
+   * [1.3 Powertrain Analysis](#13-powertrain-analysis)
+      * [1.3.1 Torque and Speed Analysis](#131-torque-and-speed-analysis)
+   * [1.4 Mechanical Tradeoffs and Iterations](#14-mechanical-tradeoffs-and-iterations)
+      * [1.4.1 Cantilever vs. Braced Rear Wheel Stability](#141-cantilever-vs-braced-rear-wheel-stability)
+   * [1.5 Assembly and Bill of Materials (BOM)](#15-assembly-and-bill-of-materials-bom)
+      * [1.5.1 Building Instructions](#151-building-instructions)
+      * [1.5.2 Complete Component List](#152-complete-component-list)
+* [2.0 Power and Sense Management](#20-power-and-sense-management)
+   * [2.1 Power Distribution](#21-power-distribution)
+      * [2.1.1 LEGO SPIKE Hub Battery](#211-lego-spike-hub-battery)
+      * [2.1.2 External Power](#212-external-power)
+   * [2.2 Wiring & Schematics](#22-wiring--schematics)
+      * [2.2.1 LEGO SPIKE Hub](#221-lego-spike-hub)
+      * [2.2.2 External Wiring](#222-external-wiring)
+   * [2.3 Sensor Integration](#23-sensor-integration)
+      * [2.3.1 OpenMV H7 Plus](#231-openmv-h7-plus)
+      * [2.3.2 Ultrasonic Sensors](#232-ultrasonic-sensors)
+      * [2.3.3 Spike IMU/Gyro](#233-spike-imugyro)
+      * [2.3.4 Color Sensor](#234-color-sensor)
+* [3.0 Obstacle Management and Software Documentation](#30-obstacle-management-and-software-documentation)
+   * [3.1 Open Challenge](#31-open-challenge)
+   * [3.2 Obstacle Challenge](#32-obstacle-challenge)
+   * [3.3 Camera Usage and Software](#33-camera-usage-and-software)
+   * [3.4 Problems Encountered](#34-problems-encountered) 
+<br><br><br>
 
-<img width="40%" alt="Kolo-Robota-Mindstorms-43x14-1szt-LEGO-65834" src="https://github.com/user-attachments/assets/93f40a8d-c51b-4f4b-a18a-cd7e0507d101" />
+## 1.0 Mechanical Design and Mobility Management
 
-We used this wheel compared to others, because of the advantage that it's a single piece, which prevents the tire from slipping off unlike others. The tire is also made of hard rubber, which prevents significant friction and allows the wheel to slide smoothly over the track, requiring less motor power to steer.
+## 1.1 Chassis Architecture
+   
+## 1.1.1 Tire Selection
+&emsp; &emsp; **Rear Wheels:** LEGO Technic Tire 62.4 x 20	
 
-**2. Implementation of motor**
+&emsp; <img width="474" height="474" alt="OIP" src="https://github.com/user-attachments/assets/70aab19b-2eb9-4e7c-9320-6dd2b9ac9914" />
+<br><br>
+   
+The rear wheels are responsible for propelling the mass of the robot and resolving the torque distributed by the differential gear. The 62.4 mm x 20 mm tire was selected to optimize linear velocity and traction. <br>
 
-Our robot consists of two Lego Technic motors, one being medium angular motor (vertical) and the other being large angular motor (horizontal). The medium  motor faces inwards because when facing in the back the nearest connections dont move with the axle unlike the front makes the robot compact to reduce overall length, saves space, reduces turning radius for sharper turns.
+   * **Kinematic Velocity:** Linear speed is directly proportional to wheel radius. At a fixed maximum motor RPM, the larger 62.4 mm diameter significantly increases the vehicle's top straight-line speed compared to standard 43 mm tires.
 
-**3. Integration of a Differential Gear**
+   * **Differential Synergy & Contact Patch:** A differential prevents wheel scrub by allowing the outer wheel to spin faster during a turn. However, if a tire lacks grip, the differential will dump all torque into the slipping wheel (path of least resistance), stranding the vehicle. The 20 mm width provides a wide, flat contact patch that guarantees sufficient static friction to keep both wheels anchored, ensuring smooth, continuous torque delivery through corners.
+<br><br><br><br>
 
-A differential gear is integrated into the drive axle to allow the outer and inner wheels to rotate at different speeds. This mechanism prevents wheel binding and scrubbing, ensuring smooth cornering and maintaining overall vehicle stability. This capability was crucial for executing precise turns in both challenges.
+&emsp; &emsp; **Front Wheels:** Integrated Wheel 43 x 14 (Part 65834)
 
-<img width="45%" alt="Messenger_creation_2DD2113F-E5B7-4058-AAD0-0F9EC8B3905B" src="https://github.com/user-attachments/assets/cebe4825-b5ef-4ca0-b05a-08d2a869794f" />
+&emsp; <img width="474" height="423" alt="Kolo-Robota-Mindstorms-43x14-1szt-LEGO-65834" src="https://github.com/user-attachments/assets/275e1658-528d-4a80-9907-178f90be9e17" />
+<br><br>
 
-**4. Engineering principle for steering**
+The front wheels actuate the Ackermann steering geometry. The priority here is minimizing servo load, eliminating steering hysteresis, and maintaining geometric clearance. The 43 mm x 14 mm integrated wheel is structurally and geometrically superior for this role.
 
-This robot uses Ackermann steering geometry.
+* **Scrub Radius & Servo Torque:** In an Ackermann setup, wheels pivot around a kingpin axis. A wide tire forces the contact patch further away from this pivot point, creating a large "scrub radius." The narrow 14 mm profile keeps the contact patch almost perfectly aligned with the pivot axis. This dramatically reduces the friction force fighting the steering servo, allowing for lightning-fast, micro-adjustments driven by the PID algorithm.
 
-<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://github.com/user-attachments/assets/9bf7b1c8-57c6-436e-9b63-53230b88d505" /><br>
+* **Elimination of Sidewall Flex:** Part 65834 is an integrated wheel: the hard rubber tire is permanently molded into the plastic rim. During high-speed cornering, lateral shear forces cause standard 2-piece Lego rubber tires to flex sideways or peel off the rim. This deformation introduces hysteresis (a delay between the servo turning and the car actually changing direction). The solid integration of the 65834 wheel ensures zero sidewall flex, translating servo commands into immediate, mathematically predictable drifts.
 
-Our robot utilizes Ackermann steering geometry to solve a fundamental problem in vehicle cornering: during a turn, the inner and outer wheels must travel along circles of different radii. Because the inner wheel is closer to the center of the turn, it follows a tighter, shorter path than the outer wheel.
+* **Spatial Clearance:** The smaller 43 mm diameter allows the wheel to pivot to extreme lock angles without colliding with the chassis walls, tie rods, or ultrasonic sensors mounted at the front of the vehicle.
+<br><br><br><br>
 
-If both front wheels were to turn at the exact same angle (parallel steering), they would fight each other. One or both tires would be forced to drag or "scrub" sideways across the track to compensate for the different turning circles.
+## 1.1.2 Motor Configuration
+The vehicle's propulsion and directional control are governed by a dual-motor powertrain utilizing a combination of LEGO Technic Large and Medium Angular Motors. These specific models were engineered into the design primarily because they feature internal absolute encoders. This closed-loop hardware feedback allows for high-resolution odometry, ensuring the robot can maintain perfectly straight linear trajectories and execute precise positional tasks with minimal drift. Additionally, their box-like form factor and low-profile wiring harnesses greatly facilitated a clean, tightly integrated chassis build. 
+<br><br>
 
-The Ackermann setup mechanically angles the inner front wheel more sharply than the outer one. This ensures that the axle lines of all four wheels intersect at a single, common center point during a turn.<br>
+&emsp; &emsp; **LEGO Technic Medium Angular Motor (Vertical)**
 
-Advantages for our Robot:
+&emsp; <img width="474" height="474" alt="R" src="https://github.com/user-attachments/assets/2c7899da-9349-43c7-88ed-be22a46470b5" />
+<br>
 
-Eliminates Tire Scrubbing: The wheels experience pure rolling motion rather than sliding, which significantly reduces friction and prevents unnecessary tire wear.
+This motor is oriented vertically and serves as the primary steering actuator for the vehicle. To optimize the chassis footprint, the motor is strategically mounted facing inward toward the center of the chassis rather than protruding outward. This internal orientation was chosen because it ensures the adjacent mounting connections remain static and do not interfere with the dynamic movement of the steering axle. By packing the steering assembly inward, the design significantly reduces the overall longitudinal length of the robot. This compacted wheelbase directly translates to a reduced turning radius, enabling the sharper, high-precision cornering required to navigate around tight obstacles. 
+<br><br><br><br>
 
-Reduces Wear on Tires: Because the motors aren't fighting against the friction of dragging tires, the robot's wheels don't wear as fast.
+&emsp; &emsp; **LEGO Technic Large Angular Motor (Horizontal)**
 
-High-Precision Odometry: Since wheel slip is eliminated, the motor encoders can track the robot's distance and position much more accurately, allowing for highly reliable autonomous programming.
+&emsp; <img width="474" height="474" alt="image" src="https://github.com/user-attachments/assets/53c26369-691a-4214-b203-34ed6d8556fa" />
+<br>
 
-Enhanced Stability: The vehicle maintains maximum traction and grip on the track, making it capable of executing the tight, high-speed turns required in both the Open and Obstacle challenges without losing control.
+Mounted horizontally, this unit functions as the primary drive motor for the vehicle's propulsion. By utilizing the larger variant for the drivetrain, the system benefits from higher torque output, which is necessary to overcome the static friction of the vehicle's mass and maintain consistent velocities during the Open and Obstacle Challenges. Its horizontal integration seamlessly couples with the drive axle and differential gear to deliver stable, continuous power to the rear wheels. 
+<br><br><br><br>
 
-<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-i" src="https://th.bing.com/th/id/R.4972e645d170158c2f9dc37ff1e09c00?rik=sURb92AoO9szTA&riu=http%3a%2f%2fwww.datagenetics.com%2fblog%2fdecember12016%2ftitle.jpg&ehk=w5iAOJ7uEVvs3vc6SoebZdEQm1gcUfzZh5uA5vIyu68%3d&risl=&pid=ImgRaw&r=0" />
-<a id="22-components"></a>
+## 1.2 Drivetrain and Kinematics
+   
+## 1.2.1 Differential Gear Integration
+&emsp; <img width="747" height="474" alt="607458375-cebe4825-b5ef-4ca0-b05a-08d2a869794f" src="https://github.com/user-attachments/assets/b22d56bf-24f5-4cef-884e-422a2e634d44" />
+<br>
 
-## ⚙️2.2 Why components were chosen
+The vehicle's rear-wheel-drive powertrain incorporates a mechanical differential gear to manage torque distribution from the primary horizontal drive motor to the rear wheels. In autonomous track navigation, fixing both drive wheels to a solid axle results in severe wheel scrubbing during cornering, as the outer wheel is forced to travel a greater distance than the inner wheel in the same amount of time. By integrating a differential, the rear wheels are mechanically decoupled. This allows them to rotate at independent angular velocities while maintaining continuous and balanced power delivery. This design minimizes tire wear, prevents traction loss, and is critical for maintaining highly precise odometry. It ensures that the rotational data from the motor's internal encoder strictly reflects true rolling distance rather than artificial slipping
 
-We chose spike as our component, because
-<br>-same multithreading capabilities to EV3
-<br>-its smaller and  faster
-<br>-It is also easier to build around
-<br>-it has better connectivity to openmv
-<br>-it has more flexible ports due to all ports and either be all sensors or all motors
+### **Advantages**
+   * **Elimination of Rear Wheel Scrubbing:** Prevents friction-induced torque loss and mechanical drag during sharp cornering.
+   * **Reduced Powertrain Strain:** Minimizes shock loading on motor gears by allowing proportional speed distribution across both drive wheels.
+   * **Odometry Preservation:** Ensures smooth linear velocity transfer, preventing wheel slip that could otherwise corrupt encoder readings and gyro-assisted path tracking. 
+<br><br><br><br>
 
-The Large and Medium Spike angular motor were chosen because of it having special sensors called absolute encoders, which help it move in a straight line and do precise tasks with ease. It is also very easy to build around due to its box-like shape and the fact it has slim wires and not thick ones, which can hinder the build around it.
+## 1.2.2 Ackermann Steering Geometry
+&emsp; <img width="450" height="239" alt="image" src="https://github.com/user-attachments/assets/5ef04509-f272-4c32-9b1e-0d5f397b7922" />
+<br>
 
-## ⚡3.0 Power and Sensor management
+To complement the rear differential, the vehicle's front steering assembly employs Ackermann steering geometry. Traditional parallel steering systems force both front tires to maintain identical turning angles, which inevitably causes the inner wheel to drag laterally through tight corners. The Ackermann linkage geometrically corrects this error by ensuring the inner wheel steers at a slightly sharper angle than the outer wheel. This allows all four wheels to trace concentric circles that share a common center point aligned with the rear drive axle.This kinematic alignment completely eliminates lateral tire scrubbing and maximizes the contact patch of the 62.4 x 20 tires. When paired with the differential gear, the Ackermann setup provides exceptionally smooth, high-precision cornering. Furthermore, it drastically reduces the dynamic load and torsional strain on the vertical steering motor, allowing the software's PID control loops to execute instantaneous directional corrections with negligible mechanical resistance.
 
-This section breaks down the foundational hardware systems that drive the vehicle, specifically focusing on:
+### **Advantages**
+   * **Kinematic Alignment:** During a turn, the inside wheel traces a tighter circle than the outside wheel. The linkage geometry causes the inner wheel to turn at a steeper angle, aligning all four wheel axes toward a single, common point known as the Instantaneous Center of Rotation (ICR).
+   * **Friction & Load Reduction:** By ensuring each tire rolls pure-statically along its precise turning arc without lateral dragging, steering resistance is drastically minimized. This reduces the required actuation torque from the steering motor.
+   * **High-Precision Cornering:** The combination of an Ackermann front linkage and a differential rear axle enables clean, predictable 90-degree cornering routines, preventing trajectory drift during autonomous obstacle-avoidance maneuvers. 
+<br><br><br><br>
 
-**Power Supply Architecture:** Specifications, capacity, and power distribution across the robot.
+## 1.3 Powertrain Analysis
 
-**Sensor Integration:** The specific role, implementation, and functionality of each onboard sensor.
+## 1.3.1 Torque and Speed Reasoning
 
-**System Wiring:** A complete electrical schematic illustrating how all components and sensors are connected.
-## ⚡3.1 Power source
-<img align="right" width="25%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" /><br>
-Battery: LEGO SPIKE Prime 2,000 mAh Rechargeable Lithium-Ion Battery.<br>
+## 1.4 Mechanical Tradeoffs and Iterations
+   
+## 1.4.1 Cantilever vs. Braced Rear Wheel Stability
 
-Characteristics: Maintains flat voltage discharge profiles during runs to ensure consistent motor torque and camera processing performance. Easily swappable .<br>
+&emsp; &emsp; **Example of Cantilever Wheels**
 
+&emsp; <img width="474" height="267" alt="fde622be1b35c086e08aad69b99be743225c7290Lego-Mindstorms-Ev3-Car-With-Two-Wheel-Drive-Robot-Fllcasts" src="https://github.com/user-attachments/assets/c5eef589-a431-48b8-908f-79f853ae2238" />
 
+&emsp; &emsp; **Example of Braced Wheels**
 
-<a id="32-sensors"></a>
-## 👁️3.2 Sensors
-**Camera**<br>-The Openmv camera’s function is to detect the blocks and the parking lot. It detects Red and Green blocks while the robot is in motion and helps it turn left or right. It also helps find the magenta walls after the final turn to help in parking.
+&emsp; <img width="474" height="267" alt="OIP" src="https://github.com/user-attachments/assets/efd465d3-5719-49b4-8075-3ce7eae6fa8e" />
 
-<img width="30%" alt="a" src="https://github.com/user-attachments/assets/98a59458-286c-4f7c-a0f9-371ffc370521" />
+Initial rear-drive prototypes utilized a cantilever wheel configuration to minimize track width and simplify direct-drive motor coupling. However, testing revealed that the unsupported axles suffered from deflection under the weight of the rear chassis components. This resultant axle wobble compromised the tire contact patches and introduced unpredictable micro-drifts into straight-line odometry
+<br><br>
+To resolve this kinematic instability, the rear drivetrain was redesigned to have braced wheels. This transition required a deliberate engineering tradeoff: adopting a braced framework inherently increases the vehicle's overall footprint and introduces outer hardware edges that risk catching on track borders. However, the team determined that these spatial penalties were necessary to secure mechanical reliability. By supporting both ends of the axle within a rigid fork, the new configuration maintained strict vertical wheel alignment under load, providing the absolute rigidity required for consistent rear traction and accurate sensor-driven navigation.
+<br><br><br><br>
 
+## 1.5 Assembly and Bill of Materials (BOM)
+   
+## 1.5.1 Building Instructions
+<img width="450" alt="1_1x" src="https://github.com/user-attachments/assets/9cf4a0f4-46bc-46fc-b5e6-03cf4d21febb" />
+<img width="450" alt="2_1x - Copy" src="https://github.com/user-attachments/assets/1b88cf9b-ab1b-4231-9170-d0695a8744ca" />
+<img width="450" alt="3_1x - Copy" src="https://github.com/user-attachments/assets/fbacf456-a4e4-4898-bfb3-af05dad62f3e" />
+<img width="450" alt="4_1x - Copy" src="https://github.com/user-attachments/assets/3439bc68-b10e-4611-aae0-bcc06a4bc240" />
+<img width="450" alt="5_1x - Copy" src="https://github.com/user-attachments/assets/fe21f8a7-5ee6-4b7e-ab1f-bf75235006ff" />
+<img width="450" alt="6_1x - Copy" src="https://github.com/user-attachments/assets/69e20950-959b-47c8-b76e-73dc221e558e" />
+<img width="450" alt="7_1x - Copy" src="https://github.com/user-attachments/assets/2cc913ab-5ea4-435e-b8c3-f4f157a9e2de" />
+<img width="450" alt="8_1x - Copy" src="https://github.com/user-attachments/assets/d69d6479-92c8-4032-aebc-294ff38e2ce1" />
+<img width="450" alt="9_1x - Copy" src="https://github.com/user-attachments/assets/cf716722-908b-4516-b5e9-7fd505156cb2" />
+<img width="450" alt="10_1x - Copy" src="https://github.com/user-attachments/assets/31b8c794-0506-4937-9ce6-b45e5fd7ec2d" />
+<img width="450" alt="11_1x - Copy" src="https://github.com/user-attachments/assets/ed2b9215-ad41-44c3-b43b-2645a573cfec" />
+<img width="450" alt="12_1x - Copy" src="https://github.com/user-attachments/assets/f6c6202e-0aa2-4f0d-b6de-b69dcfe456c2" />
+<img width="450" alt="13_1x - Copy" src="https://github.com/user-attachments/assets/1f1d334b-042e-4fa3-8eac-0c594fe75948" />
+<img width="450" alt="14_1x - Copy" src="https://github.com/user-attachments/assets/51b05397-3399-44b7-ad52-660146a20b7a" />
+<img width="450" alt="15_1x - Copy" src="https://github.com/user-attachments/assets/9ba8b765-2bfc-425e-9dcb-a5457190b4b0" />
+<img width="450" alt="16_1x - Copy" src="https://github.com/user-attachments/assets/123d8042-9665-45b9-ae24-491ea6ae84db" />
+<img width="450" alt="16_1x - Copy" src="https://github.com/user-attachments/assets/bac4650b-0aa5-4701-82ab-ae680200b46d" />
+<img width="450" alt="17_1x - Copy" src="https://github.com/user-attachments/assets/9f1d35f3-4ae2-4915-808f-760593a2c2e9" />
+<img width="450" alt="18_1x - Copy" src="https://github.com/user-attachments/assets/bdc4631e-b03d-4399-891e-eb88e46d1653" />
+<img width="450" alt="19_1x - Copy" src="https://github.com/user-attachments/assets/1ac44692-5d84-494e-93d1-697cac1fb8c8" />
+<img width="450" alt="20_1x - Copy" src="https://github.com/user-attachments/assets/f3a6b966-f5cf-4460-8974-1fed89345853" />
+<img width="450" alt="21_1x - Copy" src="https://github.com/user-attachments/assets/e8ce2c4b-350a-4b5d-8a37-e93d7e93ad56" />
+<img width="450" alt="22_1x - Copy" src="https://github.com/user-attachments/assets/f6a54867-f0b4-4a6f-a0f7-ff62d0e08ca5" />
+<img width="450" alt="23_1x - Copy" src="https://github.com/user-attachments/assets/8d729189-8f28-4078-819b-d57457c13771" />
+<img width="450" alt="24_1x - Copy" src="https://github.com/user-attachments/assets/ad436e90-71d7-43cf-9866-584f2bd54402" />
+<img width="450" alt="25_1x - Copy" src="https://github.com/user-attachments/assets/948f33ee-07c2-43fe-8d63-1683eb2b762e" />
+<img width="450" alt="26_1x - Copy" src="https://github.com/user-attachments/assets/5c924007-c50d-40a8-a71d-70aae03895cd" />
+<img width="450" alt="27_1x - Copy" src="https://github.com/user-attachments/assets/52e337f2-502a-4edd-8d12-ed86d1e4342c" />
+<img width="450" alt="28_1x - Copy" src="https://github.com/user-attachments/assets/e5c0aed0-417e-4801-b71c-9a7aa8faea76" />
+<img width="450" alt="29_1x - Copy" src="https://github.com/user-attachments/assets/b77ef906-46e1-47f3-9cdc-04f9cfeab98f" />
+<img width="450" alt="30_1x - Copy" src="https://github.com/user-attachments/assets/f5724db1-63fa-49c5-a4a4-41c5abbea34d" />
+<img width="450" alt="31_1x - Copy" src="https://github.com/user-attachments/assets/56fbc6ba-fe3f-45bf-b786-07644059d9d7" />
+<img width="450" alt="32_1x - Copy" src="https://github.com/user-attachments/assets/94d8713a-d8d4-49df-a788-ef994b18a90b" />
+<img width="450" alt="33_1x - Copy" src="https://github.com/user-attachments/assets/1ed6705b-fb51-4fd1-a356-319c5b2e1830" />
+<img width="450" alt="34_1x - Copy" src="https://github.com/user-attachments/assets/67f3ff31-6687-4884-a08a-24cfdedde857" />
+<img width="450" alt="35_1x - Copy" src="https://github.com/user-attachments/assets/3e3cca88-010a-4455-95e6-340d709c9834" />
+<img width="450" alt="36_1x - Copy" src="https://github.com/user-attachments/assets/b09163fa-9a3c-4227-941b-d6a8c6303a0f" />
+<img width="450" alt="37_1x - Copy" src="https://github.com/user-attachments/assets/93327e76-60e2-4fde-8780-825b40d6ecd9" />
+<img width="450" alt="38_1x - Copy" src="https://github.com/user-attachments/assets/5e947560-29c1-4025-907f-603dfeb1d8ef" />
+<img width="450" alt="39_1x" src="https://github.com/user-attachments/assets/2fbabe39-a8a7-4efa-b7dc-e291b2f337fb" />
+<img width="450" alt="40_1x" src="https://github.com/user-attachments/assets/3b248551-4b5e-4fc4-89dd-8bbf53cf99d7" />
+<img width="450" alt="41_1x" src="https://github.com/user-attachments/assets/e1f83237-6904-4d7c-a908-2ed97643c2d1" />
+<img width="450" alt="42_1x" src="https://github.com/user-attachments/assets/369534e9-176d-4f8b-800b-301811675b3b" />
+<img width="450" alt="43_1x" src="https://github.com/user-attachments/assets/a7e8a90b-b025-4803-b6ad-de1109d20916" />
+<img width="450" alt="44_1x" src="https://github.com/user-attachments/assets/b0ab6af2-880b-4c81-935d-c2eb1c4980d6" />
+<img width="450" alt="45_1x" src="https://github.com/user-attachments/assets/f06a9e80-644c-4943-ba21-c2f274eddb76" />
+<img width="450" alt="46_1x" src="https://github.com/user-attachments/assets/c4ce4af1-2aaa-43c1-9ed2-3b6ee3016703" />
+<img width="450" alt="47_1x" src="https://github.com/user-attachments/assets/634cc96c-3d4b-4597-b112-e98f1447aa62" />
+<img width="450" alt="48_1x" src="https://github.com/user-attachments/assets/016dc344-3833-4ca1-9b3b-9cf25a3b3448" />
+<img width="450" alt="49_1x" src="https://github.com/user-attachments/assets/abf91385-4cc0-42c3-8f14-1ed97f9f427a" />
+<img width="450" alt="50_1x" src="https://github.com/user-attachments/assets/d1354895-958b-4416-9518-f17616e7f5b4" />
+<img width="450" alt="51_1x" src="https://github.com/user-attachments/assets/6f1bdfd3-a5a3-4046-87f3-20ea6924acf4" />
+<img width="450" alt="52_1x" src="https://github.com/user-attachments/assets/6210cb4b-6d32-4b32-b318-cee51fee3669" />
+<img width="450" alt="53_1x" src="https://github.com/user-attachments/assets/ab682197-8ebd-450f-9faa-75dd08e7c616" />
+<img width="450" alt="54_1x" src="https://github.com/user-attachments/assets/dc7c17d5-91ec-49f8-88a9-9aabec9b1641" />
+<img width="450" alt="55_1x" src="https://github.com/user-attachments/assets/efb4776f-e2a1-46f9-8ed5-113fcaeb9d3c" />
+<img width="450" alt="56_1x" src="https://github.com/user-attachments/assets/ed14838d-02ba-47f3-8b26-02bb0ed4b1dd" />
+<img width="450" alt="57_1x" src="https://github.com/user-attachments/assets/bf8f6dd3-efbf-43aa-b0e2-eddf2633772f" />
+<img width="450" alt="58_1x" src="https://github.com/user-attachments/assets/6adcfd65-28f7-4cd2-a459-708f775eedf3" />
+<img width="450" alt="59_1x" src="https://github.com/user-attachments/assets/2ea14d57-3946-4b39-bfc7-6fc1b38c8651" />
+<img width="450" alt="60_1x" src="https://github.com/user-attachments/assets/34674dad-d7f7-4e4e-860d-45f92d660719" />
+<img width="450" alt="61_1x" src="https://github.com/user-attachments/assets/c2df2fb3-26d3-42d5-9f78-bd45035a490c" />
+<img width="450" alt="62_1x" src="https://github.com/user-attachments/assets/1b5dff2a-ca40-4cee-99a6-220c63074417" />
+<img width="450" alt="62_1x" src="https://github.com/user-attachments/assets/f478baee-47ec-4205-9273-10e860be9431" />
+<img width="450" alt="63_1x" src="https://github.com/user-attachments/assets/bb05a73f-2473-4051-ae63-a9681995db8f" />
+<img width="450" alt="64_1x" src="https://github.com/user-attachments/assets/fb22f0ed-f202-4d80-9583-bd9a88fac883" />
+<img width="450" alt="65_1x" src="https://github.com/user-attachments/assets/ff719aeb-e852-44f7-9892-28649a2781ee" />
+<img width="450" alt="66_1x" src="https://github.com/user-attachments/assets/0b0784d1-cfa9-4831-9b8e-7a7fa3a90657" />
+<img width="450" alt="67_1x" src="https://github.com/user-attachments/assets/34fe2b71-80b3-408c-945f-13e4f0ee1afd" />
+<img width="450" alt="68_1x" src="https://github.com/user-attachments/assets/019ff5fd-6c5c-4ea5-b3c0-691c61697e55" />
+<img width="450" alt="69_1x" src="https://github.com/user-attachments/assets/feccb713-e8c8-4cdd-a114-e07bd40d0fc5" />
+<img width="450" alt="70_1x" src="https://github.com/user-attachments/assets/6da16154-808f-4da5-8b9c-28b8011c233b" />
+<img width="450" alt="71_1x" src="https://github.com/user-attachments/assets/e7072da9-e707-4e1f-9c60-63f0eb829247" />
+<img width="450" alt="72_1x" src="https://github.com/user-attachments/assets/7c5f6e8f-594d-462c-a3f7-ed0ae50de57c" />
+<img width="450" alt="73_1x" src="https://github.com/user-attachments/assets/83dc1f64-c2e7-448a-806a-fe4829db8f97" />
+<img width="450" alt="74_1x" src="https://github.com/user-attachments/assets/0a0a28d3-9062-457d-892d-ebe69b95cb76" />
+<img width="450" alt="75_1x" src="https://github.com/user-attachments/assets/cdbd6d95-8013-4114-bb5a-e23b94ca078a" />
+<img width="450" alt="76_1x" src="https://github.com/user-attachments/assets/27add380-357b-4a66-9270-c85a163070b8" />
+<img width="450" alt="77_1x" src="https://github.com/user-attachments/assets/1f4ce2c3-d6b7-4512-8104-bb9cd7ad05de" />
+<br><br><br>
+## 1.5.2 Complete Component List
 
-**Gyro**<br>-The gyro sensor is built in to our robot via the Spike Prime hub and, is used to find and maintain the correct direction. It’s also used to turn at an accurate angle on the turns.
+## 2.0 Power and Sense Management
 
-<img width="40%"  alt="Screenshot 2026-06-03 100053" src="https://github.com/user-attachments/assets/41e484c0-4b90-4e50-833b-3ca5c74df42b" />
+## 2.1 Power Distribution
 
+## 2.1.1 LEGO SPIKE Hub Battery
+&emsp; <img width="350" height="350" alt="leg45612_lego-education-spike-small-hub-battery" src="https://github.com/user-attachments/assets/e56980f2-9fc3-41e5-9584-37145c15c929" />
 
-**Color**<br>-The color sensor is used to detect the orange and blue lines on the track. Depending on the direction either (clockwise or counterclockwise) it tells the robot to not avoid the blocks and find the corner on the wall and turn the correct direction.<br>
+The LEGO SPIKE hub battery is a rechargeable lithium-ion battery designed for use with Technic Large Hub and SPIKE Prime Set.
 
-<img width="50%" alt="Messenger_creation_A0C92DA4-F460-49D0-89A5-o" src="https://github.com/user-attachments/assets/9056b1a8-1a10-4d55-8d19-9b44090fe660" />
+### **Specifications:**
+* **Capacity:** 2100 mAh
+* **Normal Voltage:** 7.3 V 
+* **Standard Discharge:** 0.2C (~420 mA)
+* **Standard Charge Current:** 500 mA (~3 hour charging time)
+* **Weight:** 110 g (~6.7 oz)
+<br><br>
+### **Reason For Selection**
+* **Regulated and Stable Voltage Output -** The SPIKE Prime battery features integrated power management circuitry that keeps a steady nominal voltage (7.3 V).
+* **Lightweight -** The battery itself is 110 g, which helps our
+<br><br><br><br>
 
+## 2.1.2 External Power
+&emsp; 
 
-**Ultrasonic**<br>-Our robot is equipped with two Spike Prime ultrasonic sensors. These sensors detect how far or near the walls are to go closer or avoid contact with the wall. These sensors operate by sending sound waves and calculating the time it takes for the sound wave to bounce back after it hits the wall and converts it to a value. This allows the robot to move to the center of two walls without making contact and makes efficient movement throughout the challenges.
+Three 1.5 V Lithium Ion Batteries in series.
 
-<img width="40%" alt="Messenger_creation_CAF01661-0C92-4251-9CD1-j" src="https://github.com/user-attachments/assets/953f666c-4e99-4b5f-973f-a4d4987c5e5f" />
+### **Specifications:**
+* **Capacity:** 2700 mAh
+* **Normal Voltage:** 4.5 V 
+* **Weight:** 110 g (~6.7 oz)
+<br><br>
+### **Reason For Selection**
+* **Additional Capacity:** We chose to introduce external batteries so we do not deplete the capacity of the SPIKE PRIME Hub battery too quickly.
+<br><br><br><br>
 
+## 2.2 Wiring & Schematics
 
-## 🛜3.3 Wiring Diagram
-This diagram shows the sensor's power usage and how the motors are connected with them to run the vehicle.<br><br>
-**SPIKE hub Wiring**<br>
-<img width="70%"  alt="1" src="scheme/A.png" /><br><br>
-**OpenMV Camera Wiring**<br>
-<img width="508" height="343" alt="image" src="https://github.com/user-attachments/assets/32093d39-e3d5-4635-a763-4dd1b0d757ee" />
+## 2.2.1 LEGO SPIKE Hub
+&emsp; <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7cd1c827-653c-43bc-8e90-e0c15cc2a3eb" />
+<br><br>
+### **Power Consumption**
 
-We took advantage of Spike's versatility and used four ports for sensors and only two for motors. This setup helps the robot to sense the obstacles and make smart decisons on the track.
+| **Component** | **Voltage** | **Current** | **Standard Discharge** |
+|---|---|---|---|
+| Color Sensor | 3.3 V | ~20 mA - 50 mA | ~35 mA |
+| Large Angular Motor | ~6.0 V - 8.4 V <br> (nominally ~7.3) | 135 mA - 1400 mA <br> (depends on load) | ~300 mA - 500 mA |
+| Medium Angular Motor | ~6.0 V - 8.4 V <br> (nominally ~7.3) | 110 mA - 800 mA <br> (depends on load) | ~150 mA - 250 mA |
+| OpenMV H7 Plus | 3.3 V | 0 mA (not drawing power) | 0 mA |
+| Ultrasonic Sensor | 3.3 V | ~30 mA - 50 mA | ~40 mA |
 
+<br>
 
-##  🚗4.0 Obstacle Management
-For this project, we used Python as the coding language to operate the robot. Our robot uses two different codes that both utilize a camera to complete the open and obstacle challenge. This section includes the code overview and a flowchart for the open challenge and obstacle challenge.
-## 🚗4.1 Open Challenge
-To navigate the Open Challenge track, the vehicle integrates 2 on each side ultrasonic sensors, an OpenMV camera module, and the SPIKE Hub’s internal IMU (gyroscope).
+The total continuous discharge of the components on the SPIKE PRIME Hub Battery is approximately 675 mA to 1000 mA (including SPIKE Hub processor and bluetooth consumption). The expected runtime is 2.4 hours (2100 mAh / 850 mA (average draw) = 2.4 hrs).
 
-Track Navigation & Wall-Centering: The robot utilizes a proportional-integral-derivative (PID) controller fed by the left and right ultrasonic sensors to calculate real-time error, dynamically adjusting steering to keep the vehicle centered between walls.
+<br><br><br>
 
-Corner Detection: A central Region of Interest (ROI) configured on the OpenMV camera monitors the track ahead. When the camera detects a black corner boundary—and confirms a color line crossing—it triggers the turn sequence.
+## 2.2.2 External Wiring
+&emsp; <img width="1013" height="686" alt="image" src="https://github.com/user-attachments/assets/adc3bb63-2212-42c7-aab8-461524ca5062" />
+<br><br>
+### **Power Consumption**
 
-Directional Decision & Turning: The turn direction (clockwise vs. counter-clockwise) is determined by comparing the differential distance read by the left and right ultrasonic sensors. The vehicle executes a controlled, reverse-steering maneuver, using gyro-based heading feedback to complete a precise 90-degree turn.
+| **Component** | **Voltage** | **Current** | **Standard Discharge** |
+|---|---|---|---|
+| OpenMV H7 Plus | 4.5 V | 100 mA - 250 mA | ~150 mA - 180 mA |
+| Fill Light | 4.5 V | ~1556 mA | ~1556 mA |
 
-Lap Tracking & Finish: Each completed turn increments the global variable num_turn. The PID loop maintains heading stability using absolute IMU values throughout the run. Once num_turn reaches 12 (completing 3 full laps across 4 corners), the turning routine disengages and the vehicle drives forward under PID control back across the finish line.
+<br><br><br>
 
-<img width="70%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
+## 2.3 Sensor Integration
+The autonomous navigation system uses deterministic sensor fusion. Processing loads are distributed across specialized sensors utilizing hardware-level calibration and software noise filtering to ensure highly predictable performance without single points of failure.
+
+## 2.3.1 OpenMV H7 Plus
+&emsp; <img width="474" height="255" alt="image" src="https://github.com/user-attachments/assets/c91ce047-27c4-4791-b2c8-deac86066037" />
+
+The primary optical processor identifies traffic signs (Red/Green blocks) and boundary markers (black walls) at 320x240 resolution.
+
+* **Environmental Calibration:** Auto-gain, auto-exposure, and auto-white-balance are explicitly disabled at initialization. Locking these hardware parameters ensures LAB color space thresholds remain absolute, preventing vision failures from ambient lighting shifts.
+
+* **Dynamic Regions of Interest (ROI):** To maximize inference speed, the field of view is cropped into task-specific ROIs: a narrow central strip for corner detection and a wide lower strip for obstacle tracking.
+  
+* **Perspective-Based Depth Estimation:** Due to the camera's downward mounting angle, Y-coordinates act as physical depth proxies. Objects lower on the image plane are physically closer to the chassis, allowing the software to consistently prioritize the nearest obstacle..
+<br><br><br>
+
+## 2.3.2 Ultrasonic Sensors
+&emsp; <img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/859bd0fe-219a-4946-9edc-b9a1ddabc210" />
+
+Two lateral SPIKE Ultrasonic sensors continuously map the track's inner and outer boundary walls to drive the open-lane navigation logic.
+
+* **Noise Filtering:** Ultrasonic sensors occasionally register false distance readings due to stray echoes. To prevent these random spikes from disrupting the steering, the system rapidly takes three distance samples, sorts them, and uses the middle (median) value. This guarantees the robot ignores sudden, inaccurate data before it affects navigation.
+
+* **Error Vector Calculation:** Filtered distance arrays feed directly into the steering PID controller. The steering error is calculated as distance from the right wall minus the distance from the left wall. A zero error indicates perfect centering, enabling oscillation-free lane keeping.
+<br><br><br>
+
+## 2.3.3 Spike IMU/Gyro
+&emsp; <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/7434012e-9a58-4b25-8303-06e1ccf652ef" />
+
+The Hub's built-in 6-axis IMU provides absolute heading and turning odometry, independent of wheel slip.
+
+* **Closed-Loop Cornering:** Upon corner detection, ultrasonic tracking is temporarily suspended. A dedicated PID loop takes over, reading real-time yaw data to execute a precise 90-degree Ackermann turn while dynamically decelerating the drive motor to maintain traction.
+
+* **Momentum Compensation:** To account for chassis inertia, the turning sequence is programmed to terminate early. The target angle is offset by 14 degrees. This allows the vehicle's physical momentum to carry it smoothly through the remaining rotation into perfect orthogonal alignment.
+<br><br><br>
+
+## 2.3.4 Color Sensor
+&emsp; <img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/f6c55940-951c-42bc-9640-bf7ebd2f09f8" />
+
+Mounted vertically facing the track floor, this sensor acts strictly as a hardware-level safety trigger to eliminate false positives from the vision system.
+
+* **Corner Detection Authorization:** Shadows or track scuffs can occasionally trick the OpenMV camera into flagging a false corner. To prevent catastrophic early turns, the vehicle is mathematically locked out of cornering until the color sensor detects a colored lane boundary (Orange for Clockwise routing, Blue for Counter-Clockwise). Crossing this line acts as a hardware interlock, successfully arming the vision system to accept the next corner flag.
+<br><br><br>
+
+## 3.0 Obstacle Management and Software Documentation
+
+## 3.1 Open Challenge
+To navigate the Open Challenge track, the vehicle integrates 2 ultrasonic sensors, an OpenMV camera module, and the SPIKE Hub’s internal IMU (gyroscope).
+
+* **Track Navigation & Wall-Centering:** The robot utilizes a proportional-integral-derivative (PID) controller fed by the left and right ultrasonic sensors to calculate real-time error, dynamically adjusting steering to keep the vehicle centered between walls.
+
+* **Corner Detection:** A central Region of Interest (ROI) configured on the OpenMV camera monitors the track ahead. When the camera detects a black corner boundary—and confirms a color line crossing—it triggers the turn sequence.
+
+* **Directional Decision & Turning:** The turn direction (clockwise vs. counter-clockwise) is determined by comparing the differential distance read by the left and right ultrasonic sensors. The vehicle executes a controlled, reverse-steering maneuver, using gyro-based heading feedback to complete a precise 90-degree turn.
+
+* **Lap Tracking & Finish:** Each completed turn increments the global variable num_turn. The PID loop maintains heading stability using absolute IMU values throughout the run. Once num_turn reaches 12 (completing 3 full laps across 4 corners), the turning routine disengages and the vehicle drives forward under PID control back across the finish line.
+
+&emsp; <img width="70%" alt="Untitled Diagram drawio_page-0001" src="https://github.com/user-attachments/assets/4eb3d02e-a88e-4a4b-9331-e58ade7158f8" />
+
 
 ```python
 p = PUPRemoteHub(Port.D)
@@ -512,13 +704,13 @@ async def main():
 * race=True: This Pybricks feature means that if any single task ends, all tasks are stopped. The ultrasonic_PID loop ends when num_turn > 12 (meaning the robot has finished 3 full laps of a 4-corner track).
 
 Once the multitasking race finishes, the car drops out of the concurrent loop, stops, fires gc.collect() to free memory, and runs a standalone function (UltrasonicPID_2Sensor_C) utilizing gyro correction angles to smoothly drive forward exactly 1850 motor degrees back across the starting finish line to complete the run.
+<br><br><br>
 
-
-## 🚗4.2 Obstacle Challenge
+## 3.2 Obstacle Challenge
 For the obstacle challenge, the robot uses a code similar to the open challenge. The camera has another roi that takes up half of the camera to detect an approaching obstacle and its color. The robot uses the ultrasonic sensors to determine which direction it needs to face after leaving the parking lot. The robot uses pid to face straight forward. When a block enters the roi, the camera also detects its color. By using the x coordinate and the color of the obstacle, the robot is able to maneuver away from the obstacle. To avoid detecting corner blocks that cause the robot to face the wrong direction, we utilized the orange and blue lines of the track. When the robot passes the orange or blue line, the robot will ignore the obstacle until it makes a turn. The robot will repeat this until num_turn is equal to 12. When num_turn reaches 12, the robot will align itself using the walls and execute a parallel parking.
 
+&emsp; <img width="100%"  alt="Untitled Diagram oc drawio_page-0001" src="https://github.com/user-attachments/assets/216c2a1c-e014-44f7-8426-ec3c51461759" />
 
-<img width="100%"  alt="Untitled Diagram oc drawio_page-0001" src="https://github.com/user-attachments/assets/216c2a1c-e014-44f7-8426-ec3c51461759" />
 
 **Logic and Behavoir**
 ```python
@@ -1048,127 +1240,10 @@ async def main():
     await wait(500) 
 ```
 This function orchestrates everything. The multitask() function allows the robot to do PID, obstacle avoidance, and line checking at the same time. The moment detect_corner() finishes lap 3 (turn 12), the multitasking race ends, and the script moves directly to the final parallel_parking() function.
+<br><br><br>
 
-
-## 📋5.0 Bill of Materials (BOM) and instructions to build
-This section shows the BOM and the instructions to build the vehicle. 
-
-|  |  |
-|:----------:|:--------:|
-<img width="450" alt="1_1x" src="https://github.com/user-attachments/assets/9cf4a0f4-46bc-46fc-b5e6-03cf4d21febb" />
-<img width="450" alt="2_1x - Copy" src="https://github.com/user-attachments/assets/1b88cf9b-ab1b-4231-9170-d0695a8744ca" />
-<img width="450" alt="3_1x - Copy" src="https://github.com/user-attachments/assets/fbacf456-a4e4-4898-bfb3-af05dad62f3e" />
-<img width="450" alt="4_1x - Copy" src="https://github.com/user-attachments/assets/3439bc68-b10e-4611-aae0-bcc06a4bc240" />
-<img width="450" alt="5_1x - Copy" src="https://github.com/user-attachments/assets/fe21f8a7-5ee6-4b7e-ab1f-bf75235006ff" />
-<img width="450" alt="6_1x - Copy" src="https://github.com/user-attachments/assets/69e20950-959b-47c8-b76e-73dc221e558e" />
-<img width="450" alt="7_1x - Copy" src="https://github.com/user-attachments/assets/2cc913ab-5ea4-435e-b8c3-f4f157a9e2de" />
-<img width="450" alt="8_1x - Copy" src="https://github.com/user-attachments/assets/d69d6479-92c8-4032-aebc-294ff38e2ce1" />
-<img width="450" alt="9_1x - Copy" src="https://github.com/user-attachments/assets/cf716722-908b-4516-b5e9-7fd505156cb2" />
-<img width="450" alt="10_1x - Copy" src="https://github.com/user-attachments/assets/31b8c794-0506-4937-9ce6-b45e5fd7ec2d" />
-<img width="450" alt="11_1x - Copy" src="https://github.com/user-attachments/assets/ed2b9215-ad41-44c3-b43b-2645a573cfec" />
-<img width="450" alt="12_1x - Copy" src="https://github.com/user-attachments/assets/f6c6202e-0aa2-4f0d-b6de-b69dcfe456c2" />
-<img width="450" alt="13_1x - Copy" src="https://github.com/user-attachments/assets/1f1d334b-042e-4fa3-8eac-0c594fe75948" />
-<img width="450" alt="14_1x - Copy" src="https://github.com/user-attachments/assets/51b05397-3399-44b7-ad52-660146a20b7a" />
-<img width="450" alt="15_1x - Copy" src="https://github.com/user-attachments/assets/9ba8b765-2bfc-425e-9dcb-a5457190b4b0" />
-<img width="450" alt="16_1x - Copy" src="https://github.com/user-attachments/assets/123d8042-9665-45b9-ae24-491ea6ae84db" />
-<img width="450" alt="16_1x - Copy" src="https://github.com/user-attachments/assets/bac4650b-0aa5-4701-82ab-ae680200b46d" />
-<img width="450" alt="17_1x - Copy" src="https://github.com/user-attachments/assets/9f1d35f3-4ae2-4915-808f-760593a2c2e9" />
-<img width="450" alt="18_1x - Copy" src="https://github.com/user-attachments/assets/bdc4631e-b03d-4399-891e-eb88e46d1653" />
-<img width="450" alt="19_1x - Copy" src="https://github.com/user-attachments/assets/1ac44692-5d84-494e-93d1-697cac1fb8c8" />
-<img width="450" alt="20_1x - Copy" src="https://github.com/user-attachments/assets/f3a6b966-f5cf-4460-8974-1fed89345853" />
-<img width="450" alt="21_1x - Copy" src="https://github.com/user-attachments/assets/e8ce2c4b-350a-4b5d-8a37-e93d7e93ad56" />
-<img width="450" alt="22_1x - Copy" src="https://github.com/user-attachments/assets/f6a54867-f0b4-4a6f-a0f7-ff62d0e08ca5" />
-<img width="450" alt="23_1x - Copy" src="https://github.com/user-attachments/assets/8d729189-8f28-4078-819b-d57457c13771" />
-<img width="450" alt="24_1x - Copy" src="https://github.com/user-attachments/assets/ad436e90-71d7-43cf-9866-584f2bd54402" />
-<img width="450" alt="25_1x - Copy" src="https://github.com/user-attachments/assets/948f33ee-07c2-43fe-8d63-1683eb2b762e" />
-<img width="450" alt="26_1x - Copy" src="https://github.com/user-attachments/assets/5c924007-c50d-40a8-a71d-70aae03895cd" />
-<img width="450" alt="27_1x - Copy" src="https://github.com/user-attachments/assets/52e337f2-502a-4edd-8d12-ed86d1e4342c" />
-<img width="450" alt="28_1x - Copy" src="https://github.com/user-attachments/assets/e5c0aed0-417e-4801-b71c-9a7aa8faea76" />
-<img width="450" alt="29_1x - Copy" src="https://github.com/user-attachments/assets/b77ef906-46e1-47f3-9cdc-04f9cfeab98f" />
-<img width="450" alt="30_1x - Copy" src="https://github.com/user-attachments/assets/f5724db1-63fa-49c5-a4a4-41c5abbea34d" />
-<img width="450" alt="31_1x - Copy" src="https://github.com/user-attachments/assets/56fbc6ba-fe3f-45bf-b786-07644059d9d7" />
-<img width="450" alt="32_1x - Copy" src="https://github.com/user-attachments/assets/94d8713a-d8d4-49df-a788-ef994b18a90b" />
-<img width="450" alt="33_1x - Copy" src="https://github.com/user-attachments/assets/1ed6705b-fb51-4fd1-a356-319c5b2e1830" />
-<img width="450" alt="34_1x - Copy" src="https://github.com/user-attachments/assets/67f3ff31-6687-4884-a08a-24cfdedde857" />
-<img width="450" alt="35_1x - Copy" src="https://github.com/user-attachments/assets/3e3cca88-010a-4455-95e6-340d709c9834" />
-<img width="450" alt="36_1x - Copy" src="https://github.com/user-attachments/assets/b09163fa-9a3c-4227-941b-d6a8c6303a0f" />
-<img width="450" alt="37_1x - Copy" src="https://github.com/user-attachments/assets/93327e76-60e2-4fde-8780-825b40d6ecd9" />
-<img width="450" alt="38_1x - Copy" src="https://github.com/user-attachments/assets/5e947560-29c1-4025-907f-603dfeb1d8ef" />
-<img width="450" alt="39_1x" src="https://github.com/user-attachments/assets/2fbabe39-a8a7-4efa-b7dc-e291b2f337fb" />
-<img width="450" alt="40_1x" src="https://github.com/user-attachments/assets/3b248551-4b5e-4fc4-89dd-8bbf53cf99d7" />
-<img width="450" alt="41_1x" src="https://github.com/user-attachments/assets/e1f83237-6904-4d7c-a908-2ed97643c2d1" />
-<img width="450" alt="42_1x" src="https://github.com/user-attachments/assets/369534e9-176d-4f8b-800b-301811675b3b" />
-<img width="450" alt="43_1x" src="https://github.com/user-attachments/assets/a7e8a90b-b025-4803-b6ad-de1109d20916" />
-<img width="450" alt="44_1x" src="https://github.com/user-attachments/assets/b0ab6af2-880b-4c81-935d-c2eb1c4980d6" />
-<img width="450" alt="45_1x" src="https://github.com/user-attachments/assets/f06a9e80-644c-4943-ba21-c2f274eddb76" />
-<img width="450" alt="46_1x" src="https://github.com/user-attachments/assets/c4ce4af1-2aaa-43c1-9ed2-3b6ee3016703" />
-<img width="450" alt="47_1x" src="https://github.com/user-attachments/assets/634cc96c-3d4b-4597-b112-e98f1447aa62" />
-<img width="450" alt="48_1x" src="https://github.com/user-attachments/assets/016dc344-3833-4ca1-9b3b-9cf25a3b3448" />
-<img width="450" alt="49_1x" src="https://github.com/user-attachments/assets/abf91385-4cc0-42c3-8f14-1ed97f9f427a" />
-<img width="450" alt="50_1x" src="https://github.com/user-attachments/assets/d1354895-958b-4416-9518-f17616e7f5b4" />
-<img width="450" alt="51_1x" src="https://github.com/user-attachments/assets/6f1bdfd3-a5a3-4046-87f3-20ea6924acf4" />
-<img width="450" alt="52_1x" src="https://github.com/user-attachments/assets/6210cb4b-6d32-4b32-b318-cee51fee3669" />
-<img width="450" alt="53_1x" src="https://github.com/user-attachments/assets/ab682197-8ebd-450f-9faa-75dd08e7c616" />
-<img width="450" alt="54_1x" src="https://github.com/user-attachments/assets/dc7c17d5-91ec-49f8-88a9-9aabec9b1641" />
-<img width="450" alt="55_1x" src="https://github.com/user-attachments/assets/efb4776f-e2a1-46f9-8ed5-113fcaeb9d3c" />
-<img width="450" alt="56_1x" src="https://github.com/user-attachments/assets/ed14838d-02ba-47f3-8b26-02bb0ed4b1dd" />
-<img width="450" alt="57_1x" src="https://github.com/user-attachments/assets/bf8f6dd3-efbf-43aa-b0e2-eddf2633772f" />
-<img width="450" alt="58_1x" src="https://github.com/user-attachments/assets/6adcfd65-28f7-4cd2-a459-708f775eedf3" />
-<img width="450" alt="59_1x" src="https://github.com/user-attachments/assets/2ea14d57-3946-4b39-bfc7-6fc1b38c8651" />
-<img width="450" alt="60_1x" src="https://github.com/user-attachments/assets/34674dad-d7f7-4e4e-860d-45f92d660719" />
-<img width="450" alt="61_1x" src="https://github.com/user-attachments/assets/c2df2fb3-26d3-42d5-9f78-bd45035a490c" />
-<img width="450" alt="62_1x" src="https://github.com/user-attachments/assets/1b5dff2a-ca40-4cee-99a6-220c63074417" />
-<img width="450" alt="62_1x" src="https://github.com/user-attachments/assets/f478baee-47ec-4205-9273-10e860be9431" />
-<img width="450" alt="63_1x" src="https://github.com/user-attachments/assets/bb05a73f-2473-4051-ae63-a9681995db8f" />
-<img width="450" alt="64_1x" src="https://github.com/user-attachments/assets/fb22f0ed-f202-4d80-9583-bd9a88fac883" />
-<img width="450" alt="65_1x" src="https://github.com/user-attachments/assets/ff719aeb-e852-44f7-9892-28649a2781ee" />
-<img width="450" alt="66_1x" src="https://github.com/user-attachments/assets/0b0784d1-cfa9-4831-9b8e-7a7fa3a90657" />
-<img width="450" alt="67_1x" src="https://github.com/user-attachments/assets/34fe2b71-80b3-408c-945f-13e4f0ee1afd" />
-<img width="450" alt="68_1x" src="https://github.com/user-attachments/assets/019ff5fd-6c5c-4ea5-b3c0-691c61697e55" />
-<img width="450" alt="69_1x" src="https://github.com/user-attachments/assets/feccb713-e8c8-4cdd-a114-e07bd40d0fc5" />
-<img width="450" alt="70_1x" src="https://github.com/user-attachments/assets/6da16154-808f-4da5-8b9c-28b8011c233b" />
-<img width="450" alt="71_1x" src="https://github.com/user-attachments/assets/e7072da9-e707-4e1f-9c60-63f0eb829247" />
-<img width="450" alt="72_1x" src="https://github.com/user-attachments/assets/7c5f6e8f-594d-462c-a3f7-ed0ae50de57c" />
-<img width="450" alt="73_1x" src="https://github.com/user-attachments/assets/83dc1f64-c2e7-448a-806a-fe4829db8f97" />
-<img width="450" alt="74_1x" src="https://github.com/user-attachments/assets/0a0a28d3-9062-457d-892d-ebe69b95cb76" />
-<img width="450" alt="75_1x" src="https://github.com/user-attachments/assets/cdbd6d95-8013-4114-bb5a-e23b94ca078a" />
-<img width="450" alt="76_1x" src="https://github.com/user-attachments/assets/27add380-357b-4a66-9270-c85a163070b8" />
-<img width="450" alt="77_1x" src="https://github.com/user-attachments/assets/1f4ce2c3-d6b7-4512-8104-bb9cd7ad05de" />
-
-
-
-
-
-
-**Build of Materials (BOM)**
-| | |
-|:---|:---|
-|<img width="450" alt="1_1x" src="https://github.com/user-attachments/assets/012e493a-47a0-4b4b-9e71-5d446988dcfb" />|<img width="450" alt="2_1x" src="https://github.com/user-attachments/assets/3a46e1a0-72a6-4392-975d-e46c169e90af" />|
-|<img width="450" alt="3_1x" src="https://github.com/user-attachments/assets/af129b96-11ad-4494-bd68-36f0c6c9bca8" />|<img width="450" alt="4_1x" src="https://github.com/user-attachments/assets/76bf120f-a79b-4e04-bc3b-0912f05189f0" />|
-|<img width="450" alt="5_1x" src="https://github.com/user-attachments/assets/1f7a261e-23f2-4c93-8c18-6e7933e22516" />|<img width="450" alt="6_1x" src="https://github.com/user-attachments/assets/78e69178-5a95-4f12-92d5-7b0fdb9b774c" />|
-|<img width="450" alt="7_1x" src="https://github.com/user-attachments/assets/2855d29b-dfa2-4fad-b5ef-b807ef798764" />|
-
-
-|Component |QTY |PHOTO|
-|:---|:---|:---|
-|OpenMV H7 Plus Camera|1|<img width="150" alt="490818226-ca1d665c-cde8-455f-a26d-12d1ab6409a1" src="https://github.com/user-attachments/assets/7c5ee0b8-33c3-4ba0-bd69-2e91ee1c7bdc" />|
-|Wide Angle Lens|1|<img width="150" alt="Wide Angle Lens" src="https://github.com/user-attachments/assets/da917b02-3e57-40bc-b735-6138b657e443" />|
-|Voltage Regulator|1|<img width="150" alt="eisei-trading2019_denkai-50v100uf-smd" src="https://github.com/user-attachments/assets/9852e4dc-e5e8-493e-86fc-a4f1d49bf6ec" />|
-
-
-
-## 💡 <mark> How to Improve Obstacle Management</mark>
-**Adding a backup function** can help the robot with problems if it sees it too late. Making the function be a backward command when the robot gets too close to an obstacle, like when the robot doesn't see the block until it's already near. This function will make the robot go backward, thus giving it the chance to redo the obstacle avoidance. This will make runs more consistent and will give a chance to save your run.
-
-
-## 💡6.0 Engineering Factor
-The third-party factor that we used is the Openmv camera, which enables us to see the blocks and their color. It gives the robot the ability to see the blocks, and in turn, make the right decisions that are needed.
-
-<img width="40%"  alt="Screenshot 2026-06-03 093710" src="https://github.com/user-attachments/assets/67ad3cf5-2a82-496e-ae5a-0b0daca77669" />
-
-## 📷6.1 Usage of Camera
-
-**OPEN CHALLENGE CAMERA**
+## 3.3 Camera Usage and Software
+### **OPEN CHALLENGE CAMERA**
 
 Our Camera Code for the open challenge searches for objects and sends the data to a Lego Hub using the PUPRemote library. It sets the camera resolution to QVGA (320x240 pixels). When it starts, it sets up a Region of Interest (ROI) to limit where the camera looks. set_auto_gain(), set_auto_whitebal(), and set_auto_exposure() are set to False to keep the image and thresholds consistent when in different lighting conditions.
 
@@ -1214,7 +1289,7 @@ while True:
     p.process()
 ```
 
-**OBSTACLE CHALLENGE CAMERA**
+### **OBSTACLE CHALLENGE CAMERA**
 
 The camera first turns on its front LED lights to full brightness. This keeps the lighting on the track perfectly steady and stops outside shadows from messing up the camera’s view. The camera then locks its settings for exposure and color balance. By turning off the camera's automatic adjustments, the code ensures colors look exactly the same whether the room is bright or dim. The camera also fixes lens distortion so shapes look accurate.
 
@@ -1246,25 +1321,8 @@ All of this gathered information is packed into a compact 4-part data packet con
     p.process()
 ```
 
-## 💡7.0 Engineering decisions and Improvements
-This segment explains the challenges, both in the build, programming, and tradeoffs when making the robot and the improvements made to clear the challenges.
-
-## 🔧7.1  Problems Encountered in Robot Construction
-The first problem we had was when our robot's ultrasonic sensors were infront of the wheels, which made the timing of the turn too early. To solve that, we made an entirely new design with the sensors on top of the wheels to help the robot turn better. We also switch from cantilever to braced for better stability on the wheels.
-
-| | |
-|:---|:---|
-|<img width="50%" alt="a910624c-00f3-4ee8-b32c-c6e39e3e3a63" src="https://github.com/user-attachments/assets/db19628c-23a0-4470-924d-ea5b12803162" />|<img width="30%" alt="6" src="https://github.com/user-attachments/assets/d8fe5bac-05d1-4e37-9ee0-4aa5278ebcee" />|
-|**OLD ROBOT**|**CURRENT ROBOT**|
-
-**Tradeoffs**
-| | | |
-|:---|:---|:---|
-|Changes|Pros|Cons|
-|Wheels Braced |Better Stability|Bigger Width|
-
-<a id="72-programming"></a>
-## 🖥️7.2 Robot Programming
+<br><br><br>
+## 3.4 Problems Encountered 
 We encountered many problems in our old code and we made many improvements since then. We managed to complete the parking and made the AvoidBlocks command more consistent. We have also managed to make it go both clockwise and counterclockwise.
 <table class="failure-table">
     <thead>
