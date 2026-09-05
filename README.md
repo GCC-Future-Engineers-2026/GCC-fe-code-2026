@@ -173,7 +173,7 @@ Mounted horizontally, this unit functions as the primary drive motor for the veh
 ## 1.2 Drivetrain and Kinematics
    
 ## 1.2.1 Differential Gear Integration
-&emsp; <img width="747" height="474" alt="607458375-cebe4825-b5ef-4ca0-b05a-08d2a869794f" src="https://github.com/user-attachments/assets/b22d56bf-24f5-4cef-884e-422a2e634d44" />
+&emsp; <img width="474" height="301" alt="607458375-cebe4825-b5ef-4ca0-b05a-08d2a869794f" src="https://github.com/user-attachments/assets/b22d56bf-24f5-4cef-884e-422a2e634d44" />
 <br>
 
 The vehicle's rear-wheel-drive powertrain incorporates a mechanical differential gear to manage torque distribution from the primary horizontal drive motor to the rear wheels. In autonomous track navigation, fixing both drive wheels to a solid axle results in severe wheel scrubbing during cornering, as the outer wheel is forced to travel a greater distance than the inner wheel in the same amount of time. By integrating a differential, the rear wheels are mechanically decoupled. This allows them to rotate at independent angular velocities while maintaining continuous and balanced power delivery. This design minimizes tire wear, prevents traction loss, and is critical for maintaining highly precise odometry. It ensures that the rotational data from the motor's internal encoder strictly reflects true rolling distance rather than artificial slipping
@@ -185,7 +185,7 @@ The vehicle's rear-wheel-drive powertrain incorporates a mechanical differential
 <br><br><br><br>
 
 ## 1.2.2 Ackermann Steering Geometry
-&emsp; <img width="450" height="239" alt="image" src="https://github.com/user-attachments/assets/5ef04509-f272-4c32-9b1e-0d5f397b7922" />
+&emsp; <img width="474" height="252" alt="image" src="https://github.com/user-attachments/assets/5ef04509-f272-4c32-9b1e-0d5f397b7922" />
 <br>
 
 To complement the rear differential, the vehicle's front steering assembly employs Ackermann steering geometry. Traditional parallel steering systems force both front tires to maintain identical turning angles, which inevitably causes the inner wheel to drag laterally through tight corners. The Ackermann linkage geometrically corrects this error by ensuring the inner wheel steers at a slightly sharper angle than the outer wheel. This allows all four wheels to trace concentric circles that share a common center point aligned with the rear drive axle.This kinematic alignment completely eliminates lateral tire scrubbing and maximizes the contact patch of the 62.4 x 20 tires. When paired with the differential gear, the Ackermann setup provides exceptionally smooth, high-precision cornering. Furthermore, it drastically reduces the dynamic load and torsional strain on the vertical steering motor, allowing the software's PID control loops to execute instantaneous directional corrections with negligible mechanical resistance.
@@ -307,7 +307,7 @@ To resolve this kinematic instability, the rear drivetrain was redesigned to hav
 ## 2.1 Power Distribution
 
 ## 2.1.1 LEGO SPIKE Hub Battery
-&emsp; <img width="350" height="350" alt="leg45612_lego-education-spike-small-hub-battery" src="https://github.com/user-attachments/assets/e56980f2-9fc3-41e5-9584-37145c15c929" />
+&emsp; <img width="474" height="474" alt="leg45612_lego-education-spike-small-hub-battery" src="https://github.com/user-attachments/assets/e56980f2-9fc3-41e5-9584-37145c15c929" />
 
 The LEGO SPIKE hub battery is a rechargeable lithium-ion battery designed for use with Technic Large Hub and SPIKE Prime Set.
 
@@ -340,7 +340,7 @@ Three 1.5 V Lithium Ion Batteries in series.
 ## 2.2 Wiring & Schematics
 
 ## 2.2.1 LEGO SPIKE Hub
-&emsp; <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7cd1c827-653c-43bc-8e90-e0c15cc2a3eb" />
+&emsp; <img width="474" height="267" alt="image" src="https://github.com/user-attachments/assets/7cd1c827-653c-43bc-8e90-e0c15cc2a3eb" />
 <br><br>
 ### **Power Consumption**
 
@@ -359,7 +359,7 @@ The total continuous discharge of the components on the SPIKE PRIME Hub Battery 
 <br><br><br>
 
 ## 2.2.2 External Wiring
-&emsp; <img width="1013" height="686" alt="image" src="https://github.com/user-attachments/assets/adc3bb63-2212-42c7-aab8-461524ca5062" />
+&emsp; <img width="474" height="321" alt="image" src="https://github.com/user-attachments/assets/adc3bb63-2212-42c7-aab8-461524ca5062" />
 <br><br>
 ### **Power Consumption**
 
@@ -386,7 +386,7 @@ The primary optical processor identifies traffic signs (Red/Green blocks) and bo
 <br><br><br>
 
 ## 2.3.2 Ultrasonic Sensors
-&emsp; <img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/859bd0fe-219a-4946-9edc-b9a1ddabc210" />
+&emsp; <img width="474" height="355" alt="image" src="https://github.com/user-attachments/assets/859bd0fe-219a-4946-9edc-b9a1ddabc210" />
 
 Two lateral SPIKE Ultrasonic sensors continuously map the track's inner and outer boundary walls to drive the open-lane navigation logic.
 
@@ -396,7 +396,7 @@ Two lateral SPIKE Ultrasonic sensors continuously map the track's inner and oute
 <br><br><br>
 
 ## 2.3.3 Spike IMU/Gyro
-&emsp; <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/7434012e-9a58-4b25-8303-06e1ccf652ef" />
+&emsp; <img width="474" height="267" alt="image" src="https://github.com/user-attachments/assets/7434012e-9a58-4b25-8303-06e1ccf652ef" />
 
 The Hub's built-in 6-axis IMU provides absolute heading and turning odometry, independent of wheel slip.
 
@@ -406,7 +406,7 @@ The Hub's built-in 6-axis IMU provides absolute heading and turning odometry, in
 <br><br><br>
 
 ## 2.3.4 Color Sensor
-&emsp; <img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/f6c55940-951c-42bc-9640-bf7ebd2f09f8" />
+&emsp; <img width="474" height="316" alt="image" src="https://github.com/user-attachments/assets/f6c55940-951c-42bc-9640-bf7ebd2f09f8" />
 
 Mounted vertically facing the track floor, this sensor acts strictly as a hardware-level safety trigger to eliminate false positives from the vision system.
 
